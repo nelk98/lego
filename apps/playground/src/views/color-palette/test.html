@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .flex-container {
+        display: flex;
+        width: 500px;
+      }
+
+      .flex-item {
+        /* 保持原有的样式 */
+        background-color: lightblue;
+        padding: 10px;
+        margin: 5px;
+        flex: 1;
+      }
+
+      /* 新添加的div容器不会影响原有的flex-item样式 */
+      .new-div {
+        /* 您可以根据需要修改这个新div的样式 */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex-container">
+      <div class="new-div">
+        <div class="flex-item">子元素1</div>
+      </div>
+      <div class="flex-item">子元素2</div>
+      <div class="flex-item">子元素3</div>
+    </div>
+  </body>
+</html>

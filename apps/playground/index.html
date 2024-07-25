@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/logo.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Playground</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      #app[data-mounted] + #app-loading {
+        display: none;
+      }
+      #app-loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+      }
+      #app-loading img {
+        width: 128px;
+        mix-blend-mode: multiply;
+        filter: contrast(2);
+      }
+      #app-loading .app-loading__progress {
+        width: 240px;
+        height: 8px;
+        border-radius: 16px;
+        margin-top: 36px;
+        overflow: hidden;
+        background-color: rgba(0, 0, 0, 0.05);
+        i {
+          display: block;
+          width: 100%;
+          height: 100%;
+          background-color: rgb(89, 161, 255);
+          border-radius: inherit;
+          animation: app-loading__progress 1s both;
+          transition: all 0.3s 1s;
+        }
+      }
+      #app-loading h5 {
+        margin-top: 36px;
+        font-size: 16px;
+        opacity: 0.6;
+        letter-spacing: 1px;
+      }
+      @keyframes app-loading__progress {
+        from {
+          transform: translate3d(-100%, 0, 0);
+        }
+        to {
+          transform: translate3d(-10%, 0, 0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <div id="app-loading">
+      <img src="https://dev-cs.kacat.cn/tourism/assets/editor_loading-W9rS9_Fj.gif" alt="" />
+      <div class="app-loading__progress">
+        <i></i>
+      </div>
+      <h5>加载中，请稍候...</h5>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

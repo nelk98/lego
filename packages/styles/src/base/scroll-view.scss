@@ -1,0 +1,61 @@
+$scroll-bar-size: 8px;
+
+.scroll-view,
+.scroll-view--hover {
+  position: relative;
+  &::-webkit-scrollbar {
+    /*高宽分别对应横竖滚动条的尺寸*/
+    width: $scroll-bar-size;
+    height: $scroll-bar-size;
+  }
+  &::-webkit-scrollbar-thumb {
+    width: $scroll-bar-size;
+    border-radius: $scroll-bar-size;
+    background: rgba(0, 0, 0, 0.15);
+    &:hover {
+      background: rgba(0, 0, 0, 0.25);
+    }
+  }
+  &::-webkit-scrollbar-track {
+    background-color: none;
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+  &:hover {
+    &::-webkit-scrollbar {
+      display: block;
+    }
+  }
+}
+
+.scroll-view--hidden,
+.scroll-view--hover {
+  &::-webkit-scrollbar {
+    /*高宽分别对应横竖滚动条的尺寸*/
+    width: 0;
+    height: 0;
+  }
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+}
+
+.scroll-view--hover:hover {
+  &::-webkit-scrollbar {
+    width: $scroll-bar-size;
+    height: $scroll-bar-size;
+    display: block;
+  }
+}
+
+[theme='dark'] {
+  .scroll-view,
+  .scroll-view--hover {
+    &::-webkit-scrollbar-thumb {
+      // background: rgba(255, 255, 255, .3);
+      background: rgb(133, 133, 133);
+    }
+  }
+}
