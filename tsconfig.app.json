@@ -5,7 +5,8 @@
     "apps/**/*",
     "apps/**/*.vue",
     "packages/**/*",
-    "packages/**/*.vue"
+    "packages/**/*.vue",
+    "types/*"
   ],
   "exclude": [
     "apps/**/__tests__/*",
