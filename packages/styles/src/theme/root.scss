@@ -1,0 +1,51 @@
+:root,
+:root[lego-theme='light'],
+[lego-theme='light'] {
+  --lego-color-bg-0: #ffffff;
+  --lego-color-bg-1: #ffffff;
+  --lego-color-bg-2: #f8f8f8;
+  --lego-color-bg-3: #f3f3f3;
+  --lego-color-bg-4: #ededed;
+
+  --lego-color-bg-a: 0, 0, 0;
+
+  --lego-color-border-1: rgba(var(--lego-color-text), 0.1);
+
+  --lego-color-text-strong: #000000;
+  --lego-color-text-base: rgba(0, 0, 0, 0.87);
+  --lego-color-text-secondary: rgba(0, 0, 0, 0.6);
+  --lego-color-text-tertiary: rgba(0, 0, 0, 0.5);
+  --lego-color-text-disabled: rgba(0, 0, 0, 0.38);
+
+  --lego-color-info: #1677ff;
+  --lego-color-danger: #eb2f06;
+  --lego-color-success: #2ecc71;
+  --lego-color-warning: #f1c40f;
+  --lego-color-price: #ff2b60;
+
+  color: rgba(#000000, 0.85);
+}
+
+:root[lego-theme='dark'],
+[lego-theme='dark'] {
+  --lego-color-bg-1: #000000;
+  --lego-color-bg-1: #171717;
+  --lego-color-bg-2: #1d1d1d;
+  --lego-color-bg-3: #222222;
+  --lego-color-bg-4: #282828;
+
+  --lego-color-bg-a: 255, 255, 255;
+
+  --lego-color-text-strong: #ffffff;
+  --lego-color-text-base: rgba(255, 255, 255, 0.87);
+  --lego-color-text-secondary: rgba(255, 255, 255, 0.6);
+  --lego-color-text-tertiary: rgba(255, 255, 255, 0.5);
+  --lego-color-text-disabled: rgba(255, 255, 255, 0.38);
+
+  color: rgba(#ffffff, 0.85);
+}
+
+:root {
+  font-size: 14px;
+  color: rgba(var(--lego-color-text), 0.85);
+}

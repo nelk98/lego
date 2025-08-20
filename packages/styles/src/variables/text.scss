@@ -1,0 +1,15 @@
+// 纯黑或者纯白，不建议使用
+$color-text-0: var(--lego-color-text-0);
+// 默认字体颜色，正文使用
+$color-text-1: rgba(var(--lego-color-text-1), 0.85);
+// 其他次级字体颜色
+$color-text-2: rgba(var(--lego-color-text-2), 0.75);
+$color-text-3: rgba(var(--lego-color-text-3), 0.6);
+$color-text-4: rgba(var(--lego-color-text-4), 0.4);
+$color-text-5: rgba(var(--lego-color-text-5), 0.3);
+
+$color-info: var(--lego-color-info);
+$color-success: var(--lego-color-success);
+$color-warning: var(--lego-color-warning);
+$color-danger: var(--lego-color-danger);
+$color-price: var(--lego-color-price);

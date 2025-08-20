@@ -1,0 +1,108 @@
+.p_style-theme {
+  display: flex;
+  min-height: 90vh;
+}
+
+.p_style-theme__content {
+  flex: 1;
+  background: var(--lego-color-bg-1);
+  .info {
+    // color: var(--lego-color-info);
+    color: $color-info;
+  }
+  .success {
+    color: $color-success;
+  }
+  .danger {
+    color: $color-danger;
+    @include light-mode {
+      background-color: $color-danger;
+      color: #fff;
+    }
+  }
+
+  .price {
+    color: $color-price;
+  }
+
+  .warning {
+    color: $color-warning;
+    @include dark-mode {
+      background-color: $color-warning;
+      color: #fff;
+    }
+  }
+}
+
+.bg1,
+.bg2,
+.bg3,
+.bg4,
+.bg5 {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding-right: 24px;
+  padding-bottom: 24px;
+  border: 1px solid rgba(var(--lego-color-text), 0.1);
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.bg1 > .bg1 {
+  width: calc(100% - 48px);
+  height: calc(100% - 48px);
+}
+.bg2,
+.bg3,
+.bg4,
+.bg5 {
+  width: 80%;
+  height: 80%;
+}
+
+.bg2 {
+  background: var(--lego-color-bg-2);
+}
+
+.bg3 {
+  background: var(--lego-color-bg-3);
+}
+
+.bg4 {
+  background: var(--lego-color-bg-4);
+}
+
+.bg5 {
+  background: var(--lego-color-bg-5);
+}
+
+.squircle3,
+.squircle4,
+.squircle5,
+.squircle6 {
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+  background-color: $color-bg-a-3;
+  cursor: pointer;
+  &:hover {
+    background-color: $color-bg-a-6;
+  }
+}
+
+.squircle3 {
+  @include squircle(3);
+}
+
+.squircle4 {
+  @include squircle(4);
+}
+
+.squircle5 {
+  @include squircle(5);
+}
+
+.squircle6 {
+  @include squircle(6);
+}
