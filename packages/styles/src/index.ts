@@ -1,3 +1,6 @@
+/** 抹平浏览器样式差异，来自 https://tailwindcss.com/docs/preflight */
+import './preflight.css'
+
 import { useTheme } from './theme/index'
 
 import './theme'
