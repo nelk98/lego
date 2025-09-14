@@ -1,0 +1,46 @@
+// 深色模式作用域，最终编译为：[lego-theme='dark'] 选择器 { ... }
+@mixin dark-mode {
+  [lego-theme='dark'] & {
+    @content;
+  }
+}
+
+// 浅色模式作用域，通常不会用到，浅色为默认模式，直接写在选择器内就行
+@mixin light-mode {
+  [lego-theme='light'] & {
+    @content;
+  }
+}
+
+// 单行文本省略
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 多行文本省略
+@mixin line-clamp($lines) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/**
+ * 超椭圆，曲率 n = 3|4|5|6，且必须为正方形
+ * 默认 5（IOS曲率风格）
+ */
+@mixin squircle($n: 5) {
+  @if not index((3, 4, 5, 6), $n) {
+    @error "超椭圆曲率仅支持 3/4/5/6，不支持 #{$n}";
+  }
+  position: relative;
+  overflow: hidden;
+  flex: none;
+  border-radius: 15%;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+  mask-image: url(../assets/squircle-#{$n}.svg);
+}
