@@ -111,10 +111,19 @@ importers:
       '@lego/styles':
         specifier: workspace:*
         version: link:../../packages/styles
+      '@lego/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
 
   packages/hooks: {}
 
   packages/styles: {}
+
+  packages/ui:
+    dependencies:
+      '@lego/styles':
+        specifier: workspace:*
+        version: link:../styles
 
 packages:
 
