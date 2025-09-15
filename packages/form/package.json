@@ -1,5 +1,5 @@
 {
-  "name": "@lego/hooks",
+  "name": "@lego/form",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -9,6 +9,7 @@
     "./*": null
   },
   "dependencies": {
-    "@lego/shared": "workspace:*"
+    "@lego/hooks": "workspace:*",
+    "@lego/ui": "workspace:*"
   }
 }

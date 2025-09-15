@@ -1,7 +1,7 @@
 packages:
   - 'packages/*'
   - 'apps/*'
-  - 'shared/*'
+  - 'shared'
 
 shared-workspace-lockfile: true
 link-workspace-packages: true
