@@ -16,6 +16,7 @@
   "dependencies": {
     "@lego/hooks": "workspace:*",
     "@lego/styles": "workspace:*",
-    "@lego/ui": "workspace:*"
+    "@lego/ui": "workspace:*",
+    "@lego/form": "workspace:*"
   }
 }

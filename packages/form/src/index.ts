@@ -1,6 +1,3 @@
-import pkg from '../package.json'
+import Schema from './core/Schema'
 
-export default {
-  name: pkg.name,
-  version: pkg.version
-}
+export { Schema }

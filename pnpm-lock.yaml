@@ -105,6 +105,9 @@ importers:
 
   apps/playground:
     dependencies:
+      '@lego/form':
+        specifier: workspace:*
+        version: link:../../packages/form
       '@lego/hooks':
         specifier: workspace:*
         version: link:../../packages/hooks

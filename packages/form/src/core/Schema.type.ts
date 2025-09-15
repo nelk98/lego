@@ -11,7 +11,7 @@ export type SchemaTypes =
 
 type SchemaContext<T> = T | ((context: unknown) => T)
 
-interface CommonSchemaDefine {
+export interface BaseSchemaDefine {
   /** 数据类型 */
   type?: SchemaTypes
   /** 标题 */
@@ -54,13 +54,13 @@ interface CommonSchemaDefine {
 }
 
 /** 对象类型 */
-export interface ObjectSchemaDefine extends CommonSchemaDefine {
+export interface ObjectSchemaDefine extends BaseSchemaDefine {
   type: 'object'
   properties: Record<string, SchemaDefine>
 }
 
 /** 数组类型 */
-export interface ArraySchemaDefine extends CommonSchemaDefine {
+export interface ArraySchemaDefine extends BaseSchemaDefine {
   type: 'array'
   items: SchemaDefine
   minItems?: number
@@ -72,5 +72,5 @@ export type SchemaDefine =
   | ObjectSchemaDefine
   | ArraySchemaDefine
   | ({
-      type: Exclude<SchemaTypes, 'object' | 'array'>
-    } & CommonSchemaDefine)
+      type?: Exclude<SchemaTypes, 'object' | 'array'>
+    } & BaseSchemaDefine)

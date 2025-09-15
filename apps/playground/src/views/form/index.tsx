@@ -1,5 +1,7 @@
 import { defineComponent } from 'vue'
-import './demo'
+import { Schema } from '@lego/form'
+
+new Schema({})
 
 export default defineComponent({
   setup() {
