@@ -24,6 +24,8 @@
     "moduleResolution": "bundler",
     "baseUrl": ".",
     "esModuleInterop": true,
-    "allowJs": true
+    "allowJs": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   }
 }

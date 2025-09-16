@@ -1,4 +1,4 @@
-import type Schema from '../core/Schema'
+import type Schema from './Schema'
 
 /** 数据类型 */
 export type SchemaTypes =
