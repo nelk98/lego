@@ -1,13 +1,26 @@
-import type Schema from './Schema'
+export enum SchemaType {
+  String = 'string',
+  Number = 'number',
+  Boolean = 'boolean',
+  Object = 'object',
+  Array = 'array',
+  Any = 'any'
+}
 
-/** 数据类型 */
+/** 数据类型，undefined 表示任意类型将不进行属性、行为约束 */
 export type SchemaTypes =
-  | 'string' // 字符串类型，结果会执行 toSting() 操作
-  | 'number' // 数字类型，结果会进行 Number() 操作
-  | 'boolean' // 布尔类型，结果会进行 Boolean() 操作，注意：任意 falsy 值都会变成 false，否则为 true
-  | 'object' // 对象类型，结果会进行 Object() 操作
-  | 'array' // 数组类型，结果会进行 Array() 操作
-  | undefined // 任意类型，对结果不会进行任何类型处理和校验
+  /** 字符串类型 */
+  | 'string'
+  /** 数字类型 */
+  | 'number'
+  /** 布尔类型 */
+  | 'boolean'
+  /** 对象类型 */
+  | 'object'
+  /** 数组类型 */
+  | 'array'
+  /** 任意类型 */
+  | undefined
 
 type SchemaContext<T> = T | ((context: unknown) => T)
 
@@ -43,14 +56,6 @@ export interface BaseSchemaDefine {
 
   /** 自定义属性 */
   attrs?: Record<string, unknown>
-
-  /** 值 */
-  value?: unknown
-
-  /** 父节点 */
-  parentSchema?: Schema
-  /** 根节点 */
-  rootSchema?: Schema
 }
 
 /** 对象类型 */
@@ -67,10 +72,27 @@ export interface ArraySchemaDefine extends BaseSchemaDefine {
   maxItems?: number
 }
 
+export interface StringSchemaDefine extends BaseSchemaDefine {
+  type: 'string'
+}
+
+export interface NumberSchemaDefine extends BaseSchemaDefine {
+  type: 'number'
+}
+
+export interface BooleanSchemaDefine extends BaseSchemaDefine {
+  type: 'boolean'
+}
+
+export interface AnySchemaDefine extends BaseSchemaDefine {
+  type?: undefined
+}
+
 /** 表单项类型 */
 export type SchemaDefine =
   | ObjectSchemaDefine
   | ArraySchemaDefine
-  | ({
-      type?: Exclude<SchemaTypes, 'object' | 'array'>
-    } & BaseSchemaDefine)
+  | StringSchemaDefine
+  | NumberSchemaDefine
+  | BooleanSchemaDefine
+  | AnySchemaDefine
