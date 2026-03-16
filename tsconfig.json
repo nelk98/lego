@@ -1,0 +1,11 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.node.json" },
+    { "path": "./shared" },
+    { "path": "./web/ui" },
+    { "path": "./web/playground" },
+    { "path": "./mobile/ui" },
+    { "path": "./mobile/playground" }
+  ]
+}

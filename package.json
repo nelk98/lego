@@ -1,0 +1,60 @@
+{
+  "name": "lego",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prepare": "husky",
+    "commit": "cz",
+    "dev:web": "pnpm -C web/playground dev",
+    "dev:mobile": "pnpm -C mobile/playground dev",
+    "build:web": "pnpm -C web/playground build",
+    "build:mobile": "pnpm -C mobile/playground build",
+    "type-check": "pnpm -r exec vue-tsc --build --force 2>/dev/null || pnpm -r exec tsc --noEmit 2>/dev/null || true",
+    "lint": "run-s lint:*",
+    "lint:oxlint": "oxlint . --fix",
+    "lint:eslint": "eslint . --fix --cache",
+    "format": "oxfmt .",
+    "test:unit": "vitest"
+  },
+  "devDependencies": {
+    "@oxfmt/binding-darwin-arm64": "0.35.0",
+    "@tsconfig/node24": "^24.0.4",
+    "@types/node": "^24.11.0",
+    "@vitejs/plugin-vue": "^6.0.4",
+    "@vitejs/plugin-vue-jsx": "^5.1.4",
+    "@vitest/eslint-plugin": "^1.6.9",
+    "@vue/eslint-config-typescript": "^14.7.0",
+    "@vue/test-utils": "^2.4.6",
+    "ant-design-vue": "^4.2.6",
+    "commitizen": "^4.3.1",
+    "cz-git": "^1.10.0",
+    "eslint": "^10.0.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-oxlint": "~1.50.0",
+    "eslint-plugin-vue": "~10.8.0",
+    "happy-dom": "^19.0.2",
+    "husky": "^9.1.7",
+    "jiti": "^2.6.1",
+    "lint-staged": "^15.5.2",
+    "npm-run-all2": "^8.0.4",
+    "oxfmt": "^0.35.0",
+    "oxlint": "~1.50.0",
+    "typescript": "~5.9.3",
+    "vite": "^7.3.1",
+    "vite-plugin-vue-devtools": "^8.0.6",
+    "vitest": "^4.0.18",
+    "vue-tsc": "^3.2.5"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,vue,js,jsx,json,mts,cts}": "oxfmt"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

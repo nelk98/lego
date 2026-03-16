@@ -1,0 +1,8 @@
+.main {
+  padding: 2rem 0;
+}
+
+.desc {
+  color: var(--color-text);
+  opacity: 0.8;
+}

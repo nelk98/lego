@@ -1,0 +1,6 @@
+packages:
+  - 'shared'
+  - 'web/ui'
+  - 'web/playground'
+  - 'mobile/ui'
+  - 'mobile/playground'
