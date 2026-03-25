@@ -10,7 +10,7 @@
     "dev:mobile": "pnpm -C mobile/playground dev",
     "build:web": "pnpm -C web/playground build",
     "build:mobile": "pnpm -C mobile/playground build",
-    "type-check": "pnpm -r exec vue-tsc --build --force 2>/dev/null || pnpm -r exec tsc --noEmit 2>/dev/null || true",
+    "type-check": "pnpm -C web/playground type-check && pnpm -C mobile/playground type-check && pnpm exec tsc -b",
     "lint": "run-s lint:*",
     "lint:oxlint": "oxlint . --fix",
     "lint:eslint": "eslint . --fix --cache",
