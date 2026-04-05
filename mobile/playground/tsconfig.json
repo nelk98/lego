@@ -4,10 +4,13 @@
     "composite": true,
     "jsxImportSource": "vue",
     "baseUrl": ".",
+    "types": ["@tarojs/taro"],
+    "lib": ["ES2022", "DOM"],
     "paths": {
       "@/*": ["./src/*"]
     },
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.tsbuildinfo"
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.taro.tsbuildinfo"
   },
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "../ui/src/**/*", "../../shared/src/**/*"]
+  "include": ["src/**/*", "types/**/*", "../ui/src/**/*", "../../shared/src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

@@ -1,0 +1,41 @@
+@use './theme' as *;
+
+@include define-theme-vars();
+@include shared-utilities();
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+.taro_page,
+page {
+  min-height: 100%;
+}
+
+body,
+.taro_page,
+page {
+  margin: 0;
+  background: theme('color-bg');
+  color: theme('color-text');
+  font-family:
+    'SF Pro Text',
+    'PingFang SC',
+    'Helvetica Neue',
+    sans-serif;
+}
+
+.taro_page,
+page {
+  line-height: 1.6;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}

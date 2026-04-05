@@ -26,6 +26,7 @@ export default defineConfigWithVueTs(
     files: ['**/*.{vue,ts,mts,tsx}'],
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
+      'vue/multi-word-component-names': 'off',
     },
   },
 

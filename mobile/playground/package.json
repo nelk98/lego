@@ -2,24 +2,43 @@
   "name": "@lego/mobile-playground",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "type-check": "vue-tsc --build --force"
+    "dev": "taro build --type h5 --watch",
+    "dev:h5": "taro build --type h5 --watch",
+    "dev:weapp": "taro build --type weapp --watch",
+    "build": "taro build --type h5",
+    "build:h5": "taro build --type h5",
+    "build:weapp": "taro build --type weapp",
+    "type-check": "vue-tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
+    "@babel/runtime": "^7.28.4",
     "@lego/mobile-ui": "workspace:*",
     "@lego/shared": "workspace:*",
+    "@tarojs/components": "4.1.11",
+    "@tarojs/helper": "4.1.11",
+    "@tarojs/plugin-framework-vue3": "4.1.11",
+    "@tarojs/plugin-platform-h5": "4.1.11",
+    "@tarojs/plugin-platform-weapp": "4.1.11",
+    "@tarojs/runtime": "4.1.11",
+    "@tarojs/shared": "4.1.11",
+    "@tarojs/taro": "4.1.11",
     "pinia": "^3.0.4",
-    "vue": "^3.5.29",
-    "vue-router": "^5.0.3"
+    "vue": "^3.5.29"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.4",
+    "@babel/core": "^7.28.4",
+    "@tarojs/cli": "4.1.11",
+    "@tarojs/vite-runner": "4.1.11",
+    "@types/minimatch": "^5.1.2",
+    "@vitejs/plugin-vue": "4.6.2",
+    "@vitejs/plugin-vue-jsx": "^3.1.0",
+    "babel-preset-taro": "4.1.11",
+    "postcss": "^8.5.6",
+    "sass": "^1.93.2",
+    "terser": "^5.44.0",
     "typescript": "~5.9.3",
-    "vite": "^7.3.1",
+    "vite": "^4.2.0",
     "vue-tsc": "^3.2.5"
   }
 }
