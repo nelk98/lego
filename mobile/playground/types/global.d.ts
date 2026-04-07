@@ -1,5 +1,6 @@
 /// <reference types="@tarojs/taro" />
 
+declare module 'uno.css'
 declare module '*.png'
 declare module '*.gif'
 declare module '*.jpg'

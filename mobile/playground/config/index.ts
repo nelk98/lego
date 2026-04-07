@@ -4,7 +4,14 @@ import { defineConfig, type UserConfigExport } from '@tarojs/cli'
 import devConfig from './dev'
 import prodConfig from './prod'
 
+const sharedSassFunctionsPath = fileURLToPath(
+  new URL('../../../shared/src/style/functions.scss', import.meta.url)
+).replaceAll('\\', '/')
+const unoConfigFile = fileURLToPath(new URL('../../../uno.config.ts', import.meta.url))
+
 export default defineConfig<'vite'>(async (merge) => {
+  const { default: UnoCSS } = await Function('return import("@unocss/vite")')()
+
   const baseConfig: UserConfigExport<'vite'> = {
     projectName: 'mobile-playground',
     date: '2026-04-03',
@@ -21,8 +28,14 @@ export default defineConfig<'vite'>(async (merge) => {
       '@': fileURLToPath(new URL('../src', import.meta.url))
     },
     framework: 'vue3',
-    compiler: 'vite',
+    compiler: {
+      type: 'vite',
+      vitePlugins: [UnoCSS({ configFile: unoConfigFile })]
+    },
     mini: {
+      sassLoaderOption: {
+        additionalData: `@use '${sharedSassFunctionsPath}' as *;`
+      },
       postcss: {
         pxtransform: {
           enable: true,
@@ -40,6 +53,9 @@ export default defineConfig<'vite'>(async (merge) => {
     h5: {
       publicPath: '/',
       staticDirectory: 'static',
+      sassLoaderOption: {
+        additionalData: `@use '${sharedSassFunctionsPath}' as *;`
+      },
       postcss: {
         autoprefixer: {
           enable: true,

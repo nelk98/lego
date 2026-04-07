@@ -5,5 +5,6 @@ declare module '*.module.css' {
   export default classes
 }
 
+declare module 'uno.css'
 declare module '*.scss'
 declare module '*.sass'

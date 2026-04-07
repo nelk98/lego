@@ -1,3 +1,4 @@
+import 'uno.css'
 import '@lego/shared/styles/web'
 import './main.css'
 
