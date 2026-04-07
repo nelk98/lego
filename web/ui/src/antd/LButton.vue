@@ -4,7 +4,7 @@ import type { ButtonProps } from 'ant-design-vue'
 
 defineOptions({
   name: 'LButton',
-  inheritAttrs: false,
+  inheritAttrs: false
 })
 
 // 扩展额外 props：Partial<ButtonProps> & { 自定义?: 类型 }
@@ -17,8 +17,8 @@ withDefaults(
   >(),
   {
     type: 'primary',
-    tooltip: 'xxxx',
-  },
+    tooltip: 'xxxx'
+  }
 )
 </script>
 

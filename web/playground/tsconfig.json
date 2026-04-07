@@ -8,6 +8,6 @@
     },
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo"
   },
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "../ui/src/**/*", "../../shared/src/**/*"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
   "exclude": ["node_modules"]
 }

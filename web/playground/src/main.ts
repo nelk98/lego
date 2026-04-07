@@ -1,3 +1,4 @@
+import '@lego/shared/styles/web'
 import './main.css'
 
 import { createApp } from 'vue'

@@ -1,0 +1,72 @@
+.c_dot-loading {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  color: #3875f7;
+}
+
+.c_dot-loading::before,
+.c_dot-loading::after {
+  content: '';
+  position: absolute;
+  top: 7px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.3, 0, 0.7, 1);
+  background: currentColor;
+}
+
+/* 左 → 右 */
+@keyframes dot-loading-move-right {
+  0% {
+    opacity: 1;
+    transform: translateX(0) scale(0.6);
+  }
+  48% {
+    opacity: 0.5;
+    transform: translateX(4.5px) scale(0.9);
+  }
+  52% {
+    opacity: 0.5;
+    transform: translateX(4.5px) scale(0.9);
+  }
+  100% {
+    opacity: 0.2;
+    transform: translateX(12px) scale(0.6);
+  }
+}
+
+/* 右 → 左 */
+@keyframes dot-loading-move-left {
+  0% {
+    opacity: 0.2;
+    transform: translateX(0) scale(0.6);
+  }
+  48% {
+    opacity: 0;
+    transform: translateX(-4.5px) scale(0.3);
+  }
+  52% {
+    opacity: 0;
+    transform: translateX(-4.5px) scale(0.3);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-12px) scale(0.6);
+  }
+}
+
+.c_dot-loading::before {
+  animation-name: dot-loading-move-right;
+  left: 0;
+}
+
+.c_dot-loading::after {
+  animation-name: dot-loading-move-left;
+  left: 12px;
+}

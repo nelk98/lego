@@ -11,6 +11,6 @@
     },
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.taro.tsbuildinfo"
   },
-  "include": ["src/**/*", "types/**/*", "../ui/src/**/*", "../../shared/src/**/*"],
+  "include": ["src/**/*", "types/**/*"],
   "exclude": ["node_modules", "dist"]
 }

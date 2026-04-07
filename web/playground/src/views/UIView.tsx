@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue'
-import { LButton } from '@lego/web-ui'
+import { LButton, Loading } from '@lego/web-ui'
 
 import styles from './UIView.module.css'
 
@@ -18,9 +18,12 @@ export default defineComponent({
             <LButton>Default</LButton>
             <LButton type="dashed">Dashed</LButton>
             <LButton type="link">Link</LButton>
+            ???
+            <Loading />
+            ...
           </div>
         </section>
       </div>
     )
-  },
+  }
 })

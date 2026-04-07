@@ -174,13 +174,16 @@ importers:
 
   mobile/ui:
     dependencies:
+      '@lego/shared':
+        specifier: workspace:*
+        version: link:../../shared
+      '@tarojs/components':
+        specifier: 4.1.11
+        version: 4.1.11(@tarojs/helper@4.1.11)(postcss@8.5.8)(rollup@3.30.0)(vue@3.5.30(typescript@5.9.3))(webpack@5.105.4)
       vue:
         specifier: ^3.5.0
         version: 3.5.30(typescript@5.9.3)
     devDependencies:
-      '@lego/shared':
-        specifier: workspace:*
-        version: link:../../shared
       typescript:
         specifier: ~5.9.3
         version: 5.9.3
@@ -1509,6 +1512,7 @@ packages:
   '@oxfmt/binding-darwin-arm64@0.35.0':
     resolution: {integrity: sha512-pGqRtqlNdn9d4VrmGUWVyQjkw79ryhI6je9y2jfqNUIZCfqceob+R97YYAoG7C5TFyt8ILdLVoN+L2vw/hSFyA==}
     engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
     os: [darwin]
 
   '@oxfmt/binding-darwin-x64@0.35.0':
@@ -7963,6 +7967,29 @@ snapshots:
       - webpack-chain
       - webpack-dev-server
 
+  '@tarojs/components@4.1.11(@tarojs/helper@4.1.11)(postcss@8.5.8)(rollup@3.30.0)(vue@3.5.30(typescript@5.9.3))(webpack@5.105.4)':
+    dependencies:
+      '@stencil/core': 2.22.3
+      '@tarojs/runtime': 4.1.11
+      '@tarojs/shared': 4.1.11
+      '@tarojs/taro': 4.1.11(@tarojs/components@4.1.11(@tarojs/helper@4.1.11)(postcss@8.5.8)(rollup@3.30.0)(vue@3.5.30(typescript@5.9.3))(webpack@5.105.4))(@tarojs/helper@4.1.11)(@tarojs/shared@4.1.11)(postcss@8.5.8)(rollup@3.30.0)(vue@3.5.30(typescript@5.9.3))(webpack@5.105.4)
+      classnames: 2.5.1
+      hammerjs: 2.0.8
+      hls.js: 1.6.15
+      resolve-pathname: 3.0.0
+      swiper: 11.1.15
+      tslib: 2.8.1
+    optionalDependencies:
+      vue: 3.5.30(typescript@5.9.3)
+    transitivePeerDependencies:
+      - '@tarojs/helper'
+      - html-webpack-plugin
+      - postcss
+      - rollup
+      - webpack
+      - webpack-chain
+      - webpack-dev-server
+
   '@tarojs/helper@4.1.11':
     dependencies:
       '@babel/core': 7.29.0
@@ -8211,6 +8238,20 @@ snapshots:
       rollup: 3.30.0
       vue: 3.5.30(typescript@5.9.3)
       webpack: 5.105.4(@swc/core@1.3.96)
+
+  '@tarojs/taro@4.1.11(@tarojs/components@4.1.11(@tarojs/helper@4.1.11)(postcss@8.5.8)(rollup@3.30.0)(vue@3.5.30(typescript@5.9.3))(webpack@5.105.4))(@tarojs/helper@4.1.11)(@tarojs/shared@4.1.11)(postcss@8.5.8)(rollup@3.30.0)(vue@3.5.30(typescript@5.9.3))(webpack@5.105.4)':
+    dependencies:
+      '@tarojs/api': 4.1.11(@tarojs/runtime@4.1.11)(@tarojs/shared@4.1.11)
+      '@tarojs/components': 4.1.11(@tarojs/helper@4.1.11)(postcss@8.5.8)(rollup@3.30.0)(vue@3.5.30(typescript@5.9.3))(webpack@5.105.4)
+      '@tarojs/helper': 4.1.11
+      '@tarojs/runtime': 4.1.11
+      '@tarojs/shared': 4.1.11
+      '@types/postcss-url': 10.0.4
+      postcss: 8.5.8
+    optionalDependencies:
+      rollup: 3.30.0
+      vue: 3.5.30(typescript@5.9.3)
+      webpack: 5.105.4
 
   '@tarojs/vite-runner@4.1.11(@tarojs/runtime@4.1.11)(jiti@2.6.1)(postcss@8.5.8)(rollup@3.30.0)(terser@5.46.1)(typescript@5.9.3)(vite@4.5.14(@types/node@24.12.0)(sass@1.99.0)(terser@5.46.1))':
     dependencies:
@@ -11934,6 +11975,15 @@ snapshots:
     optionalDependencies:
       '@swc/core': 1.3.96
 
+  terser-webpack-plugin@5.4.0(webpack@5.105.4):
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.31
+      jest-worker: 27.5.1
+      schema-utils: 4.3.3
+      terser: 5.46.1
+      webpack: 5.105.4
+    optional: true
+
   terser@5.46.1:
     dependencies:
       '@jridgewell/source-map': 0.3.11
@@ -12353,6 +12403,39 @@ snapshots:
   webpack-sources@3.3.4: {}
 
   webpack-virtual-modules@0.6.2: {}
+
+  webpack@5.105.4:
+    dependencies:
+      '@types/eslint-scope': 3.7.7
+      '@types/estree': 1.0.8
+      '@types/json-schema': 7.0.15
+      '@webassemblyjs/ast': 1.14.1
+      '@webassemblyjs/wasm-edit': 1.14.1
+      '@webassemblyjs/wasm-parser': 1.14.1
+      acorn: 8.16.0
+      acorn-import-phases: 1.0.4(acorn@8.16.0)
+      browserslist: 4.28.1
+      chrome-trace-event: 1.0.4
+      enhanced-resolve: 5.20.1
+      es-module-lexer: 2.0.0
+      eslint-scope: 5.1.1
+      events: 3.3.0
+      glob-to-regexp: 0.4.1
+      graceful-fs: 4.2.11
+      json-parse-even-better-errors: 2.3.1
+      loader-runner: 4.3.1
+      mime-types: 2.1.35
+      neo-async: 2.6.2
+      schema-utils: 4.3.3
+      tapable: 2.3.2
+      terser-webpack-plugin: 5.4.0(webpack@5.105.4)
+      watchpack: 2.5.1
+      webpack-sources: 3.3.4
+    transitivePeerDependencies:
+      - '@swc/core'
+      - esbuild
+      - uglify-js
+    optional: true
 
   webpack@5.105.4(@swc/core@1.3.96):
     dependencies:

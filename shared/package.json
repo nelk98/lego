@@ -1,10 +1,11 @@
 {
   "name": "@lego/shared",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
   "sideEffects": [
-    "./src/style/**/*.scss"
+    "./src/style/**/*.scss",
+    "./src/ui/**/*.scss"
   ],
   "main": "./src/index.ts",
   "module": "./src/index.ts",

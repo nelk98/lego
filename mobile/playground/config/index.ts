@@ -8,22 +8,17 @@ export default defineConfig<'vite'>(async (merge) => {
   const baseConfig: UserConfigExport<'vite'> = {
     projectName: 'mobile-playground',
     date: '2026-04-03',
-    designWidth: 750,
+    designWidth: 375,
     deviceRatio: {
       640: 2.34 / 2,
       750: 1,
       375: 2,
-      828: 1.81 / 2,
+      828: 1.81 / 2
     },
     sourceRoot: 'src',
     outputRoot: 'dist',
     alias: {
-      '@': fileURLToPath(new URL('../src', import.meta.url)),
-      '@lego/shared/styles/mobile': fileURLToPath(
-        new URL('../../../shared/src/style/mobile.scss', import.meta.url),
-      ),
-      '@lego/shared': fileURLToPath(new URL('../../../shared/src', import.meta.url)),
-      '@lego/mobile-ui': fileURLToPath(new URL('../../ui/src', import.meta.url)),
+      '@': fileURLToPath(new URL('../src', import.meta.url))
     },
     framework: 'vue3',
     compiler: 'vite',
@@ -31,16 +26,16 @@ export default defineConfig<'vite'>(async (merge) => {
       postcss: {
         pxtransform: {
           enable: true,
-          config: {},
+          config: {}
         },
         cssModules: {
           enable: false,
           config: {
             namingPattern: 'module',
-            generateScopedName: '[name]__[local]___[hash:base64:5]',
-          },
-        },
-      },
+            generateScopedName: '[name]__[local]___[hash:base64:5]'
+          }
+        }
+      }
     },
     h5: {
       publicPath: '/',
@@ -48,17 +43,17 @@ export default defineConfig<'vite'>(async (merge) => {
       postcss: {
         autoprefixer: {
           enable: true,
-          config: {},
+          config: {}
         },
         cssModules: {
           enable: false,
           config: {
             namingPattern: 'module',
-            generateScopedName: '[name]__[local]___[hash:base64:5]',
-          },
-        },
-      },
-    },
+            generateScopedName: '[name]__[local]___[hash:base64:5]'
+          }
+        }
+      }
+    }
   }
 
   if (process.env.NODE_ENV === 'development') {
