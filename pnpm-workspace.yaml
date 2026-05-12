@@ -4,3 +4,4 @@ packages:
   - 'web/playground'
   - 'mobile/ui'
   - 'mobile/playground'
+  - 'docs'

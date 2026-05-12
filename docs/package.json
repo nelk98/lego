@@ -1,0 +1,51 @@
+{
+  "name": "@lego/docs",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Lego 组件库文档站；通过 @lego/docs/preset 在业务仓库中复用配置与侧栏",
+  "files": [
+    "preset",
+    ".vitepress",
+    "index.md",
+    "guide",
+    "components",
+    "package.json"
+  ],
+  "type": "module",
+  "exports": {
+    "./preset": {
+      "types": "./preset/index.ts",
+      "import": "./preset/index.ts",
+      "default": "./preset/index.ts"
+    },
+    "./sidebar": {
+      "types": "./preset/sidebar.ts",
+      "import": "./preset/sidebar.ts",
+      "default": "./preset/sidebar.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "dependencies": {
+    "@lego/shared": "workspace:*",
+    "@lego/web-ui": "workspace:*"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue-jsx": "^5.1.4",
+    "vitepress": "^1.6.4",
+    "vue": "^3.5.0"
+  },
+  "peerDependencies": {
+    "vitepress": "^1.3.0",
+    "vue": "^3.5.0"
+  },
+  "peerDependenciesMeta": {
+    "vitepress": {
+      "optional": false
+    }
+  }
+}
