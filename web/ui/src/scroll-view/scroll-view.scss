@@ -1,0 +1,37 @@
+/**
+ * ScrollView + OverlayScrollbars
+ *
+ * OS 将 `.os-scrollbar` 挂在 `elements().host` 下，与 `target`（内容区）为兄弟关系，
+ * 因此 **触发器类加在 host 上**（见 index.tsx `applyScrollViewHostClasses`），用后代选择器控制滚动条。
+ *
+ * `hover`：默认隐藏；宿主 `:hover` 或库标记的 `.os-scrollbar-interaction`（拖拽/按下等）时显示。
+ * `always`：强制可见，避免与 `options.scrollbars` 里 autoHide 打架时出现闪隐。
+ *
+ * 触控屏无 hover：`@media (hover: none)` 下退回始终显示，避免无法操作滚动条。
+ */
+
+.l-scroll-view.l-scroll-view--trigger-always .os-scrollbar {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.l-scroll-view.l-scroll-view--trigger-hover:not(:hover) .os-scrollbar:not(.os-scrollbar-interaction) {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition:
+    opacity 0.15s ease,
+    visibility 0.15s ease;
+}
+
+.l-scroll-view.l-scroll-view--trigger-hover:hover .os-scrollbar {
+  transition:
+    opacity 0.15s ease,
+    visibility 0.15s ease;
+}
+
+@media (hover: none) {
+  .l-scroll-view.l-scroll-view--trigger-hover .os-scrollbar {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+}
