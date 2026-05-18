@@ -1,10 +1,10 @@
 import { defineComponent } from 'vue'
 import './style.scss'
 
-export const Loading = defineComponent({
+export const Spin = defineComponent({
   setup() {
     return () => {
-      return <div class="c_dot-loading"></div>
+      return <div class="c_dot-spin"></div>
     }
   }
 })

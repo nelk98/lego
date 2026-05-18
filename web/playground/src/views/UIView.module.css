@@ -1,26 +1,179 @@
+/* Playground 页面样式只负责排版，组件级视觉 token 与交互样式由 @lego/web-ui 提供。 */
 .uiPlayground {
-  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 16px 0 40px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: end;
+  border-bottom: 1px solid var(--l-shadcn-border);
+  padding-bottom: 24px;
+}
+
+.hero h1 {
+  margin: 6px 0 0;
+  color: var(--color-text-0);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--l-shadcn-muted-foreground);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 .desc {
-  color: var(--color-text);
-  opacity: 0.8;
-  margin-bottom: 2rem;
+  max-width: 680px;
+  margin: 10px 0 0;
+  color: var(--color-text-2);
+}
+
+.statusPanel {
+  display: grid;
+  gap: 6px;
+  min-width: 220px;
+  border: 1px solid var(--l-shadcn-border);
+  border-radius: 8px;
+  padding: 12px;
+  color: var(--color-text-2);
+  font-size: 13px;
 }
 
 .block {
-  margin-bottom: 2.5rem;
+  display: grid;
+  gap: 14px;
+  border: 1px solid var(--l-shadcn-border);
+  border-radius: 8px;
+  padding: 18px;
+  background: var(--l-shadcn-card);
 }
 
-.block h2 {
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-  color: var(--color-heading);
+.blockHeader {
+  display: grid;
+  gap: 4px;
+}
+
+.blockHeader h2 {
+  margin: 0;
+  color: var(--color-text-0);
+  font-size: 18px;
+  font-weight: 650;
+}
+
+.blockHeader p {
+  margin: 0;
+  color: var(--color-text-3);
+  font-size: 13px;
 }
 
 .flex {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.5rem;
+  gap: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 280px));
+  gap: 18px;
+  align-items: start;
+}
+
+.complexGrid {
+  display: grid;
+  grid-template-columns: minmax(320px, 520px) minmax(180px, max-content);
+  gap: 18px;
+  align-items: start;
+}
+
+.tabsDemo {
+  min-width: 0;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field label {
+  color: var(--color-text-2);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.settingRow {
+  display: flex;
+  min-height: 72px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.settingCopy {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+}
+
+.settingCopy strong {
+  color: var(--color-text-0);
+  font-size: 14px;
+}
+
+.settingCopy span {
+  color: var(--color-text-3);
+  font-size: 13px;
+}
+
+.dialogForm {
+  display: grid;
+  gap: 8px;
+}
+
+.dialogForm label {
+  color: var(--color-text-2);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.scrollBox {
+  height: 260px;
+  border: 1px solid var(--l-shadcn-border);
+  border-radius: 8px;
+}
+
+.scrollInner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--l-shadcn-muted);
+  color: var(--l-shadcn-muted-foreground);
+}
+
+@media (max-width: 720px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .complexGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .statusPanel {
+    min-width: 0;
+  }
 }

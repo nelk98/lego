@@ -1,0 +1,50 @@
+/*
+ * shadcn-vue 风格组件使用的最小语义 token。
+ *
+ * 组件样式仍由 UnoCSS 原子类生成；这里仅提供 CSS 变量，让组件能跟随
+ * 项目现有的 [data-theme="dark"] 主题切换，而不绑定到具体业务配色。
+ */
+:root,
+[data-theme='light'] {
+  --l-shadcn-background: #ffffff;
+  --l-shadcn-foreground: #09090b;
+  --l-shadcn-card: #ffffff;
+  --l-shadcn-card-foreground: #09090b;
+  --l-shadcn-popover: #ffffff;
+  --l-shadcn-popover-foreground: #09090b;
+  --l-shadcn-primary: #18181b;
+  --l-shadcn-primary-foreground: #fafafa;
+  --l-shadcn-secondary: #f4f4f5;
+  --l-shadcn-secondary-foreground: #18181b;
+  --l-shadcn-muted: #f4f4f5;
+  --l-shadcn-muted-foreground: #71717a;
+  --l-shadcn-accent: #f4f4f5;
+  --l-shadcn-accent-foreground: #18181b;
+  --l-shadcn-destructive: #dc2626;
+  --l-shadcn-destructive-foreground: #ffffff;
+  --l-shadcn-border: #e4e4e7;
+  --l-shadcn-input: #e4e4e7;
+  --l-shadcn-ring: #a1a1aa;
+}
+
+[data-theme='dark'] {
+  --l-shadcn-background: #09090b;
+  --l-shadcn-foreground: #fafafa;
+  --l-shadcn-card: #18181b;
+  --l-shadcn-card-foreground: #fafafa;
+  --l-shadcn-popover: #18181b;
+  --l-shadcn-popover-foreground: #fafafa;
+  --l-shadcn-primary: #fafafa;
+  --l-shadcn-primary-foreground: #18181b;
+  --l-shadcn-secondary: #27272a;
+  --l-shadcn-secondary-foreground: #fafafa;
+  --l-shadcn-muted: #27272a;
+  --l-shadcn-muted-foreground: #a1a1aa;
+  --l-shadcn-accent: #27272a;
+  --l-shadcn-accent-foreground: #fafafa;
+  --l-shadcn-destructive: #ef4444;
+  --l-shadcn-destructive-foreground: #ffffff;
+  --l-shadcn-border: #27272a;
+  --l-shadcn-input: #27272a;
+  --l-shadcn-ring: #71717a;
+}

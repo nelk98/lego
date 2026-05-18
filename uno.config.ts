@@ -1,8 +1,20 @@
 import { defineConfig, presetMini } from 'unocss'
 import presetRemToPx from '@unocss/preset-rem-to-px'
+import presetWind4 from '@unocss/preset-wind4'
 
 export default defineConfig({
   presets: [
+    presetWind4({
+      dark: {
+        // Tailwind v4 preset 同样绑定到项目现有的 data-theme 主题开关。
+        dark: '[data-theme="dark"]',
+        light: '[data-theme="light"]'
+      },
+      preflights: {
+        // 项目已经由 @lego/shared/web 提供 reset，避免引入第二份全局重置样式。
+        reset: false
+      }
+    }),
     presetMini({
       dark: {
         // 设置 .dark 变体绑定 [data-theme="dark"]

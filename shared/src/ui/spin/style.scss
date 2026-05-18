@@ -1,12 +1,12 @@
-.c_dot-loading {
+.c_dot-spin {
   position: relative;
   width: 24px;
   height: 24px;
   display: inline-block;
 }
 
-.c_dot-loading::before,
-.c_dot-loading::after {
+.c_dot-spin::before,
+.c_dot-spin::after {
   content: '';
   position: absolute;
   top: 7px;
@@ -60,12 +60,12 @@
   }
 }
 
-.c_dot-loading::before {
+.c_dot-spin::before {
   animation-name: dot-loading-move-right;
   left: 0;
 }
 
-.c_dot-loading::after {
+.c_dot-spin::after {
   animation-name: dot-loading-move-left;
   left: 12px;
 }

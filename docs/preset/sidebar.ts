@@ -14,6 +14,9 @@ export const legoDocsSidebar: DefaultTheme.Sidebar = [
   },
   {
     text: '组件',
-    items: [{ text: 'ScrollView', link: '/components/scroll-view' }]
+    items: [
+      { text: 'shadcn-vue Web UI', link: '/components/shadcn-vue' },
+      { text: 'ScrollView', link: '/components/scroll-view' }
+    ]
   }
 ]
