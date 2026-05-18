@@ -16,8 +16,9 @@
       "import": "./src/index.ts",
       "require": "./src/index.ts"
     },
-    "./styles/web": "./src/style/web.scss",
-    "./styles/mobile": "./src/style/mobile.scss"
+    "./web": "./src/style/web.scss",
+    "./mobile": "./src/style/mobile.scss",
+    "./variables": "./src/style/variables.scss"
   },
   "peerDependencies": {
     "pinia": "^3.0.0",

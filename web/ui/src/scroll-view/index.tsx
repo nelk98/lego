@@ -6,7 +6,7 @@
  * 用 OverlayScrollbars（OS）在宿主 div 上接管滚动：隐藏系统滚动条、提供自定义滚动条与尺寸观察等能力。
  * 本组件只做三件事：
  * 1. 生命周期里创建 / 销毁 OS 实例，避免泄漏；
- * 2. 把 `options` 与 OS 同步，并在变更后 `update` 布局；
+ * 2. 把与 OS 对应的各配置 props（原 `options` 顶层字段扁平化）合并后同步，并在变更后 `update` 布局；
  * 3. 对业务暴露「原生滚动语义」：`scroll` 事件、`scrollTo` / `scrollBy`（作用在 OS 的 `scrollOffsetElement` 上）、以及类小程序的 `scrollToLower`；
  * 4. **`trigger`（hover / always）通过样式表控制滚动条显隐**：在 OS 的 `elements().host` 上挂 BEM 类名，由 `scroll-view.scss` 覆盖 `.os-scrollbar`（滚动条与内容为兄弟节点，类只能加在 host 上才能选中滚动条）。
  *
@@ -24,7 +24,7 @@
  * 这样：快速滑到底、反复进出底部区域、或子像素取整导致的边界抖动，只要存在「从外到内」的跨越就会触发；
  * 在敏感区内来回小范围移动不会重复触发，除非先滚出敏感区再进入。
  *
- * `options` 变更或重新 mount 时重置 `prevDistanceToBottom`，便于列表配置或数据更新后再次从「未定义」状态检测穿越。
+ * OS 相关 props 变更或重新 mount 时重置 `prevDistanceToBottom`，便于列表配置或数据更新后再次从「未定义」状态检测穿越。
  */
 
 import {
@@ -50,6 +50,25 @@ import type {
   PartialOptions
 } from 'overlayscrollbars'
 
+/** 从扁平 props 组装 `PartialOptions`；未传入的键不写入，由 OverlayScrollbars 使用内置默认 */
+function buildOsOptions(p: {
+  paddingAbsolute?: PartialOptions['paddingAbsolute'] | null
+  showNativeOverlaidScrollbars?: PartialOptions['showNativeOverlaidScrollbars'] | null
+  update?: PartialOptions['update']
+  overflow?: PartialOptions['overflow']
+  scrollbars?: PartialOptions['scrollbars']
+}): PartialOptions {
+  const o: PartialOptions = {}
+  if (p.paddingAbsolute != null) o.paddingAbsolute = p.paddingAbsolute
+  if (p.showNativeOverlaidScrollbars != null) {
+    o.showNativeOverlaidScrollbars = p.showNativeOverlaidScrollbars
+  }
+  if (p.update !== undefined) o.update = p.update
+  if (p.overflow !== undefined) o.overflow = p.overflow
+  if (p.scrollbars !== undefined) o.scrollbars = p.scrollbars
+  return o
+}
+
 /** OS 官方推荐：在创建实例前注册插件（可重复调用，内部会去重） */
 OverlayScrollbars.plugin([ScrollbarsHidingPlugin, SizeObserverPlugin, ClickScrollPlugin])
 
@@ -73,10 +92,27 @@ export default defineComponent({
   name: 'ScrollView',
   inheritAttrs: false,
   props: {
-    /** 透传至 OverlayScrollbars 的选项，见官方文档 Options */
-    options: {
-      type: Object as PropType<PartialOptions>,
-      default: () => ({}) as PartialOptions
+    /** 对应 `Options.paddingAbsolute`；`null` 表示不设置（使用 OS 默认） */
+    paddingAbsolute: {
+      type: [Boolean, null] as PropType<boolean | null>,
+      default: null
+    },
+    /** 对应 `Options.showNativeOverlaidScrollbars`；`null` 表示不设置 */
+    showNativeOverlaidScrollbars: {
+      type: [Boolean, null] as PropType<boolean | null>,
+      default: null
+    },
+    /** 对应 `Options.update` */
+    update: {
+      type: Object as PropType<PartialOptions['update']>
+    },
+    /** 对应 `Options.overflow` */
+    overflow: {
+      type: Object as PropType<PartialOptions['overflow']>
+    },
+    /** 对应 `Options.scrollbars` */
+    scrollbars: {
+      type: Object as PropType<PartialOptions['scrollbars']>
     },
     /**
      * 「触底」敏感区高度（px）。
@@ -178,7 +214,7 @@ export default defineComponent({
       os?.destroy()
       prevDistanceToBottom = Number.POSITIVE_INFINITY
 
-      os = OverlayScrollbars(el, props.options ?? {}, {
+      os = OverlayScrollbars(el, buildOsOptions(props), {
         scroll: (instance, event) => handleScroll(instance, event)
       })
       applyScrollViewHostClasses(os, props.trigger)
@@ -187,14 +223,20 @@ export default defineComponent({
     onMounted(mountOs)
 
     /**
-     * options 深度变化时合并进 OS 并强制 update。
+     * OS 配置 props 深度变化时合并进 OS 并强制 update。
      * 重置 prev：列表/滚动条配置变化后，应允许再次检测「触底穿越」，避免沿用旧的上一帧距离。
      */
     watch(
-      () => props.options,
-      (next) => {
+      () => ({
+        paddingAbsolute: props.paddingAbsolute,
+        showNativeOverlaidScrollbars: props.showNativeOverlaidScrollbars,
+        update: props.update,
+        overflow: props.overflow,
+        scrollbars: props.scrollbars
+      }),
+      () => {
         if (!os) return
-        os.options(next ?? {}, false)
+        os.options(buildOsOptions(props), false)
         os.update(true)
         prevDistanceToBottom = Number.POSITIVE_INFINITY
       },

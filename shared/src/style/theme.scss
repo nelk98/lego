@@ -1,23 +1,50 @@
 $themes: (
   light: (
-    color-bg: #f4f7fb,
-    color-surface: #ffffff,
-    color-text: #111827,
-    color-text-muted: #4b5563,
-    color-border: #d9e2ef,
-    color-primary: #0f7af8,
-    color-heading: #0f172a,
-    shadow-card: 0 18px 48px rgba(15, 23, 42, 0.08)
+    color-text-a: (
+      0,
+      0,
+      0
+    ),
+    // 文字
+    color-text-0: #000,
+    color-text-1: rgba(#000, 0.9),
+    color-text-2: rgba(#000, 0.75),
+    color-text-3: rgba(#000, 0.5),
+    color-text-4: rgba(#000, 0.34),
+    color-text-5: rgba(#000, 0.34),
+    // 背景
+    color-bg-0: #fff,
+    color-bg-1: #f9fafb,
+    color-bg-2: #f3f4f6,
+    color-bg-3: #e5e7eb,
+    color-bg-4: #d1d5db,
+    color-bg-5: #9ca3af,
+    // 线、边框
+    color-line-1: rgba(#fff, 0.2),
+    color-line-2: rgba(#fff, 0.16),
+    color-line-3: rgba(#fff, 0.06),
+    color-line-4: rgba(#fff, 0.04)
   ),
   dark: (
-    color-bg: #0f172a,
-    color-surface: #111827,
-    color-text: #f8fafc,
-    color-text-muted: #cbd5e1,
-    color-border: #334155,
-    color-primary: #60a5fa,
-    color-heading: #ffffff,
-    shadow-card: 0 18px 48px rgba(15, 23, 42, 0.28)
+    // 文字
+    color-text-0: #fff,
+    color-text-1: rgba(#fff, 0.9),
+    color-text-2: rgba(#fff, 0.75),
+    color-text-3: rgba(#fff, 0.5),
+    color-text-4: rgba(#fff, 0.34),
+    color-text-5: rgba(#fff, 0.34),
+    // 背景
+    color-bg-0: #161823,
+    color-bg-1: #252632,
+    color-bg-2: #33343f,
+    color-bg-3: #41424c,
+    color-bg-4: rgba(var(--neutral-600), 1),
+    color-bg-5: rgba(var(--neutral-500), 1),
+    // 线、边框
+    color-line-1: rgba(var(--neutral-950), 0.5),
+    color-line-2: rgba(var(--neutral-950), 0.2),
+    color-line-3: rgba(var(--neutral-950), 0.1),
+    color-line-4: rgba(var(--neutral-950), 0.06)
   )
 );
 

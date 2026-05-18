@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Loading } from '@lego/shared'
 import { Button, Tooltip } from 'ant-design-vue'
 import type { ButtonProps } from 'ant-design-vue'
 
@@ -15,19 +16,26 @@ withDefaults(
       tooltip?: string
     }
   >(),
-  {
-    type: 'primary',
-    tooltip: 'xxxx'
-  }
+  {}
 )
 </script>
 
 <template>
   <Tooltip :title="tooltip">
-    <Button :loading="loading" v-bind="$attrs" :type="type" :size="size">
+    <Button
+      loadingIcon="LoadingOutlined"
+      :loading="loading"
+      v-bind="$attrs"
+      :type="type"
+      :size="size"
+      style="position: relative"
+    >
       <template v-for="(_, slot) in $slots" :key="slot" #[slot]="scope">
+        <!-- <Loading class="c_loading" /> -->
         <slot :name="slot" v-bind="scope ?? {}" />
       </template>
     </Button>
   </Tooltip>
 </template>
+
+<style lang="sass"></style>

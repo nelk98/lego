@@ -70,7 +70,7 @@ module.exports = {
     maxHeaderLength: Infinity,
     maxSubjectLength: Infinity,
     minSubjectLength: 0,
-    scopes: ['web', 'mobile', 'shared'],
+    scopes: ['web', 'mobile', 'shared', 'docs'],
     scopeOverrides: undefined,
     defaultBody: '',
     defaultIssues: '',

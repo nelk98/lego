@@ -12,7 +12,7 @@ import { ScrollView } from '@lego/web-ui'
 <template>
   <ScrollView
     class="h-40"
-    :options="{ scrollbars: { autoHide: 'move' } }"
+    :scrollbars="{ autoHide: 'move' }"
     @scroll="() => {}"
   >
     <div v-for="i in 50" :key="i">行 {{ i }}</div>
@@ -22,11 +22,15 @@ import { ScrollView } from '@lego/web-ui'
 
 ## Props
 
-| 名称             | 说明                                                |
-| ---------------- | --------------------------------------------------- |
-| `options`        | OverlayScrollbars `PartialOptions`                 |
-| `lowerThreshold` | 距底部可滚距离 ≤ 该值（px）视为进入「触底敏感区」，默认 `150` |
-| `trigger`        | `always` / `hover`，默认 `always`；由组件自带 **CSS**（挂在 OS `host` 上）控制 `.os-scrollbar` 显隐，与 `options.scrollbars` 独立 |
+| 名称                           | 说明                                                |
+| ------------------------------ | --------------------------------------------------- |
+| `paddingAbsolute`              | 对应 OS `Options.paddingAbsolute`；默认 `null` 表示不写入（用 OS 默认） |
+| `showNativeOverlaidScrollbars` | 对应 OS `Options.showNativeOverlaidScrollbars`；默认 `null` 表示不写入 |
+| `update`                       | 对应 OS `Options.update`（可选）                     |
+| `overflow`                     | 对应 OS `Options.overflow`（可选）                   |
+| `scrollbars`                   | 对应 OS `Options.scrollbars`（可选）                 |
+| `lowerThreshold`               | 距底部可滚距离 ≤ 该值（px）视为进入「触底敏感区」，默认 `150` |
+| `trigger`                      | `always` / `hover`，默认 `always`；由组件自带 **CSS**（挂在 OS `host` 上）控制 `.os-scrollbar` 显隐，与 `scrollbars` 等 OS 配置独立 |
 
 `trigger="hover"` 时：样式中对 **`@media (hover: none)`**（典型为触控）会退回滚动条常显，避免无法拖动滚动条。
 

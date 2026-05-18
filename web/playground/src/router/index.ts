@@ -7,15 +7,27 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView,
+      component: HomeView
     },
     {
       path: '/ui',
       name: 'ui',
       component: () => import('../views/UIView'),
-      meta: { title: '组件调试' },
+      meta: { title: '组件调试' }
     },
-  ],
+    {
+      path: '/table-view',
+      name: 'table-view',
+      component: () => import('../views/table-view/index'),
+      meta: { title: '表格视图' }
+    },
+    {
+      path: '/theme',
+      name: 'theme',
+      component: () => import('../views/theme/index'),
+      meta: { title: '主题' }
+    }
+  ]
 })
 
 export default router

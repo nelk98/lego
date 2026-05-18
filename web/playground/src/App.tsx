@@ -16,10 +16,13 @@ export default defineComponent({
             <RouterLink to="/ui" activeClass={styles.navLinkActive}>
               UI
             </RouterLink>
+            <RouterLink to="/theme" activeClass={styles.navLinkActive}>
+              theme
+            </RouterLink>
           </nav>
         </header>
         <RouterView />
       </>
     )
-  },
+  }
 })

@@ -2,3 +2,4 @@
 export * from './antd'
 export { default as ScrollView } from './scroll-view'
 export { Loading } from '@lego/shared'
+export { TableView } from './table-view'
