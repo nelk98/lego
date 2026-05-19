@@ -19,6 +19,9 @@ export default defineComponent({
             <RouterLink to="/theme" activeClass={styles.navLinkActive}>
               theme
             </RouterLink>
+            <RouterLink to="/color" activeClass={styles.navLinkActive}>
+              color
+            </RouterLink>
           </nav>
         </header>
         <RouterView />

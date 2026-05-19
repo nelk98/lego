@@ -26,6 +26,12 @@ const router = createRouter({
       name: 'theme',
       component: () => import('../views/theme/index'),
       meta: { title: '主题' }
+    },
+    {
+      path: '/color',
+      name: 'color',
+      component: () => import('../views/color/index'),
+      meta: { title: '主题色' }
     }
   ]
 })
