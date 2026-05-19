@@ -1,6 +1,5 @@
 import { defineComponent, ref } from 'vue'
 import {
-  LButton,
   ScrollView,
   UiButton,
   UiDialog,
@@ -41,7 +40,7 @@ export default defineComponent({
   setup() {
     // ScrollView 示例需要动态内容高度，用来验证 scrollToLower 是否能重复触发。
     const height = ref(310)
-    // Select 使用 value + onChange，模拟 AntD 风格的数据驱动 API。
+    // Select 使用 value + onChange 的数据驱动 API。
     const framework = ref('vue')
     const region = ref('cn-east')
     const activeTab = ref('account')
@@ -54,9 +53,7 @@ export default defineComponent({
           <div>
             <p class={styles.eyebrow}>shadcn-vue on TSX + UnoCSS</p>
             <h1>组件库调试</h1>
-            <p class={styles.desc}>
-              同屏展示旧的 Ant Design Vue 封装与新的 shadcn-vue 风格组件，便于迁移时逐个组件验证。
-            </p>
+            <p class={styles.desc}>shadcn-vue 风格组件调试与示例。</p>
           </div>
           <div class={styles.statusPanel}>
             <span>Framework: {framework.value}</span>
@@ -68,7 +65,7 @@ export default defineComponent({
 
         <section class={styles.block}>
           <div class={styles.blockHeader}>
-            <h2>UiButton</h2>
+            <h2>Button</h2>
             <p>本地 TSX 实现，基于 cva 管理 variant / size。</p>
           </div>
           <div class={styles.flex}>
@@ -86,7 +83,7 @@ export default defineComponent({
             <UiButton size="lg" variant="outline">
               Large
             </UiButton>
-            <UiButton size="icon" aria-label="Add">
+            <UiButton size="icon" aria-label="Add" loading>
               +
             </UiButton>
             <UiButton disabled>Disabled</UiButton>
@@ -222,21 +219,6 @@ export default defineComponent({
                 </UiDialogFooter>
               </UiDialogContent>
             </UiDialog>
-          </div>
-        </section>
-
-        <section class={styles.block}>
-          <div class={styles.blockHeader}>
-            <h2>Legacy Components</h2>
-            <p>保留原有组件，方便新旧实现并行对比。</p>
-          </div>
-          <div class={styles.flex}>
-            <LButton type="primary">Primary</LButton>
-            <LButton tooltip="Tooltip 来自旧的 Ant Design Vue 封装">Default</LButton>
-            <LButton loading>Loading</LButton>
-            <LButton type="dashed">Dashed</LButton>
-            <LButton type="link">Link</LButton>
-            <Loading />
           </div>
         </section>
 

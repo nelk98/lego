@@ -19,7 +19,6 @@
   "dependencies": {
     "@lego/shared": "workspace:*",
     "@lucide/vue": "^1.16.0",
-    "ant-design-vue": "^4.2.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "overlayscrollbars": "^2.15.1",

@@ -1,6 +1,5 @@
 import {
   defineComponent,
-  ref,
   h,
   mergeProps,
   useAttrs,
@@ -11,7 +10,7 @@ import {
   type EmitsToProps,
   type ExtractPublicPropTypes,
   type PropType,
-  type VNode,
+  type VNode
 } from 'vue'
 
 /* ---------------- 类型工具 ---------------- */
@@ -39,7 +38,7 @@ export interface EnhanceOptions<
   C extends Component,
   RuntimeProps extends Record<string, any>,
   ExtraEmits extends EmitsOptions,
-  OmitProps extends readonly string[] = readonly string[],
+  OmitProps extends readonly string[] = readonly string[]
 > {
   /** 组件名称 */
   name?: string
@@ -91,12 +90,12 @@ export function enhanceComponent<
   ExtraProps = ExtractPublicPropTypes<RuntimeProps>,
   ExtraEmits extends EmitsOptions = Record<string, never>,
   Statics extends Record<string, any> = Record<string, never>,
-  OmitProps extends readonly string[] = readonly string[],
+  OmitProps extends readonly string[] = readonly string[]
 >(
   Component: C,
   options: EnhanceOptions<C, RuntimeProps, ExtraEmits, OmitProps> & {
     statics?: Statics
-  } = {} as any,
+  } = {} as any
 ) {
   type BaseProps = PropsOf<C>
 
@@ -117,18 +116,18 @@ export function enhanceComponent<
     props: {
       forwardRef: {
         type: [Function, Object] as any,
-        default: null,
+        default: null
       },
       // 占位符在前，options.props 在后，避免与 omit 同名的扩展 prop 被 never 覆盖
       ...(options.omitProps?.length
         ? Object.fromEntries(
             options.omitProps.map((k) => [
               k,
-              { type: null as unknown as PropType<never>, default: undefined },
-            ]),
+              { type: null as unknown as PropType<never>, default: undefined }
+            ])
           )
         : {}),
-      ...(options.props ?? {}),
+      ...(options.props ?? {})
     },
 
     emits: options.emits,
@@ -173,7 +172,7 @@ export function enhanceComponent<
               slots,
               emit: ctx.emit as EmitFn<ExtraEmits>,
               expose: ctx.expose,
-              forwardRef,
+              forwardRef
             })
 
             if (customRender) {
@@ -192,9 +191,9 @@ export function enhanceComponent<
               Component as any,
               {
                 ...merged,
-                ref: forwardRef,
+                ref: forwardRef
               },
-              slots,
+              slots
             )
           } catch (error) {
             console.error(`[${Enhanced.name}] render error:`, error)
@@ -206,7 +205,7 @@ export function enhanceComponent<
         console.error(`[${Enhanced.name}] setup execution error:`, error)
         return () => null
       }
-    },
+    }
   })
 
   // 挂载静态属性
@@ -220,94 +219,3 @@ export function enhanceComponent<
 
   return Enhanced as unknown as (new () => EnhancedInstance) & Statics
 }
-
-/* ---------------- 使用示例 ---------------- */
-
-import { Button, Select } from 'ant-design-vue'
-import type { RefSelectProps } from 'ant-design-vue/es/select'
-
-const KSelect = enhanceComponent(Select, {
-  name: 'KSelect',
-
-  defaultProps: {
-    allowClear: true,
-    showSearch: true,
-    placeholder: '请选择xxx',
-  },
-
-  props: {
-    loadingText: {
-      type: String,
-    },
-    size: {
-      type: Object as PropType<{ size: number }>,
-      required: true,
-    },
-  } as const,
-
-  omitProps: ['size'] as const,
-  statics: { Option: Select.Option, OptGroup: Select.OptGroup },
-  emits: {
-    focus: () => true,
-  },
-  // setup(ctx) {
-  //   const { Component, props, slots, forwardRef, expose, emit } = ctx
-
-  //   expose({
-  //     aaa: () => {
-  //       console.log('focus')
-  //     }
-  //   })
-
-  //   return () => (
-  //     <div>
-  //       <span
-  //         onClick={() => {
-  //           emit('focus')
-  //         }}
-  //       >
-  //         前缀：
-  //       </span>
-  //       <Component
-  //         {...props}
-  //         ref={forwardRef}
-  //         v-slots={slots}
-  //       ></Component>
-  //       后缀。
-  //     </div>
-  //   )
-  // }
-})
-
-export const Demo = defineComponent({
-  setup() {
-    const selectRef = ref<RefSelectProps | null>(null)
-
-    return () => {
-      return (
-        <div>
-          <h1>...</h1>
-          <Button
-            onClick={() => {
-              selectRef.value?.focus()
-            }}
-          >
-            点我
-          </Button>
-          <KSelect
-            loadingText={'xx,..x'}
-            size={{ size: 1 }}
-            forwardRef={selectRef}
-            onFocus={() => {
-              console.log('focus')
-            }}
-          >
-            <KSelect.Option value="1">1</KSelect.Option>
-            <KSelect.Option value="2">2</KSelect.Option>
-            <KSelect.Option value="3">3</KSelect.Option>
-          </KSelect>
-        </div>
-      )
-    }
-  },
-})
