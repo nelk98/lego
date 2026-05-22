@@ -4,6 +4,32 @@ Web 端组件库已接入 shadcn-vue 的落地方式：组件源码放在 `@lego
 
 当前示例组件包含 `UiButton`、`UiSelect`、`UiDialog`、`UiTabs`、`UiSwitch` 及其组合子组件。Playground 路径为 `/ui`。
 
+## CLI 添加组件
+
+配置位于 `web/ui/components.json`，**需在 Node ≥ 22 下运行**（与仓库 `engines` 一致）。
+
+```bash
+# 从仓库根目录
+pnpm ui:shadcn card
+
+# 或在 web/ui 包内
+pnpm -C web/ui shadcn:add badge
+pnpm -C web/ui shadcn:info
+```
+
+组件会安装到 `web/ui/src/shadcn/<name>/`（与 `aliases.ui` 一致）。`cn()` 工具路径为 `@/shadcn/utils`。
+
+### 主题变量（已对齐 @lego/shared）
+
+CLI 默认写入 `--background`、`--primary` 等 shadcn 语义变量；本仓库在 `web/ui/src/styles/shadcn-theme.css` 中把它们**映射到 shared 已有 token**（如 `--color-bg-0`、`--color-primary-500`），因此：
+
+- `pnpm shadcn:add` 生成的 `bg-background`、`text-primary` 会跟随 `[data-theme]`、`[data-primary]` 切换；
+- 历史组件使用的 `--l-shadcn-*` 与上述变量保持同步，无需改类名。
+
+**不要**对 `shadcn-theme.css` 执行 `shadcn-vue init` 覆盖；若误跑 init，恢复该文件中的映射表即可。UnoCSS 主题色见根目录 `uno.config.ts` 的 `theme.colors`。
+
+CLI 生成的是 `.vue` 文件；若团队规范为 TSX + `Ui*` 前缀，添加后需手工重命名/封装并从 `web/ui/src/index.ts` 导出。
+
 ## 使用方式
 
 ```tsx
@@ -150,19 +176,22 @@ const enabled = ref(true)
 
 ## 新组件开发
 
-1. 在 `web/ui/src/shadcn/<component>/index.tsx` 新建组件源码。
-2. 交互复杂的组件优先使用 `reka-ui` primitives；对业务暴露的数据驱动 API，对极端场景再保留 primitive escape hatch。
-3. 样式优先写 UnoCSS / Tailwind v4 兼容原子类，公共视觉变量放在 `web/ui/src/styles/index.css`。
-4. 需要变体的组件使用 `cva`；需要 class 合并时统一使用 `cn()`。
-5. 从 `web/ui/src/index.ts` 导出组件，保持按需命名导出。
-6. 在 `web/playground/src/views/UIView.tsx` 增加可交互案例，覆盖基础态、禁用态、复杂内容与受控值。
-7. 在 `docs/components` 补充文档，并更新 `docs/preset/sidebar.ts`。
+推荐流程：
+
+1. `pnpm ui:shadcn <component>` 拉取官方实现（或继续在 `web/ui/src/shadcn/<component>/index.tsx` 手写）。
+2. 将 `.vue` 调整为 TSX + `Ui*` 导出（若需要与现有 API 一致）。
+3. 交互复杂的组件优先使用 `reka-ui` primitives；对业务暴露的数据驱动 API，对极端场景再保留 primitive escape hatch。
+4. 样式使用 UnoCSS 原子类（`bg-primary`、`border-border` 等）；**不要**在组件里写死色值，语义色由 `shadcn-theme.css` → shared token 提供。
+5. 需要变体的组件使用 `cva`；需要 class 合并时统一使用 `cn()`。
+6. 从 `web/ui/src/index.ts` 导出组件，保持按需命名导出。
+7. 在 `web/playground/src/views/UIView.tsx` 增加可交互案例，覆盖基础态、禁用态、复杂内容与受控值。
+8. 在 `docs/components` 补充文档，并更新 `docs/preset/sidebar.ts`。
 
 ## 维护约定
 
 - 不直接修改 `node_modules` 中的 shadcn-vue 或 Reka UI 文件；组件源码以本仓库为准。
 - 新增依赖先放在 `@lego/web-ui`，只有 playground 自己直接 import 时才放到 `@lego/web-playground`。
-- 组件默认样式不要写业务色值，优先使用 `--l-shadcn-*` 语义变量。
+- 组件默认样式不要写业务色值，优先使用 `bg-background`、`text-primary` 等语义类（底层变量见 `shadcn-theme.css`）。
 - 继续保留 Ant Design Vue 旧导出；新组件使用 `Ui*` 前缀，避免与历史 `Button`、`Select` 冲突。
 - UnoCSS 已启用 `@unocss/preset-wind4`，但全局 reset 仍由 `@lego/shared/web` 管理。
 
