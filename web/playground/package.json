@@ -13,11 +13,17 @@
   "dependencies": {
     "@lego/shared": "workspace:*",
     "@lego/web-ui": "workspace:*",
+    "iconv-lite": "^0.7.2",
     "pinia": "^3.0.4",
+    "qz-tray": "^2.2.6",
     "vue": "^3.5.29",
     "vue-router": "^5.0.3"
   },
   "devDependencies": {
+    "@types/iconv-lite": "^0.0.1",
+    "@types/w3c-web-serial": "^1.0.8",
+    "@types/w3c-web-usb": "^1.0.14",
+    "@types/web-bluetooth": "^0.0.21",
     "@vitejs/plugin-vue": "^6.0.4",
     "@vitejs/plugin-vue-jsx": "^5.1.4",
     "sass": "^1.93.2",

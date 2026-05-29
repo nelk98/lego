@@ -1,8 +1,177 @@
-.main {
-  padding: 2rem 0;
+.page {
+  padding: 20px;
 }
 
-.desc {
-  color: var(--color-text);
-  opacity: 0.8;
+.section {
+  margin-bottom: 28px;
+}
+
+.sectionTitle {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.sectionHint {
+  margin: 0 0 16px;
+  color: #666;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.recommended {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #15803d;
+  background: #dcfce7;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+.previewWrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.receipt {
+  box-sizing: border-box;
+  width: 58mm;
+  max-width: 100%;
+  padding: 8px 6px;
+  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #000;
+  background: #fff;
+  border: 1px dashed #cbd5e1;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 8%);
+}
+
+.receiptLogo {
+  display: block;
+  width: 100%;
+  max-width: 48mm;
+  margin: 0 auto 8px;
+}
+
+.receiptTitle {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.receiptDivider {
+  margin: 6px 0;
+  border: none;
+  border-top: 1px dashed #000;
+}
+
+.receiptRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 4px 0;
+}
+
+.receiptLabel {
+  flex-shrink: 0;
+  color: #333;
+}
+
+.receiptValue {
+  text-align: right;
+  word-break: break-all;
+}
+
+.receiptFooter {
+  margin: 8px 0 0;
+  text-align: center;
+  font-size: 11px;
+}
+
+.printActions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.printBtn {
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.serialBlock {
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.apiBlock {
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.btnRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.error {
+  margin: 8px 0 0;
+  color: #dc2626;
+  font-size: 13px;
+}
+
+.noPrint {
+  /* screen only; hidden when printing */
+}
+
+@media print {
+  :global(body) {
+    margin: 0;
+    padding: 0;
+  }
+
+  .page {
+    padding: 0;
+  }
+
+  .section {
+    margin: 0;
+  }
+
+  .noPrint {
+    display: none !important;
+  }
+
+  .previewWrap {
+    display: block;
+    margin: 0;
+  }
+
+  .receipt {
+    width: 58mm;
+    max-width: none;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+  }
+
+  .printActions {
+    display: none !important;
+  }
+
+  @page {
+    size: 58mm auto;
+    margin: 2mm;
+  }
 }
