@@ -79,7 +79,10 @@ export const UiSelectValue = defineComponent({
 
     return () => (
       <SelectValue
-        {...mergeProps(attrs, { placeholder: props.placeholder } satisfies SelectValueProps)}
+        {...mergeProps(attrs, {
+          'data-slot': 'select-value',
+          placeholder: props.placeholder
+        } satisfies SelectValueProps & { 'data-slot': string })}
       >
         {slots.default?.()}
       </SelectValue>
@@ -110,14 +113,18 @@ export const UiSelectTrigger = defineComponent({
         asChild={props.asChild}
         disabled={props.disabled}
         {...mergeProps(attrs, {
+          'data-slot': 'select-trigger',
+          'data-size': 'default',
           class: cn(
             [
-              'flex h-9 w-full items-center justify-between gap-2 rounded-md border border-[var(--l-shadcn-input)]',
-              'bg-[var(--l-shadcn-background)] px-3 py-2 text-sm text-[var(--l-shadcn-foreground)] shadow-xs outline-none',
-              'transition-colors hover:bg-[var(--l-shadcn-accent)]',
-              'focus-visible:border-[var(--l-shadcn-ring)] focus-visible:ring-[3px] focus-visible:ring-[var(--l-shadcn-ring)]/30',
+              'border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*=text-])]:text-muted-foreground',
+              'focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50',
+              'aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40',
+              'dark:bg-input/30 dark:hover:bg-input/50 flex h-9 w-full items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs',
+              'transition-[color,box-shadow] outline-none',
               'disabled:cursor-not-allowed disabled:opacity-50',
-              '[&>span]:min-w-0 [&>span]:truncate'
+              '*:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2',
+              '[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=size-])]:size-4'
             ],
             attrs.class
           )
@@ -170,11 +177,13 @@ export const UiSelectContent = defineComponent({
           avoidCollisions={props.avoidCollisions}
           collisionPadding={props.collisionPadding}
           {...mergeProps(attrs, {
+            'data-slot': 'select-content',
             class: cn(
               [
-                'relative z-50 max-h-96 min-w-32 overflow-hidden rounded-md border border-[var(--l-shadcn-border)]',
-                'bg-[var(--l-shadcn-popover)] text-[var(--l-shadcn-popover-foreground)] shadow-md',
-                'data-[state=open]:opacity-100 data-[state=closed]:opacity-0',
+                'bg-popover text-popover-foreground relative z-50 max-h-(--reka-select-content-available-height) min-w-[8rem] overflow-x-hidden overflow-y-auto rounded-md border shadow-md',
+                'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+                'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
+                'data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
                 props.position === 'popper' &&
                   'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1'
               ],
@@ -187,7 +196,7 @@ export const UiSelectContent = defineComponent({
             class={cn(
               'p-1',
               props.position === 'popper' &&
-                'h-[var(--reka-select-trigger-height)] w-full min-w-[var(--reka-select-trigger-width)]'
+                'h-[var(--reka-select-trigger-height)] w-full min-w-[var(--reka-select-trigger-width)] scroll-my-1'
             )}
           >
             {slots.default?.()}
@@ -213,10 +222,7 @@ export const UiSelectLabel = defineComponent({
       <SelectLabel
         for={props.for}
         {...mergeProps(attrs, {
-          class: cn(
-            'px-2 py-1.5 text-xs font-medium text-[var(--l-shadcn-muted-foreground)]',
-            attrs.class
-          )
+          class: cn('text-muted-foreground px-2 py-1.5 text-xs font-medium', attrs.class)
         })}
       >
         {slots.default?.()}
@@ -248,12 +254,13 @@ export const UiSelectItem = defineComponent({
         disabled={props.disabled}
         textValue={props.textValue}
         {...mergeProps(attrs, {
+          'data-slot': 'select-item',
           class: cn(
             [
-              'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pr-8 pl-2 text-sm outline-none',
-              'text-[var(--l-shadcn-popover-foreground)]',
-              'focus:bg-[var(--l-shadcn-accent)] focus:text-[var(--l-shadcn-accent-foreground)]',
-              'data-[disabled]:pointer-events-none data-[disabled]:opacity-50'
+              'focus:bg-accent focus:text-accent-foreground [&_svg:not([class*=text-])]:text-muted-foreground',
+              'relative flex w-full cursor-default select-none items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden',
+              'data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+              '[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=size-])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2'
             ],
             attrs.class
           )
@@ -286,7 +293,7 @@ export const UiSelectSeparator = defineComponent({
         as={props.as}
         asChild={props.asChild}
         {...mergeProps(attrs, {
-          class: cn('-mx-1 my-1 h-px bg-[var(--l-shadcn-border)]', attrs.class)
+          class: cn('bg-border -mx-1 my-1 h-px', attrs.class)
         })}
       />
     )
@@ -435,9 +442,7 @@ export const UiSelect = defineComponent({
           ) : option.description ? (
             <span class="grid min-w-0 gap-0.5">
               <span>{option.label}</span>
-              <small class="text-xs leading-4 text-[var(--l-shadcn-muted-foreground)]">
-                {option.description}
-              </small>
+              <small class="text-muted-foreground text-xs leading-4">{option.description}</small>
             </span>
           ) : (
             option.label
@@ -449,7 +454,7 @@ export const UiSelect = defineComponent({
     function renderOptions() {
       if (!props.options.length) {
         return (
-          <div class="px-2 py-1.5 text-sm text-[var(--l-shadcn-muted-foreground)]">
+          <div class="text-muted-foreground px-2 py-1.5 text-sm">
             {slots.empty?.() ?? props.emptyText}
           </div>
         )

@@ -120,8 +120,9 @@ export const UiDialogOverlay = defineComponent({
         asChild={props.asChild}
         forceMount={props.forceMount}
         {...mergeProps(attrs, {
+          'data-slot': 'dialog-overlay',
           class: cn(
-            'fixed inset-0 z-50 bg-black/50 data-[state=open]:animate-in data-[state=closed]:animate-out',
+            'fixed inset-0 z-50 bg-black/50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
             attrs.class
           )
         })}
@@ -153,18 +154,22 @@ export const UiDialogContent = defineComponent({
           forceMount={props.forceMount}
           disableOutsidePointerEvents={props.disableOutsidePointerEvents}
           {...mergeProps(attrs, {
+            'data-slot': 'dialog-content',
             class: cn(
               [
-                'fixed top-1/2 left-1/2 z-50 grid w-[min(92vw,520px)] -translate-x-1/2 -translate-y-1/2 gap-4',
-                'rounded-lg border border-[var(--l-shadcn-border)] bg-[var(--l-shadcn-background)] p-6 text-[var(--l-shadcn-foreground)] shadow-lg',
-                'data-[state=open]:opacity-100 data-[state=closed]:opacity-0'
+                'bg-background fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-4 rounded-lg border p-6 shadow-lg duration-200 sm:max-w-lg',
+                'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+                'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95'
               ],
               attrs.class
             )
           })}
         >
           {slots.default?.()}
-          <DialogClose class="absolute top-4 right-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-[var(--l-shadcn-ring)] disabled:pointer-events-none">
+          <DialogClose
+            data-slot="dialog-close"
+            class="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=size-])]:size-4"
+          >
             <X class="size-4" aria-hidden="true" />
             <span class="sr-only">Close</span>
           </DialogClose>
@@ -245,7 +250,7 @@ export const UiDialogDescription = defineComponent({
         as={props.as}
         asChild={props.asChild}
         {...mergeProps(attrs, {
-          class: cn('text-sm text-[var(--l-shadcn-muted-foreground)]', attrs.class)
+          class: cn('text-muted-foreground text-sm', attrs.class)
         })}
       >
         {slots.default?.()}

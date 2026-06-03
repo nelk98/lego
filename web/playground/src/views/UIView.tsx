@@ -1,27 +1,11 @@
 import { defineComponent, ref } from 'vue'
-import {
-  ScrollView,
-  UiButton,
-  UiDialog,
-  UiDialogClose,
-  UiDialogContent,
-  UiDialogDescription,
-  UiDialogFooter,
-  UiDialogHeader,
-  UiDialogTitle,
-  UiDialogTrigger,
-  UiSelect,
-  UiSwitch,
-  UiTabs,
-  UiTabsContent,
-  UiTabsList,
-  UiTabsTrigger
-} from '@lego/web-ui'
+import { Button, Input, Modal, ScrollView, Select, modal } from '@lego/web-ui'
+import { PRIMARY_COLOR_NAMES, useTheme, type PrimaryColorName } from '@lego/shared'
 
 import styles from './UIView.module.css'
 
 // Playground 只维护示例数据；组件源码与样式逻辑都留在 @lego/web-ui 内。
-const buttonVariants = ['default', 'secondary', 'outline', 'ghost', 'destructive', 'link'] as const
+const buttonTypes = ['primary', 'default', 'danger', 'text'] as const
 const frameworks = [
   { value: 'vue', label: 'Vue', disabled: false },
   { value: 'nuxt', label: 'Nuxt', disabled: false },
@@ -34,21 +18,49 @@ const regions = [
   { value: 'sg', label: '新加坡', description: '适合东南亚业务' },
   { value: 'us-west', label: '美西区', description: '适合北美测试环境' }
 ]
+const primaryOptions = PRIMARY_COLOR_NAMES.map((primary) => ({
+  value: primary,
+  label: primary
+}))
 
 export default defineComponent({
   name: 'UIView',
   setup() {
     // ScrollView 示例需要动态内容高度，用来验证 scrollToLower 是否能重复触发。
     const height = ref(310)
-    // Select 使用 value + onChange 的数据驱动 API。
+    // 业务组件使用 value + onChange 的数据驱动 API。
+    const keyword = ref('')
     const framework = ref('vue')
     const region = ref('cn-east')
-    const activeTab = ref('account')
-    const notifications = ref(true)
-    const dialogOpen = ref(false)
+    const modalOpen = ref(false)
+    const theme = useTheme()
 
     return () => (
       <div class={styles.uiPlayground}>
+        <div class={styles.themeControls} aria-label="Theme controls">
+          <div class={styles.themeField}>
+            <span>主题色</span>
+            <Select
+              value={theme.primary.value}
+              options={primaryOptions}
+              triggerClass={styles.themeSelect}
+              contentClass={styles.themeSelectContent}
+              onChange={(value) => {
+                theme.setPrimary(value as PrimaryColorName)
+              }}
+            />
+          </div>
+          <button
+            type="button"
+            class={styles.themeToggle}
+            aria-pressed={theme.theme.value === 'dark'}
+            onClick={() => {
+              theme.toggleTheme()
+            }}
+          >
+            {theme.theme.value === 'dark' ? '深色' : '浅色'}
+          </button>
+        </div>
         <header class={styles.hero}>
           <div>
             <p class={styles.eyebrow}>shadcn-vue on TSX + UnoCSS</p>
@@ -56,50 +68,57 @@ export default defineComponent({
             <p class={styles.desc}>shadcn-vue 风格组件调试与示例。</p>
           </div>
           <div class={styles.statusPanel}>
+            <span>Keyword: {keyword.value || '-'}</span>
             <span>Framework: {framework.value}</span>
             <span>Region: {region.value}</span>
-            <span>Tab: {activeTab.value}</span>
-            <span>Notify: {notifications.value ? 'on' : 'off'}</span>
           </div>
         </header>
 
         <section class={styles.block}>
           <div class={styles.blockHeader}>
             <h2>Button</h2>
-            <p>本地 TSX 实现，基于 cva 管理 variant / size。</p>
+            <p>业务侧使用 AntD-like type / size / loading / block API。</p>
           </div>
           <div class={styles.flex}>
-            {buttonVariants.map((variant) => (
-              <UiButton key={variant} variant={variant}>
-                {variant}
-              </UiButton>
+            {buttonTypes.map((type) => (
+              <Button key={type} type={type}>
+                {type}
+              </Button>
             ))}
           </div>
           <div class={styles.flex}>
-            <UiButton size="sm" variant="secondary">
-              Small
-            </UiButton>
-            <UiButton>Default</UiButton>
-            <UiButton size="lg" variant="outline">
-              Large
-            </UiButton>
-            <UiButton size="icon" aria-label="Add" loading>
-              +
-            </UiButton>
-            <UiButton disabled>Disabled</UiButton>
-            <UiButton loading>Loading</UiButton>
+            <Button size="sm">Small</Button>
+            <Button type="primary">Default</Button>
+            <Button size="lg">Large</Button>
+            <Button disabled>Disabled</Button>
+            <Button type="primary" loading>
+              Loading
+            </Button>
+            <Button block>Block Button</Button>
           </div>
         </section>
 
         <section class={styles.block}>
           <div class={styles.blockHeader}>
-            <h2>UiSelect</h2>
-            <p>业务侧只传 options / value / onChange，内部再组合 Reka UI primitives。</p>
+            <h2>Input & Select</h2>
+            <p>业务侧只传 value / options / onChange，内部再组合 shadcn-vue/Reka。</p>
           </div>
           <div class={styles.grid}>
             <div class={styles.field}>
+              <label>搜索关键字</label>
+              <Input
+                value={keyword.value}
+                placeholder="请输入关键字"
+                clearable
+                onChange={(value) => {
+                  keyword.value = String(value ?? '')
+                }}
+              />
+            </div>
+
+            <div class={styles.field}>
               <label>基础选择</label>
-              <UiSelect
+              <Select
                 value={framework.value}
                 placeholder="选择框架"
                 options={frameworkGroups}
@@ -111,7 +130,7 @@ export default defineComponent({
 
             <div class={styles.field}>
               <label>复杂内容</label>
-              <UiSelect
+              <Select
                 value={region.value}
                 placeholder="选择部署区域"
                 options={regions}
@@ -126,100 +145,71 @@ export default defineComponent({
 
         <section class={styles.block}>
           <div class={styles.blockHeader}>
-            <h2>Complex Primitives</h2>
-            <p>Dialog、Tabs、Switch 都基于 Reka UI primitives，覆盖 Portal、受控状态与组合内容。</p>
+            <h2>Modal</h2>
+            <p>业务侧使用声明式 Modal，也可以通过 modal.open / modal.confirm 命令式调用。</p>
           </div>
-          <div class={styles.complexGrid}>
-            <UiTabs
-              modelValue={activeTab.value}
-              {...{
-                'onUpdate:modelValue': (value: string | number) => {
-                  activeTab.value = String(value)
-                }
-              }}
-              class={styles.tabsDemo}
-            >
-              <UiTabsList>
-                <UiTabsTrigger value="account">Account</UiTabsTrigger>
-                <UiTabsTrigger value="deploy">Deploy</UiTabsTrigger>
-                <UiTabsTrigger value="disabled" disabled>
-                  Disabled
-                </UiTabsTrigger>
-              </UiTabsList>
-              <UiTabsContent value="account">
-                <div class={styles.settingRow}>
-                  <div class={styles.settingCopy}>
-                    <strong>通知提醒</strong>
-                    <span>用于验证 Switch 在 Tabs 面板里的受控状态是否保持。</span>
-                  </div>
-                  <UiSwitch
-                    modelValue={notifications.value}
-                    aria-label="Toggle notifications"
-                    {...{
-                      'onUpdate:modelValue': (value: boolean) => {
-                        notifications.value = value
-                      }
-                    }}
-                  />
-                </div>
-              </UiTabsContent>
-              <UiTabsContent value="deploy">
-                <div class={styles.settingRow}>
-                  <div class={styles.settingCopy}>
-                    <strong>部署区域</strong>
-                    <span>当前区域为 {region.value}，Select 与 Tabs 状态互不影响。</span>
-                  </div>
-                  <UiButton variant="outline" size="sm">
-                    Sync
-                  </UiButton>
-                </div>
-              </UiTabsContent>
-            </UiTabs>
-
-            <UiDialog
-              open={dialogOpen.value}
-              {...{
-                'onUpdate:open': (value: boolean) => {
-                  dialogOpen.value = value
-                }
+          <div class={styles.flex}>
+            <Button
+              onClick={() => {
+                modalOpen.value = true
               }}
             >
-              <UiDialogTrigger asChild>
-                <UiButton variant="outline">Open Dialog</UiButton>
-              </UiDialogTrigger>
-              <UiDialogContent>
-                <UiDialogHeader>
-                  <UiDialogTitle>发布配置</UiDialogTitle>
-                  <UiDialogDescription>
-                    Dialog 默认通过 Portal 渲染，关闭按钮、遮罩和焦点管理都由封装处理。
-                  </UiDialogDescription>
-                </UiDialogHeader>
-                <div class={styles.dialogForm}>
-                  <label>发布区域</label>
-                  <UiSelect
-                    value={region.value}
-                    placeholder="选择发布区域"
-                    options={regions}
-                    onChange={(value) => {
-                      region.value = String(value)
-                    }}
-                  />
-                </div>
-                <UiDialogFooter>
-                  <UiDialogClose asChild>
-                    <UiButton variant="outline">取消</UiButton>
-                  </UiDialogClose>
-                  <UiButton
-                    onClick={() => {
-                      dialogOpen.value = false
-                    }}
-                  >
-                    确认发布
-                  </UiButton>
-                </UiDialogFooter>
-              </UiDialogContent>
-            </UiDialog>
+              声明式 Modal
+            </Button>
+            <Button
+              onClick={() => {
+                modal.open({
+                  title: '编辑用户',
+                  description: '命令式打开，适合跨页面动作或快速确认。',
+                  content: () => (
+                    <div class={styles.dialogForm}>
+                      <label>姓名</label>
+                      <Input value={keyword.value} placeholder="请输入姓名" clearable />
+                    </div>
+                  )
+                })
+              }}
+            >
+              modal.open
+            </Button>
+            <Button
+              type="danger"
+              onClick={async () => {
+                await modal.confirm({
+                  title: '删除确认',
+                  description: 'confirm 返回 Promise<boolean>，可直接 await。',
+                  content: '确定要删除这条配置吗？'
+                })
+              }}
+            >
+              modal.confirm
+            </Button>
           </div>
+          <Modal
+            open={modalOpen.value}
+            title="发布配置"
+            description="Modal 对业务暴露 title / onOk / onCancel，而不是 Dialog 组合结构。"
+            {...{
+              'onUpdate:open': (value: boolean) => {
+                modalOpen.value = value
+              }
+            }}
+            onOk={() => {
+              modalOpen.value = false
+            }}
+          >
+            <div class={styles.dialogForm}>
+              <label>发布区域</label>
+              <Select
+                value={region.value}
+                placeholder="选择发布区域"
+                options={regions}
+                onChange={(value) => {
+                  region.value = String(value)
+                }}
+              />
+            </div>
+          </Modal>
         </section>
 
         <section class={styles.block}>

@@ -1,10 +1,6 @@
 import './styles/index.css'
 
-export * from './shadcn/button'
-export * from './shadcn/dialog'
-export * from './shadcn/select'
-export * from './shadcn/switch'
-export * from './shadcn/tabs'
+export * from './components'
 export { default as ScrollView } from './scroll-view'
 export { Spin } from '@lego/shared'
 export { TableView } from './table-view'

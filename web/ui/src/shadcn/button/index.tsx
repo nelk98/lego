@@ -13,31 +13,32 @@ import { Spin } from '@lego/shared'
  */
 export const buttonVariants = cva(
   [
-    'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium',
-    'transition-colors outline-none select-none',
-    'focus-visible:border-[var(--l-shadcn-ring)] focus-visible:ring-[3px] focus-visible:ring-[var(--l-shadcn-ring)]/30',
+    'inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium',
+    'transition-all outline-none select-none',
+    'focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50',
     'disabled:pointer-events-none disabled:opacity-50',
-    '[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0'
+    '[&_svg]:pointer-events-none [&_svg:not([class*=size-])]:size-4 [&_svg]:shrink-0',
+    'aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40'
   ],
   {
     variants: {
       variant: {
-        default:
-          'bg-[var(--l-shadcn-primary)] text-[var(--l-shadcn-primary-foreground)] hover:opacity-90',
+        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
         destructive:
-          'bg-[var(--l-shadcn-destructive)] text-[var(--l-shadcn-destructive-foreground)] hover:opacity-90',
+          'bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:bg-destructive/60 dark:focus-visible:ring-destructive/40',
         outline:
-          'border border-[var(--l-shadcn-input)] bg-[var(--l-shadcn-background)] hover:bg-[var(--l-shadcn-accent)] hover:text-[var(--l-shadcn-accent-foreground)]',
-        secondary:
-          'bg-[var(--l-shadcn-secondary)] text-[var(--l-shadcn-secondary-foreground)] hover:opacity-85',
-        ghost: 'hover:bg-[var(--l-shadcn-accent)] hover:text-[var(--l-shadcn-accent-foreground)]',
-        link: 'h-auto px-0 text-[var(--l-shadcn-primary)] underline-offset-4 hover:underline'
+          'border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50',
+        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+        ghost: 'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
+        link: 'h-auto px-0 text-primary underline-offset-4 hover:underline'
       },
       size: {
-        default: 'h-9 px-4 py-2',
-        sm: 'h-8 rounded-md px-3 text-xs',
-        lg: 'h-10 rounded-md px-6',
-        icon: 'size-9'
+        default: 'h-9 px-4 py-2 has-[>svg]:px-3',
+        sm: 'h-8 gap-1.5 rounded-md px-3 has-[>svg]:px-2.5',
+        lg: 'h-10 rounded-md px-6 has-[>svg]:px-4',
+        icon: 'size-9',
+        'icon-sm': 'size-8',
+        'icon-lg': 'size-10'
       }
     },
     defaultVariants: {
@@ -105,6 +106,9 @@ export const UiButton = defineComponent({
           as={props.as}
           asChild={props.asChild}
           {...mergeProps(attrs, {
+            'data-slot': 'button',
+            'data-variant': props.variant,
+            'data-size': props.size,
             disabled: isDisabled,
             'aria-busy': props.loading ? true : undefined,
             type: props.as === 'button' ? props.type : undefined,
