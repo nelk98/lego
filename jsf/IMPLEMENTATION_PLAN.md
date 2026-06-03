@@ -28,7 +28,7 @@
 ```text
 src/
   core/          # schema、runtime、校验、联动、数据转换
-  renderer/      # JsfForm、JsfField、JsfProvider 等 Vue 渲染层
+  renderer/      # SchemaForm、SchemaField、SchemaProvider 等 Vue 渲染层
   registry/      # widget、validator、transformer、dataSource 注册
   widgets/       # 可选：仅放基础类型定义，不放默认控件
   designer/      # 低代码元信息、schema 编辑、预览能力
@@ -104,7 +104,7 @@ form.reset(nextValues?)
 form.destroy()
 ```
 
-推荐心智是：`JsfForm` 只负责渲染，真正的外部控制入口是 `form` 实例。
+推荐心智是：`SchemaForm` 只负责渲染，真正的外部控制入口是 `form` 实例。
 
 ## 4. 受控与非受控
 
@@ -140,13 +140,13 @@ const form = createForm({
 组件层也可以支持：
 
 ```vue
-<JsfForm v-model:values="values" :schema="schema" />
+<SchemaForm v-model:values="values" :schema="schema" />
 ```
 
 但推荐复杂场景显式创建 `form`：
 
 ```vue
-<JsfForm :form="form" />
+<SchemaForm :form="form" />
 ```
 
 ## 5. Schema 设计
@@ -240,9 +240,9 @@ Layout  # 展示结构：label/helper/error/栅格/分组/步骤/tabs
 推荐默认渲染结构：
 
 ```text
-JsfForm
-  -> JsfLayout
-    -> JsfField
+SchemaForm
+  -> SchemaLayout
+    -> SchemaField
       -> FieldFrame
         -> Label
         -> WidgetHost
@@ -616,7 +616,7 @@ designer    # 低代码设计时元信息
 错误面板可以这样使用：
 
 ```vue
-<JsfErrorSummary
+<SchemaErrorSummary
   :form="form"
   @select="error => form.locateField(error.field)"
 />
@@ -998,7 +998,7 @@ jsf.registerLazy('customerSelect', () => import('@/widgets/customer-select.widge
 
 ```vue
 <script setup lang="ts">
-import { createForm, JsfErrorSummary, JsfForm } from '@lego/jsf'
+import { createForm, SchemaErrorSummary, SchemaForm } from '@lego/jsf'
 import { jsf } from './web-jsf'
 import { baseSchema } from './user-form.schema'
 import { webPatchSchema } from './user-form.web.schema'
@@ -1026,12 +1026,12 @@ async function submit() {
 </script>
 
 <template>
-  <JsfErrorSummary
+  <SchemaErrorSummary
     :form="form"
     @select="error => form.locateField(error.field)"
   />
 
-  <JsfForm :form="form" />
+  <SchemaForm :form="form" />
 
   <button @click="form.setValue('companyName', '乐高科技')">
     修改企业名称
@@ -1061,7 +1061,7 @@ Taro 页面：
 
 ```vue
 <script setup lang="ts">
-import { createForm, JsfForm } from '@lego/jsf'
+import { createForm, SchemaForm } from '@lego/jsf'
 import { jsf } from './mobile-jsf'
 import { baseSchema } from './user-form.schema'
 
@@ -1072,7 +1072,7 @@ const form = createForm({
 </script>
 
 <template>
-  <JsfForm :form="form" />
+  <SchemaForm :form="form" />
 </template>
 ```
 
@@ -1087,7 +1087,7 @@ const form = createForm({
 - schema normalize / compile
 - `visible` / `disabled` / `readonly` / `required` 动态布尔 DSL
 - 同步校验
-- `JsfForm` / `JsfField`
+- `SchemaForm` / `SchemaField`
 - `FieldFrame`
 - widget registry
 - `defineWidget`
@@ -1099,7 +1099,7 @@ const form = createForm({
 - `exposeHandle`
 - container handle
 - `locateField`
-- `JsfErrorSummary`
+- `SchemaErrorSummary`
 - Web 滚动定位
 - Taro 滚动定位适配
 - 异步 widget loading / error / retry

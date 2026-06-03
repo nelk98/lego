@@ -250,4 +250,4 @@ if (!result.valid) {
 }
 ```
 
-`JsfErrorSummary` 会读取 `form.getErrors()`，点击错误后调用 `form.locateField(error.field)`。复杂控件可以通过 `defineWidget` 暴露自定义 `focus/activate/reveal/highlight`，让错误定位成为完整链路，而不是只滚动到 DOM 节点。
+`SchemaErrorSummary` 会读取 `form.getErrors()`，点击错误后调用 `form.locateField(error.field)`。复杂控件可以通过 `defineWidget` 暴露自定义 `focus/activate/reveal/highlight`，让错误定位成为完整链路，而不是只滚动到 DOM 节点。

@@ -6,8 +6,8 @@ import {
   defineSchema,
   dynamic,
   arrayRequiredRule,
-  JsfErrorSummary,
-  JsfForm,
+  SchemaErrorSummary,
+  SchemaForm,
   minRule,
   useWidgetContext,
   validatorRule,
@@ -569,7 +569,7 @@ const personApiModel = {
 }
 
 export default defineComponent({
-  name: 'JsfPlaygroundView',
+  name: 'SchemaFormPlaygroundView',
   setup() {
     const version = ref(0)
     const lastSubmit = ref('尚未提交')
@@ -743,8 +743,8 @@ export default defineComponent({
         <div class={styles.grid}>
           <section class={styles.panel}>
             <h2>表单</h2>
-            <JsfErrorSummary form={form} />
-            <JsfForm form={form} />
+            <SchemaErrorSummary form={form} />
+            <SchemaForm form={form} />
           </section>
 
           <aside class={[styles.panel, styles.debug]}>

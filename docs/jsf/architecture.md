@@ -61,10 +61,10 @@ flowchart TB
   end
 
   subgraph VueLayer["Vue Renderer: Vue3 相关"]
-    JsfForm["JsfForm"]
-    JsfField["JsfField"]
+    SchemaForm["SchemaForm"]
+    SchemaField["SchemaField"]
     FieldFrame["FieldFrame"]
-    ErrorSummary["JsfErrorSummary"]
+    ErrorSummary["SchemaErrorSummary"]
     WidgetHost["WidgetHost"]
     Context["provide / use context"]
   end
@@ -87,7 +87,7 @@ sequenceDiagram
   participant App as "业务代码"
   participant Registry as "Registry"
   participant Form as "FormRuntime"
-  participant Renderer as "JsfForm / JsfField"
+  participant Renderer as "SchemaForm / SchemaField"
   participant Widget as "Widget"
   participant Validator as "Validator / DataSource"
 

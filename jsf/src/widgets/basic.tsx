@@ -29,7 +29,7 @@ export const inputWidget = defineWidget({
     }
   },
   component: defineComponent({
-    name: 'JsfNativeInput',
+    name: 'SchemaNativeInput',
     props: {
       modelValue: [String, Number] as PropType<string | number | undefined>,
       type: {
@@ -78,7 +78,7 @@ export const textareaWidget = defineWidget({
     event: 'update:modelValue'
   },
   component: defineComponent({
-    name: 'JsfNativeTextarea',
+    name: 'SchemaNativeTextarea',
     props: {
       modelValue: String,
       placeholder: String,
@@ -129,7 +129,7 @@ export const selectWidget = defineWidget({
     event: 'update:modelValue'
   },
   component: defineComponent({
-    name: 'JsfNativeSelect',
+    name: 'SchemaNativeSelect',
     props: {
       modelValue: [String, Number, Boolean] as PropType<BasicOption['value'] | undefined>,
       placeholder: String,
@@ -189,7 +189,7 @@ export const radioWidget = defineWidget({
     event: 'update:modelValue'
   },
   component: defineComponent({
-    name: 'JsfNativeRadioGroup',
+    name: 'SchemaNativeRadioGroup',
     props: {
       modelValue: [String, Number, Boolean] as PropType<BasicOption['value'] | undefined>,
       options: {
@@ -242,7 +242,7 @@ export const switchWidget = defineWidget({
     event: 'update:modelValue'
   },
   component: defineComponent({
-    name: 'JsfNativeSwitch',
+    name: 'SchemaNativeSwitch',
     props: {
       modelValue: Boolean,
       disabled: Boolean

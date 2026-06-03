@@ -23,7 +23,7 @@ import type {
   ResolvedField,
   WidgetDefinition
 } from '../core/types'
-import { provideJsfFormContext, provideWidgetContext, useJsfFormContext } from './context'
+import { provideSchemaFormContext, provideWidgetContext, useSchemaFormContext } from './context'
 
 /**
  * 表单根组件。
@@ -31,8 +31,8 @@ import { provideJsfFormContext, provideWidgetContext, useJsfFormContext } from '
  * 推荐传入已经创建好的 form；也允许直接传 schema，组件内部会创建临时 runtime，
  * 方便 playground 和简单页面快速使用。
  */
-export const JsfForm = defineComponent({
-  name: 'JsfForm',
+export const SchemaForm = defineComponent({
+  name: 'SchemaForm',
   props: {
     form: Object as PropType<FormRuntime>,
     schema: Object as PropType<JsfSchema>,
@@ -69,7 +69,7 @@ export const JsfForm = defineComponent({
       { immediate: true }
     )
 
-    provideJsfFormContext({
+    provideSchemaFormContext({
       form: form.value,
       version
     })
@@ -93,15 +93,17 @@ export const JsfForm = defineComponent({
           }}
         >
           {slots.default?.() ??
-            currentForm.schema.fields.map((field) => <JsfField key={field.path} field={field} />)}
+            currentForm.schema.fields.map((field) => (
+              <SchemaField key={field.path} field={field} />
+            ))}
         </form>
       )
     }
   }
 })
 
-export const JsfField = defineComponent({
-  name: 'JsfField',
+export const SchemaField = defineComponent({
+  name: 'SchemaField',
   props: {
     field: {
       type: Object as PropType<CompiledField>,
@@ -111,7 +113,7 @@ export const JsfField = defineComponent({
   setup(props) {
     const rootRef = ref<HTMLElement>()
     const widgetHandle = shallowRef<FieldHandleEntry['widget']>()
-    const { form, version } = useJsfFormContext()
+    const { form, version } = useSchemaFormContext()
 
     const unregister = shallowRef<() => void>()
 
@@ -154,7 +156,7 @@ export const JsfField = defineComponent({
           <fieldset ref={rootRef} class="l-jsf-group">
             {resolvedField.label ? <legend>{resolvedField.label}</legend> : null}
             {field.children.map((child) => (
-              <JsfField key={child.path} field={child} />
+              <SchemaField key={child.path} field={child} />
             ))}
           </fieldset>
         )
@@ -247,7 +249,7 @@ const WidgetHost = defineComponent({
     onExposeHandle: Function as PropType<(handle: FieldHandleEntry['widget']) => void>
   },
   setup(props) {
-    const { form, version } = useJsfFormContext()
+    const { form, version } = useSchemaFormContext()
     const loadedWidget = shallowRef<WidgetDefinition>()
     const loading = ref(false)
     const loadError = shallowRef<unknown>()
@@ -359,13 +361,13 @@ const WidgetHost = defineComponent({
 })
 
 /** 展示所有校验错误，并支持点击后走 form.locateField 定位字段。 */
-export const JsfErrorSummary = defineComponent({
-  name: 'JsfErrorSummary',
+export const SchemaErrorSummary = defineComponent({
+  name: 'SchemaErrorSummary',
   props: {
     form: Object as PropType<FormRuntime>
   },
   setup(props) {
-    const injected = props.form ? undefined : useJsfFormContext()
+    const injected = props.form ? undefined : useSchemaFormContext()
     const version = ref(0)
 
     const form = computed(() => props.form ?? injected?.form)

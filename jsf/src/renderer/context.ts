@@ -7,12 +7,12 @@ import type {
   WidgetHandle
 } from '../core/types'
 
-export interface JsfFormContext {
+export interface SchemaFormContext {
   form: FormRuntime
   version: Ref<number>
 }
 
-export interface JsfWidgetContext {
+export interface SchemaWidgetContext {
   form: FormRuntime
   field: CompiledField | ResolvedField
   fieldPath: FieldPath
@@ -21,23 +21,24 @@ export interface JsfWidgetContext {
   exposeHandle: (handle: WidgetHandle) => void
 }
 
-const formContextKey: InjectionKey<JsfFormContext> = Symbol('JsfFormContext')
-const widgetContextKey: InjectionKey<JsfWidgetContext> = Symbol('JsfWidgetContext')
+const formContextKey: InjectionKey<SchemaFormContext> = Symbol('SchemaFormContext')
+const widgetContextKey: InjectionKey<SchemaWidgetContext> = Symbol('SchemaWidgetContext')
 
-/** 给 JsfForm 子树提供当前 form runtime。 */
-export function provideJsfFormContext(ctx: JsfFormContext): void {
+/** 给 SchemaForm 子树提供当前 form runtime。 */
+export function provideSchemaFormContext(ctx: SchemaFormContext): void {
   provide(formContextKey, ctx)
 }
 
-/** 在 JsfField/JsfErrorSummary 等组件中读取当前 form runtime。 */
-export function useJsfFormContext(): JsfFormContext {
+/** 在 SchemaField/SchemaErrorSummary 等组件中读取当前 form runtime。 */
+export function useSchemaFormContext(): SchemaFormContext {
   const ctx = inject(formContextKey)
-  if (!ctx) throw new Error('Jsf form context not found. Did you forget to render <JsfForm />?')
+  if (!ctx)
+    throw new Error('Schema form context not found. Did you forget to render <SchemaForm />?')
   return ctx
 }
 
 /** 给具体 widget 提供字段级上下文。 */
-export function provideWidgetContext(ctx: JsfWidgetContext): void {
+export function provideWidgetContext(ctx: SchemaWidgetContext): void {
   provide(widgetContextKey, ctx)
 }
 
@@ -46,11 +47,11 @@ export function provideWidgetContext(ctx: JsfWidgetContext): void {
  *
  * 业务控件可以通过 exposeHandle 暴露自定义 reveal/activate/focus/highlight 能力。
  */
-export function useWidgetContext(): JsfWidgetContext {
+export function useWidgetContext(): SchemaWidgetContext {
   const ctx = inject(widgetContextKey)
   if (!ctx)
     throw new Error(
-      'JSF widget context not found. defineWidget components must render in JsfField.'
+      'Schema widget context not found. defineWidget components must render in SchemaField.'
     )
   return ctx
 }

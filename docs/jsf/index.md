@@ -34,7 +34,7 @@
 ## 快速示例
 
 ```tsx
-import { createForm, createJsf, defineSchema, JsfForm, webBasicWidgets } from '@lego/jsf'
+import { createForm, createJsf, defineSchema, SchemaForm, webBasicWidgets } from '@lego/jsf'
 
 const jsf = createJsf()
 jsf.use(webBasicWidgets())
@@ -69,5 +69,5 @@ const form = createForm({
   registry: jsf.registry
 })
 
-export default () => <JsfForm form={form} />
+export default () => <SchemaForm form={form} />
 ```

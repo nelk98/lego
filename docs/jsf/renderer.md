@@ -4,26 +4,26 @@ Vue renderer 负责把 `FormRuntime` 渲染成视图。它不决定字段语义�
 
 ## 组件
 
-- `JsfForm`
-- `JsfField`
+- `SchemaForm`
+- `SchemaField`
 - `FieldFrame`
-- `JsfErrorSummary`
-- `useJsfFormContext`
+- `SchemaErrorSummary`
+- `useSchemaFormContext`
 - `useWidgetContext`
 
-## JsfForm
+## SchemaForm
 
 推荐传入外部创建好的 `form`：
 
 ```tsx
-<JsfForm form={form} />
+<SchemaForm form={form} />
 ```
 
 也可以直接传 schema，由组件内部创建临时 runtime，适合轻量场景。
 
-## JsfField
+## SchemaField
 
-`JsfField` 做三件事：
+`SchemaField` 做三件事：
 
 - 读取字段状态，隐藏不可见字段。
 - 读取 `getResolvedField(path)`，把动态属性解析后的字段交给 UI。
@@ -53,7 +53,7 @@ widget 默认只负责输入区域，不重复渲染 label/helper/error。
 
 ## ErrorSummary
 
-`JsfErrorSummary` 展示所有错误。点击错误时会调用：
+`SchemaErrorSummary` 展示所有错误。点击错误时会调用：
 
 ```ts
 form.locateField(error.field)

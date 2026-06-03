@@ -43,14 +43,14 @@ export {
 } from './core/path'
 export { compileSchema, defineSchema, mergeSchemas } from './core/schema'
 export { createJsf, createRegistry, defineWidget, type JsfRegistry } from './registry/registry'
-export { FieldFrame, JsfErrorSummary, JsfField, JsfForm } from './renderer/components'
+export { FieldFrame, SchemaErrorSummary, SchemaField, SchemaForm } from './renderer/components'
 export {
-  provideJsfFormContext,
+  provideSchemaFormContext,
   provideWidgetContext,
-  useJsfFormContext,
+  useSchemaFormContext,
   useWidgetContext,
-  type JsfFormContext,
-  type JsfWidgetContext
+  type SchemaFormContext,
+  type SchemaWidgetContext
 } from './renderer/context'
 export {
   inputWidget,

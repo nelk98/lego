@@ -33,7 +33,7 @@ const DEFAULT_LOCATE_BEHAVIOR: NonNullable<LocateOptions['behavior']> = [
 
 /** 创建表单运行时实例。renderer 和业务代码都应围绕这个实例交互。 */
 export function createForm(options: CreateFormOptions): FormRuntime {
-  return new JsfFormRuntime(options)
+  return new SchemaFormRuntime(options)
 }
 
 /**
@@ -42,7 +42,7 @@ export function createForm(options: CreateFormOptions): FormRuntime {
  * 这层只做平台无关逻辑：values、schema 编译结果、字段状态、校验错误、dataSource
  * 状态和定位句柄。不要在这里引入 DOM、Taro API 或 Vue 组件实例。
  */
-class JsfFormRuntime implements FormRuntime {
+class SchemaFormRuntime implements FormRuntime {
   readonly registry
   readonly mode
   readonly platform
