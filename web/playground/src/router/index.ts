@@ -16,6 +16,12 @@ const router = createRouter({
       meta: { title: '组件调试' }
     },
     {
+      path: '/jsf',
+      name: 'jsf',
+      component: () => import('../views/jsf/index'),
+      meta: { title: '动态表单' }
+    },
+    {
       path: '/table-view',
       name: 'table-view',
       component: () => import('../views/table-view/index'),

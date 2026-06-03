@@ -1,3 +1,20 @@
+/* ----------------------------------- 加载 ---------------------------------- */
+.c_spin {
+  color: blue;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ----------------------------------- 点加载 ---------------------------------- */
+
 .c_dot-spin {
   position: relative;
   width: 24px;

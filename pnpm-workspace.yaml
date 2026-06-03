@@ -1,4 +1,5 @@
 packages:
+  - 'jsf'
   - 'shared'
   - 'web/ui'
   - 'web/playground'

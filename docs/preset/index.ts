@@ -4,7 +4,7 @@ import { mergeConfig } from 'vitepress'
 import { legoDocsSidebar } from './sidebar'
 
 export type { UserConfig } from 'vitepress'
-export { legoDocsSidebar } from './sidebar'
+export { legoDocsSidebar, legoJsfSidebar, legoMainSidebar } from './sidebar'
 
 export interface CreateLegoDocsConfigOptions {
   /**
@@ -21,7 +21,8 @@ const legoBaseDocsConfig: UserConfig = {
   themeConfig: {
     nav: [
       { text: '首页', link: '/' },
-      { text: '指南', link: '/guide/' }
+      { text: '指南', link: '/guide/' },
+      { text: '表单', link: '/jsf/' }
     ],
     sidebar: legoDocsSidebar,
     socialLinks: [],

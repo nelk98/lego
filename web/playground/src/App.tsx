@@ -16,6 +16,9 @@ export default defineComponent({
             <RouterLink to="/ui" activeClass={styles.navLinkActive}>
               UI
             </RouterLink>
+            <RouterLink to="/jsf" activeClass={styles.navLinkActive}>
+              JSF
+            </RouterLink>
             <RouterLink to="/theme" activeClass={styles.navLinkActive}>
               theme
             </RouterLink>

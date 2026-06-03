@@ -24,16 +24,16 @@ pnpm add -D @lego/docs vitepress vue
 
 ```ts
 import { defineConfig, mergeConfig } from 'vitepress'
-import { createLegoDocsConfig, legoDocsSidebar } from '@lego/docs/preset'
+import { createLegoDocsConfig, legoDocsSidebar, legoMainSidebar } from '@lego/docs/preset'
 import type { DefaultTheme } from 'vitepress'
 
-const businessSidebar: DefaultTheme.Sidebar = [
+const businessSidebar: DefaultTheme.SidebarItem[] = [
   {
     text: '业务文档',
     items: [{ text: '概览', link: '/biz/' }],
   },
-  // 需要时可直接复用 Lego 侧栏片段
-  ...legoDocsSidebar,
+  // 需要时可直接复用 Lego 根侧栏片段
+  ...legoMainSidebar,
 ]
 
 export default defineConfig(
@@ -48,7 +48,7 @@ export default defineConfig(
         ],
         sidebar: {
           '/biz/': businessSidebar,
-          '/': legoDocsSidebar,
+          ...legoDocsSidebar,
         },
       },
     },
@@ -60,7 +60,8 @@ export default defineConfig(
 
 - **`createLegoDocsConfig()`**：返回 Lego 约定的 `title`、`themeConfig`（含默认 `sidebar`）、`markdown`、`vite.plugins`（含 Vue JSX，便于演示 TSX 组件）等。
 - **`mergeConfig` / `extend`**：业务侧覆盖 `title`、`nav`、按路由拆分 `sidebar` 等。
-- **`legoDocsSidebar`**：也可从 `@lego/docs/sidebar` 单独 import，便于与自有侧栏数组拼接。
+- **`legoDocsSidebar`**：路径侧栏对象，已包含 `/jsf/` 独立侧栏和根侧栏。
+- **`legoMainSidebar` / `legoJsfSidebar`**：侧栏数组片段，便于业务侧按需拼接或覆盖。
 
 若只需在预设上小幅覆盖，也可：
 

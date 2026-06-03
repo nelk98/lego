@@ -133,6 +133,12 @@ importers:
         specifier: ^3.5.0
         version: 3.5.30(typescript@5.9.3)
 
+  jsf:
+    devDependencies:
+      vue:
+        specifier: ^3.5.30
+        version: 3.5.30(typescript@5.9.3)
+
   mobile/playground:
     dependencies:
       '@babel/runtime':
@@ -254,6 +260,9 @@ importers:
 
   web/playground:
     dependencies:
+      '@lego/jsf':
+        specifier: workspace:*
+        version: link:../../jsf
       '@lego/shared':
         specifier: workspace:*
         version: link:../../shared

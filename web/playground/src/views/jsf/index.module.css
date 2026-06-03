@@ -1,0 +1,250 @@
+.page {
+  display: grid;
+  gap: 20px;
+  padding: 16px 0 40px;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: end;
+  border-bottom: 1px solid var(--l-shadcn-border);
+  padding-bottom: 20px;
+}
+
+.hero h1 {
+  margin: 0;
+  color: var(--color-text-0);
+  font-size: 30px;
+  line-height: 1.15;
+}
+
+.hero p {
+  max-width: 720px;
+  margin: 8px 0 0;
+  color: var(--color-text-2);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(380px, 560px) minmax(320px, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.panel {
+  display: grid;
+  gap: 14px;
+  border: 1px solid var(--l-shadcn-border);
+  border-radius: 8px;
+  padding: 18px;
+  background: var(--l-shadcn-card);
+}
+
+.panel h2 {
+  margin: 0;
+  color: var(--color-text-0);
+  font-size: 17px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.actions button {
+  min-height: 36px;
+  border: 1px solid var(--l-shadcn-border);
+  border-radius: 8px;
+  padding: 0 12px;
+  background: #fff;
+  color: var(--color-text-1);
+  cursor: pointer;
+}
+
+.actions button:first-child {
+  border-color: #357eff;
+  background: #357eff;
+  color: #fff;
+}
+
+.debug {
+  display: grid;
+  gap: 12px;
+}
+
+.traceBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.traceBar select {
+  min-width: 0;
+  max-width: 260px;
+  height: 34px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 0 10px;
+  background: #fff;
+  color: #172033;
+  font: inherit;
+}
+
+.debug pre {
+  overflow: auto;
+  max-height: 260px;
+  margin: 0;
+  border-radius: 8px;
+  padding: 12px;
+  background: #111827;
+  color: #e5e7eb;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.logs {
+  display: grid;
+  gap: 6px;
+  max-height: 180px;
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.logs li {
+  border: 1px solid #d8dee8;
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+:global(.jsf-customer-select) {
+  position: relative;
+}
+
+:global(.jsf-customer-select__trigger) {
+  width: 100%;
+  min-height: 38px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: #fff;
+  color: #172033;
+  font: inherit;
+  text-align: left;
+}
+
+:global(.jsf-customer-select__panel) {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+  border: 1px solid #d8dee8;
+  border-radius: 8px;
+  padding: 10px;
+  background: #fff;
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.12);
+}
+
+:global(.jsf-customer-select__panel input) {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font: inherit;
+}
+
+:global(.jsf-customer-select__list) {
+  display: grid;
+  gap: 6px;
+}
+
+:global(.jsf-customer-select__list button) {
+  display: grid;
+  gap: 2px;
+  border: 0;
+  border-radius: 8px;
+  padding: 8px;
+  background: #f6f8fb;
+  color: #172033;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+:global(.jsf-customer-select__list span) {
+  color: #68758a;
+  font-size: 12px;
+}
+
+:global(.jsf-risk-badge) {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  border: 1px solid #bae6fd;
+  border-radius: 8px;
+  padding: 0 12px;
+  background: #f0f9ff;
+  color: #075985;
+  font-weight: 600;
+}
+
+:global(.jsf-stakeholders) {
+  display: grid;
+  gap: 10px;
+}
+
+:global(.jsf-stakeholders__row) {
+  display: grid;
+  grid-template-columns: minmax(88px, 1fr) minmax(88px, 1fr) minmax(120px, 1.2fr) auto;
+  gap: 8px;
+}
+
+:global(.jsf-stakeholders button) {
+  min-height: 38px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 0 12px;
+  background: #fff;
+  color: #334155;
+  font: inherit;
+  cursor: pointer;
+}
+
+:global(.jsf-stakeholders button:disabled) {
+  background: #f1f5f9;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+@media (max-width: 860px) {
+  .hero {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .traceBar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .traceBar select {
+    max-width: none;
+  }
+
+  :global(.jsf-stakeholders__row) {
+    grid-template-columns: 1fr;
+  }
+}
