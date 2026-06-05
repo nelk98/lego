@@ -48,6 +48,7 @@ export default defineConfig({
   },
   presets: [
     presetWind4({
+      prefix: 'k',
       dark: {
         // Tailwind v4 preset 同样绑定到项目现有的 data-theme 主题开关。
         dark: '[data-theme="dark"]',

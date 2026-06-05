@@ -2,12 +2,13 @@ import { defineComponent } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 
 import styles from './App.module.css'
+import { ScrollView } from '@lego/web-ui'
 
 export default defineComponent({
   name: 'App',
   setup() {
     return () => (
-      <>
+      <ScrollView style={{ width: '100%', height: '100%', overflow: 'auto' }}>
         <header class={styles.header}>
           <nav class={styles.nav}>
             <RouterLink to="/" activeClass={styles.navLinkActive}>
@@ -28,7 +29,7 @@ export default defineComponent({
           </nav>
         </header>
         <RouterView />
-      </>
+      </ScrollView>
     )
   }
 })

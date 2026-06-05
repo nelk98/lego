@@ -15,7 +15,8 @@
   visibility: visible !important;
 }
 
-.l-scroll-view.l-scroll-view--trigger-hover:not(:hover) .os-scrollbar:not(.os-scrollbar-interaction) {
+.l-scroll-view.l-scroll-view--trigger-hover:not(:hover)
+  .os-scrollbar:not(.os-scrollbar-interaction) {
   opacity: 0 !important;
   visibility: hidden !important;
   transition:

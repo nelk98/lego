@@ -44,7 +44,14 @@ export const buttonVariants = cva(
     defaultVariants: {
       variant: 'default',
       size: 'default'
-    }
+    },
+    compoundVariants: [
+      {
+        variant: 'default',
+        size: 'default',
+        class: 'opacity-100'
+      }
+    ]
   }
 )
 
