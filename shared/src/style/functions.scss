@@ -1,3 +1,11 @@
 @function theme($token) {
   @return var(--#{$token});
 }
+
+@function color-var($token, $alpha: 1) {
+  @return rgba(var(--#{$token}), #{$alpha});
+}
+
+@function palette-color($family, $step, $alpha: 1) {
+  @return color-var(color-#{$family}-#{$step}, $alpha);
+}

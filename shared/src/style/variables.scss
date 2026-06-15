@@ -1,6 +1,40 @@
-// 主题色
-$color-primary-a: var(--color-primary-a);
-$color-primary: var(--color-primary-500);
+@use './functions' as *;
+@forward './palette-scale-vars';
+
+$color-white: color-var(color-white);
+$color-black: color-var(color-black);
+
+// 状态色
+$color-info: var(--color-info);
+$color-info-hover: var(--color-info-hover);
+$color-info-active: var(--color-info-active);
+$color-info-disabled: var(--color-info-disabled);
+$color-info-light: var(--color-info-light);
+$color-info-light-hover: var(--color-info-light-hover);
+$color-info-light-active: var(--color-info-light-active);
+$color-success: var(--color-success);
+$color-success-hover: var(--color-success-hover);
+$color-success-active: var(--color-success-active);
+$color-success-disabled: var(--color-success-disabled);
+$color-success-light: var(--color-success-light);
+$color-success-light-hover: var(--color-success-light-hover);
+$color-success-light-active: var(--color-success-light-active);
+$color-warning: var(--color-warning);
+$color-warning-hover: var(--color-warning-hover);
+$color-warning-active: var(--color-warning-active);
+$color-warning-disabled: var(--color-warning-disabled);
+$color-warning-light: var(--color-warning-light);
+$color-warning-light-hover: var(--color-warning-light-hover);
+$color-warning-light-active: var(--color-warning-light-active);
+$color-danger: var(--color-danger);
+$color-danger-hover: var(--color-danger-hover);
+$color-danger-active: var(--color-danger-active);
+$color-danger-disabled: var(--color-danger-disabled);
+$color-danger-light: var(--color-danger-light);
+$color-danger-light-hover: var(--color-danger-light-hover);
+$color-danger-light-active: var(--color-danger-light-active);
+
+// 主题色阶
 $color-primary-50: var(--color-primary-50);
 $color-primary-100: var(--color-primary-100);
 $color-primary-200: var(--color-primary-200);
@@ -12,12 +46,18 @@ $color-primary-700: var(--color-primary-700);
 $color-primary-800: var(--color-primary-800);
 $color-primary-900: var(--color-primary-900);
 $color-primary-950: var(--color-primary-950);
+
+// 主题色
+$color-foreground: var(--color-foreground);
+$color-primary: var(--color-primary-500);
+$color-primary-channel: var(--color-primary-channel);
 $color-primary-hover: var(--color-primary-600);
 $color-primary-active: var(--color-primary-700);
 $color-primary-disabled: var(--color-primary-100);
 
 // 文字
 $color-text-a: var(--color-text-a);
+$color-text: var(--color-text);
 $color-text-0: var(--color-text-0);
 $color-text-1: var(--color-text-1);
 $color-text-2: var(--color-text-2);
@@ -28,8 +68,10 @@ $color-text-base: var(--color-text-1);
 $color-text-secondary: var(--color-text-2);
 $color-text-tertiary: var(--color-text-3);
 $color-text-disabled: var(--color-text-5);
+$color-text-muted: var(--color-text-muted);
 
 // 背景
+$color-bg: var(--color-bg);
 $color-bg-0: var(--color-bg-0);
 $color-bg-1: var(--color-bg-1);
 $color-bg-2: var(--color-bg-2);
@@ -38,26 +80,8 @@ $color-bg-4: var(--color-bg-4);
 $color-bg-5: var(--color-bg-5);
 
 // 线、边框
-$color-line-l1: var(--color-line-l1);
-$color-line-l2: var(--color-line-l2);
-$color-line-l3: var(--color-line-l3);
-$color-line-l4: var(--color-line-l4);
-
-:root,
-.base-page {
-  --white: 255, 255, 255;
-  --black: 0, 0, 0;
-  // 中性色
-  --neutral-50: 249, 249, 250;
-  --neutral-100: 242, 242, 244;
-  --neutral-200: 228, 228, 230;
-  --neutral-300: 201, 201, 204;
-  --neutral-400: 146, 147, 153;
-  --neutral-500: 92, 93, 102;
-  --neutral-600: 78, 79, 89;
-  --neutral-700: 65, 66, 76;
-  --neutral-800: 51, 52, 63;
-  --neutral-900: 37, 38, 50;
-  --neutral-950: 22, 24, 35;
-  --neutral-1000: 6, 7, 22;
-}
+$color-border: var(--color-border);
+$color-line-1: var(--color-line-1);
+$color-line-2: var(--color-line-2);
+$color-line-3: var(--color-line-3);
+$color-line-4: var(--color-line-4);

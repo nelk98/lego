@@ -63,7 +63,7 @@ export default defineComponent({
     return () => (
       <div class="p_color">
         {THEMES.map((theme) => (
-          <ScrollView key={theme} class="p_color-panel" data-theme={theme}>
+          <ScrollView key={theme} class="p_color-panel" data-theme-isolate="" data-theme={theme}>
             <h2 class="p_color-panel-title">{theme === 'light' ? '浅色主题' : '深色主题'}</h2>
             {PRIMARY_COLOR_NAMES.map((primary) => (
               <PrimaryBlock key={primary} theme={theme} primary={primary} />

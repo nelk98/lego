@@ -1,0 +1,49 @@
+// Shared palette metadata. Keep in sync with palette.meta.ts.
+
+$palette-families: (
+  'amber',
+  'blue',
+  'carmine',
+  'cyan',
+  'green',
+  'grey',
+  'indigo',
+  'light-blue',
+  'light-green',
+  'lime',
+  'neutral',
+  'orange',
+  'pink',
+  'purple',
+  'red',
+  'saffron',
+  'teal',
+  'turquoise',
+  'violet',
+  'wathet',
+  'yellow'
+);
+
+$primary-colors: (
+  'amber',
+  'blue',
+  'cyan',
+  'green',
+  'grey',
+  'indigo',
+  'light-blue',
+  'light-green',
+  'lime',
+  'orange',
+  'pink',
+  'purple',
+  'red',
+  'teal',
+  'violet',
+  'yellow'
+);
+
+$color-steps: (50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950);
+
+$status-colors: ('info', 'success', 'warning', 'danger');
+$status-suffixes: ('', -hover, -active, -disabled, -light, -light-hover, -light-active);

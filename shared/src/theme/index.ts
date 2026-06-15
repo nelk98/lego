@@ -1,31 +1,20 @@
 import { readonly, ref, type Ref } from 'vue'
+import {
+  PRIMARY_COLOR_NAMES,
+  PRIMARY_STEPS,
+  type PrimaryColorName,
+  type PrimaryStep
+} from '../style/palette.meta'
+
+export {
+  PRIMARY_COLOR_NAMES,
+  PRIMARY_STEPS,
+  type PrimaryColorName,
+  type PrimaryStep
+} from '../style/palette.meta'
 
 export const THEME_MODES = ['light', 'dark'] as const
 export type ThemeMode = (typeof THEME_MODES)[number]
-
-export const PRIMARY_COLOR_NAMES = [
-  'amber',
-  'blue',
-  'cyan',
-  'green',
-  'grey',
-  'indigo',
-  'light-blue',
-  'light-green',
-  'lime',
-  'orange',
-  'pink',
-  'purple',
-  'red',
-  'teal',
-  'violet',
-  'yellow'
-] as const
-
-export type PrimaryColorName = (typeof PRIMARY_COLOR_NAMES)[number]
-
-export const PRIMARY_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
-export type PrimaryStep = (typeof PRIMARY_STEPS)[number]
 
 export interface ThemeState {
   theme: ThemeMode

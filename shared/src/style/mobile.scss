@@ -1,4 +1,5 @@
-@use './color';
+@use './palette';
+@use './functions' as *;
 @use './theme' as *;
 @use './variables' as *;
 

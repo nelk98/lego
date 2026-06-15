@@ -4,10 +4,8 @@ import { defineConfig, type UserConfigExport } from '@tarojs/cli'
 import devConfig from './dev'
 import prodConfig from './prod'
 
-const sharedSassFunctionsPath = fileURLToPath(
-  new URL('../../../shared/src/style/functions.scss', import.meta.url)
-).replaceAll('\\', '/')
-const unoConfigFile = fileURLToPath(new URL('../../../uno.config.ts', import.meta.url))
+const { sharedSassResources, unoConfigFile } =
+  require('../../../configs/style.cjs') as typeof import('../../../configs/style.cjs')
 
 export default defineConfig<'vite'>(async (merge) => {
   const { default: UnoCSS } = await Function('return import("@unocss/vite")')()
@@ -34,7 +32,7 @@ export default defineConfig<'vite'>(async (merge) => {
     },
     mini: {
       sassLoaderOption: {
-        additionalData: `@use '${sharedSassFunctionsPath}' as *;`
+        additionalData: sharedSassResources
       },
       postcss: {
         pxtransform: {
@@ -54,7 +52,7 @@ export default defineConfig<'vite'>(async (merge) => {
       publicPath: '/',
       staticDirectory: 'static',
       sassLoaderOption: {
-        additionalData: `@use '${sharedSassFunctionsPath}' as *;`
+        additionalData: sharedSassResources
       },
       postcss: {
         autoprefixer: {

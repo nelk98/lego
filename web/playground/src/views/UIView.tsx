@@ -1,6 +1,5 @@
 import { defineComponent, ref } from 'vue'
 import { Button, Input, Modal, ScrollView, Select, modal } from '@lego/web-ui'
-import { PRIMARY_COLOR_NAMES, useTheme, type PrimaryColorName } from '@lego/shared'
 
 import styles from './UIView.module.css'
 
@@ -18,11 +17,6 @@ const regions = [
   { value: 'sg', label: '新加坡', description: '适合东南亚业务' },
   { value: 'us-west', label: '美西区', description: '适合北美测试环境' }
 ]
-const primaryOptions = PRIMARY_COLOR_NAMES.map((primary) => ({
-  value: primary,
-  label: primary
-}))
-
 export default defineComponent({
   name: 'UIView',
   setup() {
@@ -33,34 +27,9 @@ export default defineComponent({
     const framework = ref('vue')
     const region = ref('cn-east')
     const modalOpen = ref(false)
-    const theme = useTheme()
 
     return () => (
       <div class={styles.uiPlayground}>
-        <div class={styles.themeControls} aria-label="Theme controls">
-          <div class={styles.themeField}>
-            <span>主题色</span>
-            <Select
-              value={theme.primary.value}
-              options={primaryOptions}
-              triggerClass={styles.themeSelect}
-              contentClass={styles.themeSelectContent}
-              onChange={(value) => {
-                theme.setPrimary(value as PrimaryColorName)
-              }}
-            />
-          </div>
-          <button
-            type="button"
-            class={styles.themeToggle}
-            aria-pressed={theme.theme.value === 'dark'}
-            onClick={() => {
-              theme.toggleTheme()
-            }}
-          >
-            {theme.theme.value === 'dark' ? '深色' : '浅色'}
-          </button>
-        </div>
         <header class={styles.hero}>
           <div>
             <p class={styles.eyebrow}>shadcn-vue on TSX + UnoCSS</p>

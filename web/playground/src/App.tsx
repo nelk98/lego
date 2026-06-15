@@ -2,6 +2,7 @@ import { defineComponent } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 
 import styles from './App.module.css'
+import ThemeControls from './components/ThemeControls'
 import { ScrollView } from '@lego/web-ui'
 
 export default defineComponent({
@@ -9,6 +10,7 @@ export default defineComponent({
   setup() {
     return () => (
       <ScrollView style={{ width: '100%', height: '100%', overflow: 'auto' }}>
+        <ThemeControls />
         <header class={styles.header}>
           <nav class={styles.nav}>
             <RouterLink to="/" activeClass={styles.navLinkActive}>
@@ -25,6 +27,9 @@ export default defineComponent({
             </RouterLink>
             <RouterLink to="/color" activeClass={styles.navLinkActive}>
               color
+            </RouterLink>
+            <RouterLink to="/tailwind" activeClass={styles.navLinkActive}>
+              tailwind
             </RouterLink>
           </nav>
         </header>

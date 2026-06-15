@@ -21,10 +21,18 @@
       "import": "./src/theme/index.ts",
       "require": "./src/theme/index.ts"
     },
-    "./colors": "./src/style/color.scss",
+    "./style-tokens": {
+      "types": "./src/style/palette.meta.ts",
+      "import": "./src/style/palette.meta.ts",
+      "require": "./src/style/palette.meta.ts"
+    },
+    "./palette": "./src/style/palette.scss",
     "./web": "./src/style/web.scss",
     "./mobile": "./src/style/mobile.scss",
-    "./variables": "./src/style/variables.scss"
+    "./variables": "./src/style/variables.scss",
+    "./styles/web": "./src/style/web.scss",
+    "./styles/mobile": "./src/style/mobile.scss",
+    "./styles/variables": "./src/style/variables.scss"
   },
   "peerDependencies": {
     "pinia": "^3.0.0",

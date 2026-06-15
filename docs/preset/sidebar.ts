@@ -9,7 +9,8 @@ export const legoMainSidebar: DefaultTheme.SidebarItem[] = [
     text: '指南',
     items: [
       { text: '介绍', link: '/guide/' },
-      { text: '在业务仓库中复用', link: '/guide/reuse' }
+      { text: '在业务仓库中复用', link: '/guide/reuse' },
+      { text: '样式系统', link: '/guide/style-system' }
     ]
   },
   {

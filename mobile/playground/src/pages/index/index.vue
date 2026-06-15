@@ -3,5 +3,5 @@ import PageContent from './PageContent'
 </script>
 
 <template>
-  <PageContent class="px-4 py-6" />
+  <PageContent class="px-4 py-6 bg-red-100 flex-center" />
 </template>

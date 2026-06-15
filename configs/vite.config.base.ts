@@ -1,25 +1,23 @@
-import { fileURLToPath } from 'node:url'
-import { defineConfig, normalizePath } from 'vite'
+import type { UserConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import UnoCSS from '@unocss/vite'
 import vueDevTools from 'vite-plugin-vue-devtools'
-
-const sharedSassFunctionsPath = normalizePath(
-  fileURLToPath(new URL('../shared/src/style/functions.scss', import.meta.url))
-)
-const unoConfigFile = fileURLToPath(new URL('../uno.config.ts', import.meta.url))
+import { unoConfigFile, withSharedSassResources } from './style'
 
 /**
- * 共享的 Vite 配置，供 playground 引用
+ * 共享的 Vite 配置，供 playground 引用。
  */
-export default defineConfig({
+const baseConfig = {
   plugins: [UnoCSS({ configFile: unoConfigFile }), vue(), vueJsx(), vueDevTools()],
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@use '${sharedSassFunctionsPath}' as *;`
+        quietDeps: true,
+        additionalData: withSharedSassResources
       }
     }
   }
-})
+} satisfies UserConfig
+
+export default baseConfig

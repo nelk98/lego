@@ -6,6 +6,8 @@ $themes: (
       0
     ),
     // 文字
+    color-text: rgba(#000, 0.9),
+    color-text-muted: rgba(#000, 0.5),
     color-text-0: #000,
     color-text-1: rgba(#000, 0.9),
     color-text-2: rgba(#000, 0.75),
@@ -13,6 +15,7 @@ $themes: (
     color-text-4: rgba(#000, 0.34),
     color-text-5: rgba(#000, 0.34),
     // 背景
+    color-bg: #fff,
     color-bg-0: #fff,
     color-bg-1: #f9fafb,
     color-bg-2: #f3f4f6,
@@ -20,13 +23,21 @@ $themes: (
     color-bg-4: #d1d5db,
     color-bg-5: #9ca3af,
     // 线、边框
-    color-line-1: rgba(#fff, 0.2),
-    color-line-2: rgba(#fff, 0.16),
-    color-line-3: rgba(#fff, 0.06),
-    color-line-4: rgba(#fff, 0.04)
+    color-border: #e5e7eb,
+    color-line-1: rgba(#000, 0.5),
+    color-line-2: rgba(#000, 0.2),
+    color-line-3: rgba(#000, 0.1),
+    color-line-4: rgba(#000, 0.06)
   ),
   dark: (
+    color-text-a: (
+      255,
+      255,
+      255
+    ),
     // 文字
+    color-text: rgba(#fff, 0.9),
+    color-text-muted: rgba(#fff, 0.5),
     color-text-0: #fff,
     color-text-1: rgba(#fff, 0.9),
     color-text-2: rgba(#fff, 0.75),
@@ -34,17 +45,49 @@ $themes: (
     color-text-4: rgba(#fff, 0.34),
     color-text-5: rgba(#fff, 0.34),
     // 背景
+    color-bg: #16161a,
+    color-bg-0: #16161a,
+    color-bg-1: #232429,
+    color-bg-2: #35363c,
+    color-bg-3: #43444a,
+    color-bg-4: rgba(var(--color-neutral-600), 1),
+    color-bg-5: rgba(var(--color-neutral-500), 1),
+    // 线、边框
+    color-border: rgba(#fff, 0.16),
+    color-line-1: rgba(#fff, 0.2),
+    color-line-2: rgba(#fff, 0.16),
+    color-line-3: rgba(#fff, 0.06),
+    color-line-4: rgba(#fff, 0.04)
+  ),
+  dark-blue: (
+    color-text-a: (
+      255,
+      255,
+      255
+    ),
+    // 文字
+    color-text: rgba(#fff, 0.9),
+    color-text-muted: rgba(#fff, 0.5),
+    color-text-0: #fff,
+    color-text-1: rgba(#fff, 0.9),
+    color-text-2: rgba(#fff, 0.75),
+    color-text-3: rgba(#fff, 0.5),
+    color-text-4: rgba(#fff, 0.34),
+    color-text-5: rgba(#fff, 0.34),
+    // 背景
+    color-bg: #161823,
     color-bg-0: #161823,
     color-bg-1: #252632,
     color-bg-2: #33343f,
     color-bg-3: #41424c,
-    color-bg-4: rgba(var(--neutral-600), 1),
-    color-bg-5: rgba(var(--neutral-500), 1),
+    color-bg-4: rgba(var(--color-neutral-600), 1),
+    color-bg-5: rgba(var(--color-neutral-500), 1),
     // 线、边框
-    color-line-1: rgba(var(--neutral-950), 0.5),
-    color-line-2: rgba(var(--neutral-950), 0.2),
-    color-line-3: rgba(var(--neutral-950), 0.1),
-    color-line-4: rgba(var(--neutral-950), 0.06)
+    color-border: rgba(#fff, 0.16),
+    color-line-1: rgba(#fff, 0.2),
+    color-line-2: rgba(#fff, 0.16),
+    color-line-3: rgba(#fff, 0.06),
+    color-line-4: rgba(#fff, 0.04)
   )
 );
 

@@ -38,6 +38,12 @@ const router = createRouter({
       name: 'color',
       component: () => import('../views/color/index'),
       meta: { title: '主题色' }
+    },
+    {
+      path: '/tailwind',
+      name: 'tailwind',
+      component: () => import('../views/tailwind/index'),
+      meta: { title: 'Tailwind' }
     }
   ]
 })

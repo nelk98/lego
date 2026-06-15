@@ -1,0 +1,186 @@
+.p_tailwind {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto 40px;
+  padding: 24px 0;
+}
+
+.p_tailwind-hero,
+.p_tailwind-panel {
+  border: 1px solid $color-border;
+  border-radius: 8px;
+  background: $color-bg-0;
+}
+
+.p_tailwind-hero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px;
+}
+
+.p_tailwind-panel {
+  padding: 20px;
+}
+
+.p_tailwind-panel-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+
+  h2 {
+    margin: 0;
+    color: $color-text-0;
+    font-size: 18px;
+    line-height: 1.3;
+  }
+
+  span {
+    color: $color-text-3;
+    font-size: 13px;
+  }
+}
+
+.p_tailwind-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.p_tailwind-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid $color-border;
+  border-radius: 8px;
+  background: $color-bg-1;
+}
+
+.p_tailwind-preview {
+  display: flex;
+  min-height: 96px;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  font-weight: 700;
+}
+
+.p_tailwind-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+
+  strong {
+    color: $color-text-0;
+    font-size: 14px;
+  }
+}
+
+.p_tailwind code {
+  overflow-wrap: anywhere;
+  border-radius: 6px;
+  background: $color-bg-2;
+  color: $color-text-1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 2px 6px;
+}
+
+.p_tailwind-scss-demo {
+  background: $color-bg-1;
+  border-color: $color-primary;
+  color: $color-primary;
+}
+
+.p_tailwind-scale {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.p_tailwind-scale-column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.p_tailwind-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+  border-radius: 8px;
+  padding: 10px 12px;
+
+  span {
+    font-weight: 600;
+  }
+}
+
+.p_tailwind-compose {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(240px, 0.8fr);
+  gap: 12px;
+}
+
+.p_tailwind-scss-panel {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid $color-primary;
+  border-radius: 8px;
+  background: $color-bg-1;
+  color: $color-primary;
+  padding: 18px;
+
+  strong {
+    font-size: 16px;
+  }
+
+  span {
+    color: $color-text-2;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 860px) {
+  .p_tailwind-hero {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .p_tailwind-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .p_tailwind-scale,
+  .p_tailwind-compose {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .p_tailwind {
+    width: min(100% - 20px, 1120px);
+    padding-top: 16px;
+  }
+
+  .p_tailwind-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .p_tailwind-panel-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
