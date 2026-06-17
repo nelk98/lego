@@ -1,6 +1,7 @@
-import { defineConfig } from 'unocss'
+import type { UserConfig } from '@unocss/core'
 import presetRemToPx from '@unocss/preset-rem-to-px'
 import presetWind4 from '@unocss/preset-wind4'
+
 import { UNO_THEME_COLORS } from './shared/src/style/palette.meta'
 
 const LEGO_BORDER_RADIUS = {
@@ -10,7 +11,7 @@ const LEGO_BORDER_RADIUS = {
   sm: 'calc(var(--radius) - 4px)'
 } as const
 
-export default defineConfig({
+export default {
   theme: {
     borderRadius: LEGO_BORDER_RADIUS
   },
@@ -38,4 +39,4 @@ export default defineConfig({
       baseFontSize: 16
     })
   ]
-})
+} satisfies UserConfig

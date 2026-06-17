@@ -28,7 +28,7 @@
 - [retrieve / format](/jsf/transform)
 - [数组字段](/jsf/array)
 - [低代码预留](/jsf/low-code)
-- [Playground](/jsf/playground)
+- [Lab](/jsf/lab)
 - [限制与演进](/jsf/roadmap)
 
 ## 快速示例

@@ -27,10 +27,20 @@ function withSharedSassResources(source, filename = '') {
   return `${sharedSassResources}\n${source}`
 }
 
+/** workspace 包不走依赖预构建（与 configs/vite.config.base.ts 保持一致）。 */
+const legoWorkspaceOptimizeDepsExclude = ['@lego/shared', '@lego/web-ui', '@lego/mobile-ui']
+
+const legoMobileTaroVite = {
+  optimizeDeps: {
+    exclude: legoWorkspaceOptimizeDepsExclude
+  }
+}
+
 module.exports = {
   sharedSassVariablesPath,
   sharedSassFunctionsPath,
   sharedSassResources,
   unoConfigFile,
-  withSharedSassResources
+  withSharedSassResources,
+  legoMobileTaroVite
 }

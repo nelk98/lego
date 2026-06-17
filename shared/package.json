@@ -32,7 +32,12 @@
     "./variables": "./src/style/variables.scss",
     "./styles/web": "./src/style/web.scss",
     "./styles/mobile": "./src/style/mobile.scss",
-    "./styles/variables": "./src/style/variables.scss"
+    "./styles/variables": "./src/style/variables.scss",
+    "./icon/types": {
+      "types": "./src/icon/types.ts",
+      "import": "./src/icon/types.ts",
+      "default": "./src/icon/types.ts"
+    }
   },
   "peerDependencies": {
     "pinia": "^3.0.0",

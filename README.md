@@ -8,11 +8,11 @@
 lego/
 ├── shared/                 # @lego/shared - 跨平台共享包（stores、utils、types）
 ├── web/                    # Web 平台
-│   ├── ui/               # @lego/web-ui
-│   └── playground/        # Web 开发调试 Playground
+│   └── ui/                 # @lego/web-ui
+├── web-lab/                # Web 开发调试 Lab
 ├── mobile/                 # Mobile 平台
-│   ├── ui/               # @lego/mobile-ui
-│   └── playground/        # Mobile 开发调试 Playground
+│   └── ui/                 # @lego/mobile-ui
+├── mobile-lab/             # Mobile 开发调试 Lab
 ├── configs/               # 共享配置
 │   └── vite.config.base.ts
 ├── tsconfig.base.json
@@ -31,10 +31,10 @@ lego/
 
 | 命令                | 说明                            |
 | ------------------- | ------------------------------- |
-| `pnpm dev:web`      | 启动 Web Playground 开发服务    |
-| `pnpm dev:mobile`   | 启动 Mobile Playground 开发服务 |
-| `pnpm build:web`    | 构建 Web Playground             |
-| `pnpm build:mobile` | 构建 Mobile Playground          |
+| `pnpm dev:web`      | 启动 Web Lab 开发服务    |
+| `pnpm dev:mobile`   | 启动 Mobile Lab 开发服务 |
+| `pnpm build:web`    | 构建 Web Lab             |
+| `pnpm build:mobile` | 构建 Mobile Lab          |
 | `pnpm test:unit`    | 运行单元测试                    |
 | `pnpm type-check`   | 类型检查                        |
 | `pnpm lint`         | 代码检查                        |
@@ -60,11 +60,22 @@ cd lego && pnpm install
 ```json
 {
   "dependencies": {
-    "@lego/shared": "workspace:*",
     "@lego/web-ui": "workspace:*"
   }
 }
 ```
+
+Mobile 业务：
+
+```json
+{
+  "dependencies": {
+    "@lego/mobile-ui": "workspace:*"
+  }
+}
+```
+
+业务仓库只依赖 `@lego/web-ui` / `@lego/mobile-ui`，不直接引用 `@lego/shared`。
 
 若业务层使用 pnpm workspace，需在根 `pnpm-workspace.yaml` 包含 submodule 路径。
 

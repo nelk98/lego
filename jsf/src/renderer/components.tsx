@@ -29,7 +29,7 @@ import { provideSchemaFormContext, provideWidgetContext, useSchemaFormContext } 
  * 表单根组件。
  *
  * 推荐传入已经创建好的 form；也允许直接传 schema，组件内部会创建临时 runtime，
- * 方便 playground 和简单页面快速使用。
+ * 方便 lab 和简单页面快速使用。
  */
 export const SchemaForm = defineComponent({
   name: 'SchemaForm',

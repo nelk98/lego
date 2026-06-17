@@ -5,10 +5,16 @@ import UnoCSS from '@unocss/vite'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import { unoConfigFile, withSharedSassResources } from './style'
 
+/** workspace 包不走依赖预构建，避免 .tsx 被 esbuild 编译成 React.createElement。 */
+const legoWorkspaceOptimizeDepsExclude = ['@lego/shared', '@lego/web-ui', '@lego/mobile-ui']
+
 /**
- * 共享的 Vite 配置，供 playground 引用。
+ * 共享的 Vite 配置，供 lab 引用。
  */
 const baseConfig = {
+  optimizeDeps: {
+    exclude: legoWorkspaceOptimizeDepsExclude
+  },
   plugins: [UnoCSS({ configFile: unoConfigFile }), vue(), vueJsx(), vueDevTools()],
   css: {
     preprocessorOptions: {

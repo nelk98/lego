@@ -6,7 +6,7 @@ Web 端组件库采用“Reka UI → shadcn-vue → @lego/web-ui 业务组件”
 - `shadcn-vue` 作为源码模板和默认结构参考。
 - `@lego/web-ui` 对业务暴露稳定、Ant Design-like 的 API。
 
-业务侧只从 `@lego/web-ui` 引入 `Button`、`Input`、`Select`、`Modal`、`modal` 等封装，不直接依赖 shadcn-vue 或低阶 primitives。Playground 路径为 `/ui`。
+业务侧只从 `@lego/web-ui` 引入 `Button`、`Input`、`Select`、`Modal`、`modal` 等封装，不直接依赖 shadcn-vue 或低阶 primitives。Lab 路径为 `/ui`。
 
 ## CLI 添加组件
 
@@ -177,13 +177,13 @@ const ok = await modal.confirm({
 5. 样式使用 UnoCSS 原子类（`bg-primary`、`border-border` 等）；**不要**在组件里写死色值，语义色由 `shadcn-theme.css` → shared token 提供。
 6. 需要变体的组件使用 `cva`；需要 class 合并时统一使用 `cn()`。
 7. 从 `web/ui/src/index.ts` 导出业务组件，保持按需命名导出。
-8. 在 `web/playground/src/views/UIView.tsx` 增加可交互案例，覆盖基础态、禁用态、复杂内容与受控值。
+8. 在 `web-lab/src/views/UIView.tsx` 增加可交互案例，覆盖基础态、禁用态、复杂内容与受控值。
 9. 在 `docs/components` 补充文档，并更新 `docs/preset/sidebar.ts`。
 
 ## 维护约定
 
 - 不直接修改 `node_modules` 中的 shadcn-vue 或 Reka UI 文件；组件源码以本仓库为准。
-- 新增依赖先放在 `@lego/web-ui`，只有 playground 自己直接 import 时才放到 `@lego/web-playground`。
+- 新增依赖先放在 `@lego/web-ui`，只有 lab 自己直接 import 时才放到 `@lego/web-lab`。
 - 组件默认样式不要写业务色值，优先使用 `bg-background`、`text-primary` 等语义类（底层变量见 `shadcn-theme.css`）。
 - shadcn/Reka 组合组件留在内部目录，不从包根入口导出；业务只使用稳定组件和服务对象。
 - UnoCSS 已启用 `@unocss/preset-wind4`，但全局 reset 仍由 `@lego/shared/web` 管理。

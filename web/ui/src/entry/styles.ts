@@ -1,0 +1,1 @@
+import '@lego/shared/web'

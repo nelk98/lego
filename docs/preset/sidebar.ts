@@ -53,7 +53,7 @@ export const legoJsfSidebar: DefaultTheme.SidebarItem[] = [
   {
     text: '示例与计划',
     items: [
-      { text: 'Playground', link: '/jsf/playground' },
+      { text: 'Lab', link: '/jsf/lab' },
       { text: '限制与演进', link: '/jsf/roadmap' }
     ]
   }

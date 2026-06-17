@@ -6,7 +6,7 @@ JSF 当前由四层组成：core、registry、renderer、widget。业务应用�
 
 ```mermaid
 flowchart LR
-  App["业务入口 / Playground"] --> Registry["registry / createJsf"]
+  App["业务入口 / Lab"] --> Registry["registry / createJsf"]
   App --> Schema["schema 定义"]
   App --> Form["createForm / FormRuntime"]
   App --> Renderer["Vue Renderer"]
@@ -113,4 +113,4 @@ sequenceDiagram
 - `jsf/src/registry`：扩展注册中心。
 - `jsf/src/renderer`：Vue 渲染层。
 - `jsf/src/widgets`：基础 Web 控件。
-- `web/playground/src/views/jsf`：完整示例。
+- `web-lab/src/views/jsf`：完整示例。
