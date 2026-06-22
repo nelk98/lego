@@ -1,6 +1,11 @@
+import UnoCSS from '@unocss/vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import { fileURLToPath } from 'node:url'
 import type { UserConfig } from 'vitepress'
 import { mergeConfig } from 'vitepress'
+import { unoConfigFile, withSharedSassResources } from '../../configs/style'
+import { createHammerjsShimPlugin } from '../runtime/hammerjsShimPlugin'
+import { createStoryLoaderPlugin } from '../runtime/storyLoaderPlugin'
 import { legoDocsSidebar } from './sidebar'
 
 export type { UserConfig } from 'vitepress'
@@ -14,7 +19,20 @@ export interface CreateLegoDocsConfigOptions {
   extend?: UserConfig
 }
 
-const legoBaseDocsConfig: UserConfig = {
+const docsRoot = fileURLToPath(new URL('..', import.meta.url))
+const workspaceRoot = fileURLToPath(new URL('../..', import.meta.url))
+
+const legoDocsOptimizeDepsExclude = [
+  '@lego/shared',
+  '@lego/web-ui',
+  '@lego/mobile-ui',
+  '@tarojs/api',
+  '@tarojs/components',
+  '@tarojs/runtime',
+  '@tarojs/shared'
+]
+
+const legoBaseDocsConfig = {
   title: 'Lego',
   description: '无业务 UI 与工具包，供业务仓库作为依赖引入',
   lang: 'zh-CN',
@@ -22,6 +40,7 @@ const legoBaseDocsConfig: UserConfig = {
     nav: [
       { text: '首页', link: '/' },
       { text: '指南', link: '/guide/' },
+      { text: '演练场', link: '/stories/' },
       { text: '表单', link: '/jsf/' }
     ],
     sidebar: legoDocsSidebar,
@@ -38,9 +57,65 @@ const legoBaseDocsConfig: UserConfig = {
     lineNumbers: true
   },
   vite: {
-    plugins: [vueJsx()]
+    plugins: [
+      createHammerjsShimPlugin(),
+      UnoCSS({ configFile: unoConfigFile }),
+      vueJsx(),
+      createStoryLoaderPlugin({ storiesDir: `${docsRoot}/stories` })
+    ],
+    define: {
+      'process.env.TARO_ENV': JSON.stringify('h5'),
+      global: 'globalThis',
+      ENABLE_INNER_HTML: 'true',
+      ENABLE_ADJACENT_HTML: 'true',
+      ENABLE_CLONE_NODE: 'true',
+      ENABLE_CONTAINS: 'true',
+      ENABLE_SIZE_APIS: 'false',
+      ENABLE_TEMPLATE_CONTENT: 'true',
+      ENABLE_MUTATION_OBSERVER: 'false',
+      DEPRECATED_ADAPTER_COMPONENT: 'false'
+    },
+    resolve: {
+      alias: [
+        {
+          find: '@lego/ui',
+          replacement: `${workspaceRoot}/web/ui/src/components/index.ts`
+        },
+        {
+          find: '@lego/mobile-ui',
+          replacement: `${workspaceRoot}/mobile/ui/src/index.ts`
+        },
+        {
+          find: '@lego/mobile-ui/styles',
+          replacement: `${workspaceRoot}/mobile/ui/src/entry/styles.ts`
+        },
+        {
+          find: /^@tarojs\/components$/,
+          replacement: '@tarojs/components/lib/vue3/index.js'
+        },
+        {
+          find: /^@tarojs\/taro$/,
+          replacement: '@tarojs/api/dist/index.esm.js'
+        }
+      ]
+    },
+    optimizeDeps: {
+      exclude: legoDocsOptimizeDepsExclude,
+      include: ['hammerjs']
+    },
+    ssr: {
+      noExternal: [...legoDocsOptimizeDepsExclude, 'hammerjs']
+    },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          quietDeps: true,
+          additionalData: withSharedSassResources
+        }
+      }
+    }
   }
-}
+} as UserConfig
 
 /**
  * 生成可合并进业务仓库 VitePress 的基础配置。

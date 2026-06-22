@@ -1,4 +1,5 @@
 export * from './button'
+export * from './device-frame'
 export * from './input'
 export * from './modal'
 export * from './select'

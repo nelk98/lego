@@ -5,6 +5,8 @@
   "description": "Lego 组件库文档站；通过 @lego/docs/preset 在业务仓库中复用配置与侧栏",
   "files": [
     "preset",
+    "runtime",
+    "stories",
     ".vitepress",
     "index.md",
     "guide",
@@ -32,11 +34,24 @@
     "preview": "vitepress preview --port 4900 --strictPort"
   },
   "dependencies": {
+    "@lego/mobile-ui": "workspace:*",
     "@lego/shared": "workspace:*",
-    "@lego/web-ui": "workspace:*"
+    "@lego/web-ui": "workspace:*",
+    "@tarojs/api": "4.1.11",
+    "@tarojs/components": "4.1.11",
+    "@tarojs/runtime": "4.1.11",
+    "@tarojs/shared": "4.1.11",
+    "@tarojs/taro": "4.1.11",
+    "hammerjs": "2.0.8"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue-jsx": "^5.1.4",
+    "@codemirror/lang-json": "^6.0.2",
+    "@codemirror/lint": "^6.8.5",
+    "@unocss/vite": "66.6.7",
+    "@vitejs/plugin-vue-jsx": "3.1.0",
+    "codemirror": "^6.0.2",
+    "unocss": "66.6.7",
+    "vite": "^5.4.21",
     "vitepress": "^1.6.4",
     "vue": "^3.5.0"
   },

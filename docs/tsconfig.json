@@ -1,9 +1,25 @@
 {
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
+    "baseUrl": ".",
     "jsx": "preserve",
     "jsxImportSource": "vue",
-    "types": ["vitepress/client"]
+    "types": ["vitepress/client", "node"],
+    "paths": {
+      "@lego/ui": ["../web/ui/src/components/index.ts"],
+      "@lego/ui/*": ["../web/ui/src/*"],
+      "@lego/mobile-ui": ["../mobile/ui/src/index.ts"],
+      "@lego/mobile-ui/*": ["../mobile/ui/src/*"]
+    }
   },
-  "include": [".vitepress/**/*.ts", "preset/**/*.ts"]
+  "include": [
+    ".vitepress/**/*.ts",
+    ".vitepress/**/*.tsx",
+    "preset/**/*.ts",
+    "runtime/**/*.ts",
+    "runtime/**/*.tsx",
+    "stories/**/*.ts",
+    "stories/**/*.tsx",
+    "env.d.ts"
+  ]
 }

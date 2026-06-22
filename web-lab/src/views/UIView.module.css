@@ -160,6 +160,131 @@
   color: var(--l-shadcn-muted-foreground);
 }
 
+.deviceDemoGrid {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.deviceControls {
+  display: grid;
+  gap: 14px;
+}
+
+.deviceMeta {
+  display: grid;
+  gap: 8px;
+  border: 1px solid var(--l-shadcn-border);
+  border-radius: 8px;
+  padding: 12px;
+  color: var(--color-text-2);
+  font-size: 13px;
+}
+
+.devicePreview {
+  min-width: 0;
+  overflow-x: auto;
+  padding: 8px 0 20px;
+}
+
+.mobileRuntime {
+  box-sizing: border-box;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  gap: 14px;
+  overflow: auto;
+  padding: calc(var(--device-capsule-bottom) + 14px) 16px
+    calc(var(--device-safe-area-bottom) + 18px);
+  background: linear-gradient(180deg, rgb(240 247 255) 0%, rgb(255 255 255) 42%), #ffffff;
+  color: #172033;
+}
+
+.mobileHeader {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.mobileHeader strong {
+  font-size: 22px;
+  line-height: 1.15;
+}
+
+.mobileHeader span {
+  color: #607089;
+  font-size: 13px;
+}
+
+.mobileSummary {
+  display: grid;
+  gap: 7px;
+  border-radius: 8px;
+  padding: 18px;
+  background: #172033;
+  color: #ffffff;
+}
+
+.mobileSummary span,
+.mobileSummary small {
+  color: rgb(255 255 255 / 72%);
+}
+
+.mobileSummary strong {
+  font-size: 42px;
+  line-height: 1;
+}
+
+.mobileActions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.mobileActions button {
+  min-height: 42px;
+  border: 0;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #ffffff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.mobileActions button:last-child {
+  background: #0f766e;
+}
+
+.mobileList {
+  display: grid;
+  gap: 10px;
+}
+
+.mobileListItem {
+  display: flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid #e3e8ef;
+  border-radius: 8px;
+  padding: 0 14px;
+  background: #ffffff;
+}
+
+.mobileListItem span {
+  color: #3d4a5c;
+  font-size: 14px;
+}
+
+.mobileListItem strong {
+  color: #172033;
+  font-size: 18px;
+}
+
 @media (max-width: 720px) {
   .hero {
     grid-template-columns: 1fr;
@@ -170,6 +295,10 @@
   }
 
   .complexGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .deviceDemoGrid {
     grid-template-columns: 1fr;
   }
 

@@ -20,6 +20,11 @@
       "types": "./src/entry/styles.ts",
       "import": "./src/entry/styles.ts",
       "require": "./src/entry/styles.ts"
+    },
+    "./scroll-view": {
+      "types": "./src/scroll-view/index.tsx",
+      "import": "./src/scroll-view/index.tsx",
+      "require": "./src/scroll-view/index.tsx"
     }
   },
   "scripts": {

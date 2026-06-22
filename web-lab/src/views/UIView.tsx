@@ -1,5 +1,17 @@
-import { defineComponent, ref } from 'vue'
-import { Button, Input, Modal, ScrollView, Select, modal } from '@lego/web-ui'
+import { computed, defineComponent, ref } from 'vue'
+import {
+  Button,
+  DEVICE_FRAME_MODEL_MAP,
+  DEVICE_FRAME_MODELS,
+  DEFAULT_DEVICE_FRAME_MODEL,
+  DeviceFrame,
+  Input,
+  Modal,
+  ScrollView,
+  Select,
+  modal,
+  type DeviceFrameModelName
+} from '@lego/web-ui'
 
 import styles from './UIView.module.css'
 
@@ -17,6 +29,12 @@ const regions = [
   { value: 'sg', label: '新加坡', description: '适合东南亚业务' },
   { value: 'us-west', label: '美西区', description: '适合北美测试环境' }
 ]
+const deviceOptions = DEVICE_FRAME_MODELS.map((model) => ({
+  value: model.name,
+  label: model.name,
+  description: `${model.width} x ${model.height} @${model.dpr}x`
+}))
+
 export default defineComponent({
   name: 'UIView',
   setup() {
@@ -26,6 +44,8 @@ export default defineComponent({
     const keyword = ref('')
     const framework = ref('vue')
     const region = ref('cn-east')
+    const deviceModel = ref<DeviceFrameModelName>(DEFAULT_DEVICE_FRAME_MODEL.name)
+    const activeDeviceModel = computed(() => DEVICE_FRAME_MODEL_MAP[deviceModel.value])
     const modalOpen = ref(false)
 
     return () => (
@@ -64,6 +84,66 @@ export default defineComponent({
               Loading
             </Button>
             <Button block>Block Button</Button>
+          </div>
+        </section>
+
+        <section class={styles.block}>
+          <div class={styles.blockHeader}>
+            <h2>DeviceFrame</h2>
+            <p>嵌入真实 DOM，按设备规格模拟移动端运行视口。</p>
+          </div>
+          <div class={styles.deviceDemoGrid}>
+            <div class={styles.deviceControls}>
+              <div class={styles.field}>
+                <label>设备型号</label>
+                <Select
+                  value={deviceModel.value}
+                  options={deviceOptions}
+                  onChange={(value) => {
+                    deviceModel.value = value as DeviceFrameModelName
+                  }}
+                />
+              </div>
+              <div class={styles.deviceMeta}>
+                <span>
+                  {activeDeviceModel.value.width} x {activeDeviceModel.value.height}
+                </span>
+                <span>DPR {activeDeviceModel.value.dpr}</span>
+                <span>
+                  Safe area {activeDeviceModel.value.safeArea.top} /{' '}
+                  {activeDeviceModel.value.safeArea.bottom}
+                </span>
+                <span>Capsule top {activeDeviceModel.value.capsule.top}</span>
+              </div>
+            </div>
+
+            <div class={styles.devicePreview}>
+              <DeviceFrame model={deviceModel.value} scale={0.62}>
+                <div class={styles.mobileRuntime}>
+                  <div class={styles.mobileHeader}>
+                    <strong>订单看板</strong>
+                    <span>今日履约</span>
+                  </div>
+                  <div class={styles.mobileSummary}>
+                    <span>待处理</span>
+                    <strong>128</strong>
+                    <small>较昨日 +12</small>
+                  </div>
+                  <div class={styles.mobileActions}>
+                    <button>扫码核销</button>
+                    <button>批量处理</button>
+                  </div>
+                  <div class={styles.mobileList}>
+                    {['门店自提', '同城配送', '售后审核', '库存预警'].map((item, index) => (
+                      <div class={styles.mobileListItem} key={item}>
+                        <span>{item}</span>
+                        <strong>{24 + index * 9}</strong>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </DeviceFrame>
+            </div>
           </div>
         </section>
 
