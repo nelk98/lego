@@ -17,7 +17,6 @@ export const legoMainSidebar: DefaultTheme.SidebarItem[] = [
     text: '组件',
     items: [
       { text: '组件演练场', link: '/stories/' },
-      { text: 'shadcn-vue Web UI', link: '/components/shadcn-vue' },
       { text: 'ScrollView', link: '/components/scroll-view' }
     ]
   },

@@ -1,0 +1,79 @@
+.lego-demo-workbench {
+  overflow: hidden;
+  border: 1px solid var(--lego-story-border);
+  border-radius: 12px;
+  background: var(--lego-story-surface);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--lego-story-text) 4%, transparent);
+}
+
+.lego-demo-workbench.is-single {
+  margin-top: 0;
+}
+
+.lego-demo-summary {
+  border-bottom: 1px solid var(--lego-story-border-soft);
+  padding: 14px 18px;
+  background: var(--lego-story-surface);
+}
+
+.lego-demo-summary-title {
+  color: var(--lego-story-text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.lego-demo-summary p {
+  margin: 5px 0 0;
+  color: var(--lego-story-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.lego-preview-stage {
+  overflow: auto;
+  padding: 28px;
+  background: var(--lego-story-surface);
+}
+
+.lego-preview-frame {
+  min-height: 178px;
+  margin: 0 auto;
+  border: 1px dashed var(--lego-story-border);
+  border-radius: 10px;
+  padding: 32px;
+  background:
+    linear-gradient(var(--lego-story-surface), var(--lego-story-surface)) padding-box,
+    linear-gradient(135deg, var(--lego-story-surface-soft), transparent) border-box;
+  transition: width 0.2s ease;
+}
+
+.lego-demo-rendered {
+  display: flex;
+  min-height: 112px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.lego-demo-row,
+.lego-demo-column {
+  display: flex;
+  width: 100%;
+  gap: 12px;
+}
+
+.lego-demo-row {
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.lego-demo-column {
+  flex-direction: column;
+}
+
+.lego-demo-column.is-narrow,
+.lego-demo-field {
+  width: min(100%, 360px);
+  margin: 0 auto;
+}

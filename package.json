@@ -7,7 +7,6 @@
     "prepare": "husky",
     "commit": "cz",
     "dev:web": "pnpm -C web-lab dev",
-    "ui:shadcn": "pnpm -C web/ui shadcn:add",
     "dev:docs": "pnpm -C docs dev",
     "docs:dev": "pnpm -C docs dev",
     "docs:build": "pnpm -C docs build",

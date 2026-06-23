@@ -16,14 +16,22 @@ import {
 import styles from './UIView.module.css'
 
 // Lab 只维护示例数据；组件源码与样式逻辑都留在 @lego/web-ui 内。
-const buttonTypes = ['primary', 'default', 'danger', 'text'] as const
+const buttonVariants = [
+  'primary',
+  'secondary',
+  'tertiary',
+  'outline',
+  'ghost',
+  'danger',
+  'danger-soft'
+] as const
 const frameworks = [
   { value: 'vue', label: 'Vue', disabled: false },
   { value: 'nuxt', label: 'Nuxt', disabled: false },
   { value: 'vite', label: 'Vite', disabled: false },
   { value: 'storybook', label: 'Storybook', disabled: true }
 ]
-const frameworkGroups = [{ label: 'Web stack', options: frameworks }]
+const frameworkGroups = [{ label: 'Web stack', items: frameworks }]
 const regions = [
   { value: 'cn-east', label: '华东区', description: '低延迟，适合国内主站' },
   { value: 'sg', label: '新加坡', description: '适合东南亚业务' },
@@ -52,9 +60,9 @@ export default defineComponent({
       <div class={styles.uiLab}>
         <header class={styles.hero}>
           <div>
-            <p class={styles.eyebrow}>shadcn-vue on TSX + UnoCSS</p>
+            <p class={styles.eyebrow}>TSX + UnoCSS + Reka UI</p>
             <h1>组件库调试</h1>
-            <p class={styles.desc}>shadcn-vue 风格组件调试与示例。</p>
+            <p class={styles.desc}>Web UI 组件调试与示例。</p>
           </div>
           <div class={styles.statusPanel}>
             <span>Keyword: {keyword.value || '-'}</span>
@@ -66,24 +74,22 @@ export default defineComponent({
         <section class={styles.block}>
           <div class={styles.blockHeader}>
             <h2>Button</h2>
-            <p>业务侧使用 AntD-like type / size / loading / block API。</p>
+            <p>业务侧使用 props 控制 variant / size / state，样式由组件内部实现。</p>
           </div>
           <div class={styles.flex}>
-            {buttonTypes.map((type) => (
-              <Button key={type} type={type}>
-                {type}
+            {buttonVariants.map((variant) => (
+              <Button key={variant} variant={variant}>
+                {variant}
               </Button>
             ))}
           </div>
           <div class={styles.flex}>
             <Button size="sm">Small</Button>
-            <Button type="primary">Default</Button>
+            <Button>Default</Button>
             <Button size="lg">Large</Button>
-            <Button disabled>Disabled</Button>
-            <Button type="primary" loading>
-              Loading
-            </Button>
-            <Button block>Block Button</Button>
+            <Button isDisabled>Disabled</Button>
+            <Button isPending>Loading</Button>
+            <Button fullWidth>Full Width Button</Button>
           </div>
         </section>
 
@@ -98,7 +104,9 @@ export default defineComponent({
                 <label>设备型号</label>
                 <Select
                   value={deviceModel.value}
-                  options={deviceOptions}
+                  items={deviceOptions}
+                  labelPlacement="inside"
+                  placeholder="选择设备"
                   onChange={(value) => {
                     deviceModel.value = value as DeviceFrameModelName
                   }}
@@ -150,7 +158,7 @@ export default defineComponent({
         <section class={styles.block}>
           <div class={styles.blockHeader}>
             <h2>Input & Select</h2>
-            <p>业务侧只传 value / options / onChange，内部再组合 shadcn-vue/Reka。</p>
+            <p>业务侧只传 value / items / onChange，内部再组合 Reka UI primitives。</p>
           </div>
           <div class={styles.grid}>
             <div class={styles.field}>
@@ -169,8 +177,10 @@ export default defineComponent({
               <label>基础选择</label>
               <Select
                 value={framework.value}
+                label="基础选择"
                 placeholder="选择框架"
-                options={frameworkGroups}
+                items={frameworkGroups}
+                isClearable
                 onChange={(value) => {
                   framework.value = String(value)
                 }}
@@ -181,9 +191,25 @@ export default defineComponent({
               <label>复杂内容</label>
               <Select
                 value={region.value}
+                label="复杂内容"
+                description="选项可直接带 description，适合复杂业务候选项。"
                 placeholder="选择部署区域"
-                options={regions}
+                items={regions}
                 sideOffset={6}
+                onChange={(value) => {
+                  region.value = String(value)
+                }}
+              />
+            </div>
+            <div class={styles.field}>
+              <label>错误状态</label>
+              <Select
+                value={region.value}
+                label="发布区域"
+                color="danger"
+                variant="bordered"
+                items={regions}
+                errorMessage="请选择一个可发布区域"
                 onChange={(value) => {
                   region.value = String(value)
                 }}
@@ -206,6 +232,7 @@ export default defineComponent({
               声明式 Modal
             </Button>
             <Button
+              variant="outline"
               onClick={() => {
                 modal.open({
                   title: '编辑用户',
@@ -222,7 +249,7 @@ export default defineComponent({
               modal.open
             </Button>
             <Button
-              type="danger"
+              variant="danger"
               onClick={async () => {
                 await modal.confirm({
                   title: '删除确认',
@@ -252,7 +279,7 @@ export default defineComponent({
               <Select
                 value={region.value}
                 placeholder="选择发布区域"
-                options={regions}
+                items={regions}
                 onChange={(value) => {
                   region.value = String(value)
                 }}

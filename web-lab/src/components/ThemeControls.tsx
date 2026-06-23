@@ -20,7 +20,7 @@ export default defineComponent({
           <span>主题色</span>
           <Select
             value={theme.primary.value}
-            options={primaryOptions}
+            items={primaryOptions}
             triggerClass={styles.themeSelect}
             contentClass={styles.themeSelectContent}
             onChange={(value) => {

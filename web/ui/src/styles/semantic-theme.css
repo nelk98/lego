@@ -1,9 +1,5 @@
 /*
- * shadcn-vue registry semantic tokens.
- *
- * Registry classes such as bg-primary, border-input and text-muted-foreground
- * follow @lego/shared global theme tokens when present, and fall back to the
- * shadcn defaults when a host app has not initialized the shared theme.
+ * Registry-style semantic tokens mapped to @lego/shared theme variables.
  */
 :root {
   --radius: 0.625rem;
@@ -27,25 +23,25 @@
   --input: var(--color-bg-3, oklch(0.922 0 0));
   --ring: var(--color-primary-500, oklch(0.708 0 0));
 
-  --l-shadcn-background: var(--background);
-  --l-shadcn-foreground: var(--foreground);
-  --l-shadcn-card: var(--card);
-  --l-shadcn-card-foreground: var(--card-foreground);
-  --l-shadcn-popover: var(--popover);
-  --l-shadcn-popover-foreground: var(--popover-foreground);
-  --l-shadcn-primary: var(--primary);
-  --l-shadcn-primary-foreground: var(--primary-foreground);
-  --l-shadcn-secondary: var(--secondary);
-  --l-shadcn-secondary-foreground: var(--secondary-foreground);
-  --l-shadcn-muted: var(--muted);
-  --l-shadcn-muted-foreground: var(--muted-foreground);
-  --l-shadcn-accent: var(--accent);
-  --l-shadcn-accent-foreground: var(--accent-foreground);
-  --l-shadcn-destructive: var(--destructive);
-  --l-shadcn-destructive-foreground: var(--destructive-foreground);
-  --l-shadcn-border: var(--border);
-  --l-shadcn-input: var(--input);
-  --l-shadcn-ring: var(--ring);
+  --l-semantic-background: var(--background);
+  --l-semantic-foreground: var(--foreground);
+  --l-semantic-card: var(--card);
+  --l-semantic-card-foreground: var(--card-foreground);
+  --l-semantic-popover: var(--popover);
+  --l-semantic-popover-foreground: var(--popover-foreground);
+  --l-semantic-primary: var(--primary);
+  --l-semantic-primary-foreground: var(--primary-foreground);
+  --l-semantic-secondary: var(--secondary);
+  --l-semantic-secondary-foreground: var(--secondary-foreground);
+  --l-semantic-muted: var(--muted);
+  --l-semantic-muted-foreground: var(--muted-foreground);
+  --l-semantic-accent: var(--accent);
+  --l-semantic-accent-foreground: var(--accent-foreground);
+  --l-semantic-destructive: var(--destructive);
+  --l-semantic-destructive-foreground: var(--destructive-foreground);
+  --l-semantic-border: var(--border);
+  --l-semantic-input: var(--input);
+  --l-semantic-ring: var(--ring);
 }
 
 [data-theme='dark'] {

@@ -1,0 +1,77 @@
+.lego-story-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.lego-segment-field,
+.lego-select-field {
+  display: grid;
+  gap: 6px;
+  color: var(--lego-story-mute);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.lego-segment {
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid var(--lego-story-border);
+  border-radius: 8px;
+  background: var(--lego-story-surface-soft);
+  padding: 2px;
+}
+
+.lego-select-field select {
+  min-height: 34px;
+  min-width: 132px;
+  border: 1px solid var(--lego-story-border);
+  border-radius: 8px;
+  background: var(--lego-story-surface-soft);
+  color: var(--lego-story-text);
+  font-size: 12px;
+  font-weight: 500;
+  outline: none;
+  padding: 0 30px 0 10px;
+}
+
+.lego-select-field select:focus {
+  border-color: var(--lego-story-primary);
+  box-shadow: 0 0 0 3px var(--lego-story-primary-soft);
+}
+
+.lego-segment button,
+.lego-story-nav-group,
+.lego-story-nav-item,
+.lego-docs-example-action,
+.lego-outline-item {
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.lego-segment button {
+  min-height: 28px;
+  border-radius: 6px;
+  padding: 0 9px;
+  background: transparent;
+  color: var(--lego-story-muted);
+  font-size: 12px;
+  font-weight: 500;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.lego-segment button:hover {
+  color: var(--lego-story-text);
+}
+
+.lego-segment button.is-active {
+  background: var(--lego-story-surface);
+  color: var(--lego-story-primary);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--lego-story-text) 6%, transparent);
+}

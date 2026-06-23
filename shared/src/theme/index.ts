@@ -5,7 +5,6 @@ import {
   type PrimaryColorName,
   type PrimaryStep
 } from '../style/palette.meta'
-import '../style/hero.css'
 
 export {
   PRIMARY_COLOR_NAMES,

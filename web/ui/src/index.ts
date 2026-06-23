@@ -20,3 +20,12 @@ export {
   type ThemeState
 } from '@lego/shared'
 export { TableView } from './table-view'
+export {
+  RENDERABLE_PROP,
+  lazyRenderablePropType,
+  renderablePropType,
+  resolveLazyRenderable,
+  resolveRenderable,
+  type LazyRenderable,
+  type Renderable
+} from './vue'

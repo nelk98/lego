@@ -5,8 +5,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@/shadcn/utils": ["./src/shadcn/utils.ts"],
-      "@/shadcn/*": ["./src/shadcn/*"],
+      "@/utils/*": ["./src/utils/*"],
       "@/components/*": ["./src/components/*"],
       "@/composables/*": ["./src/composables/*"]
     }

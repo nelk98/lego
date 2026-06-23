@@ -11,7 +11,7 @@
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 20px;
   align-items: end;
-  border-bottom: 1px solid var(--l-shadcn-border);
+  border-bottom: 1px solid var(--l-semantic-border);
   padding-bottom: 24px;
 }
 
@@ -25,7 +25,7 @@
 
 .eyebrow {
   margin: 0;
-  color: var(--l-shadcn-muted-foreground);
+  color: var(--l-semantic-muted-foreground);
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
@@ -41,7 +41,7 @@
   display: grid;
   gap: 6px;
   min-width: 220px;
-  border: 1px solid var(--l-shadcn-border);
+  border: 1px solid var(--l-semantic-border);
   border-radius: 8px;
   padding: 12px;
   color: var(--color-text-2);
@@ -51,10 +51,10 @@
 .block {
   display: grid;
   gap: 14px;
-  border: 1px solid var(--l-shadcn-border);
+  border: 1px solid var(--l-semantic-border);
   border-radius: 8px;
   padding: 18px;
-  background: var(--l-shadcn-card);
+  background: var(--l-semantic-card);
 }
 
 .blockHeader {
@@ -148,7 +148,7 @@
 
 .scrollBox {
   height: 260px;
-  border: 1px solid var(--l-shadcn-border);
+  border: 1px solid var(--l-semantic-border);
   border-radius: 8px;
 }
 
@@ -156,8 +156,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--l-shadcn-muted);
-  color: var(--l-shadcn-muted-foreground);
+  background: var(--l-semantic-muted);
+  color: var(--l-semantic-muted-foreground);
 }
 
 .deviceDemoGrid {
@@ -175,7 +175,7 @@
 .deviceMeta {
   display: grid;
   gap: 8px;
-  border: 1px solid var(--l-shadcn-border);
+  border: 1px solid var(--l-semantic-border);
   border-radius: 8px;
   padding: 12px;
   color: var(--color-text-2);

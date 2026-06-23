@@ -19,7 +19,7 @@ import {
 } from 'reka-ui'
 import { defineComponent, mergeProps, useAttrs, type PropType } from 'vue'
 
-import { cn } from '../utils'
+import { cn } from '../../utils/cn'
 
 export const UiDialog = defineComponent({
   name: 'UiDialog',
@@ -63,7 +63,7 @@ export const UiDialogTrigger = defineComponent({
   name: 'UiDialogTrigger',
   inheritAttrs: false,
   props: {
-    /** 与 shadcn-vue 保持一致，常和 UiButton 一起使用。 */
+    /** 与 Button 组合使用时可将样式合并到唯一子节点。 */
     asChild: Boolean,
     as: [String, Object] as PropType<DialogTriggerProps['as']>
   },

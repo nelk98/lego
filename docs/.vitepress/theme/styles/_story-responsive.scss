@@ -1,0 +1,62 @@
+@media (max-width: 1120px) {
+  .lego-story-body,
+  .lego-story-body.is-docs-view,
+  .lego-story-body.is-demo-view {
+    grid-template-columns: 232px minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) 360px;
+  }
+
+  .lego-story-inspector {
+    grid-column: 1 / -1;
+    min-height: 0;
+    border-top: 1px solid var(--lego-story-border-soft);
+    border-left: 0;
+  }
+}
+
+@media (max-width: 960px) {
+  .lego-story-body,
+  .lego-story-body.is-docs-view,
+  .lego-story-body.is-demo-view {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 220px minmax(0, 1fr) 320px;
+  }
+
+  .lego-story-sidebar {
+    border-right: 0;
+    border-bottom: 1px solid var(--lego-story-border-soft);
+  }
+
+  .lego-story-nav {
+    padding: 16px 20px;
+  }
+
+  .lego-story-content {
+    padding: 32px 24px 48px;
+  }
+
+  .lego-docs-example-header {
+    display: grid;
+  }
+
+  .lego-docs-example-action {
+    width: max-content;
+  }
+
+  .lego-story-inspector {
+    grid-column: auto;
+    border-top: 1px solid var(--lego-story-border-soft);
+  }
+}
+
+@media (max-width: 720px) {
+  .lego-story-toolbar {
+    justify-content: flex-start;
+  }
+
+  .lego-preview-stage,
+  .lego-preview-frame {
+    padding: 18px;
+  }
+}

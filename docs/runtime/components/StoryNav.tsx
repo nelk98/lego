@@ -62,15 +62,20 @@ function buildStoryTree(stories: StoryRecord[]) {
   return root
 }
 
-function getInitialExpandedKeys(nodes: StoryTreeNode[]) {
+function getExpandedKeysForStory(stories: StoryRecord[], storyId: string) {
   const keys = new Set<string>()
+  if (!storyId) return keys
 
-  function walk(node: StoryTreeNode) {
-    keys.add(node.key)
-    node.children.forEach(walk)
+  const story = stories.find((item) => item.id === storyId)
+  if (!story) return keys
+
+  const parts = story.title.split('/').filter(Boolean)
+  let key = ''
+  for (const part of parts) {
+    key = key ? `${key}/${part}` : part
+    keys.add(key)
   }
 
-  nodes.forEach(walk)
   return keys
 }
 
@@ -82,10 +87,6 @@ function getSelectedKey(storyId: string, section: StoryNavSection, demoIndex: nu
 
 function navDepthStyle(depth: number) {
   return { '--nav-depth': String(depth) }
-}
-
-function navChildrenStyle(parentDepth: number) {
-  return { '--parent-depth': String(parentDepth) }
 }
 
 export default defineComponent({
@@ -113,16 +114,17 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const tree = computed(() => buildStoryTree(props.stories))
-    const expandedKeys = ref(getInitialExpandedKeys(tree.value))
+    const expandedKeys = ref(getExpandedKeysForStory(props.stories, props.selectedId))
     const selectedKey = computed(() =>
       getSelectedKey(props.selectedId, props.selectedSection, props.selectedDemoIndex)
     )
 
-    watch(tree, (nodes) => {
-      const nextKeys = new Set(expandedKeys.value)
-      getInitialExpandedKeys(nodes).forEach((key) => nextKeys.add(key))
-      expandedKeys.value = nextKeys
-    })
+    watch(
+      () => [props.stories, props.selectedId] as const,
+      ([stories, storyId]) => {
+        expandedKeys.value = getExpandedKeysForStory(stories, storyId)
+      }
+    )
 
     function isExpanded(key: string) {
       return expandedKeys.value.has(key)
@@ -171,22 +173,22 @@ export default defineComponent({
       const docsKey = getSelectedKey(story.id, 'docs', 0)
 
       return (
-        <ul class="lego-story-nav-list lego-story-nav-children" style={navChildrenStyle(depth - 1)}>
+        <ul class="lego-story-nav-list lego-story-nav-children">
           <li
             class={[
               'lego-story-nav-node',
               'is-docs',
               selectedKey.value === docsKey && 'is-selected'
             ]}
+            style={navDepthStyle(depth)}
           >
             <button
               type="button"
               class="lego-story-nav-item"
-              style={navDepthStyle(depth)}
               onClick={() => emit('select', { story, section: 'docs' })}
             >
               {renderIcon('docs')}
-              <span class="lego-story-nav-label">Docs</span>
+              <span class="lego-story-nav-label">使用文档</span>
             </button>
           </li>
           {story.story.demos.map((demo, index) => {
@@ -199,11 +201,11 @@ export default defineComponent({
                   'is-demo',
                   selectedKey.value === key && 'is-selected'
                 ]}
+                style={navDepthStyle(depth)}
               >
                 <button
                   type="button"
                   class="lego-story-nav-item"
-                  style={navDepthStyle(depth)}
                   onClick={() => emit('select', { story, section: 'demo', demoIndex: index })}
                 >
                   {renderIcon('story')}
@@ -221,11 +223,13 @@ export default defineComponent({
 
       if (node.kind === 'component' && node.story) {
         return (
-          <li class={['lego-story-nav-node', 'is-component', expanded && 'is-expanded']}>
+          <li
+            class={['lego-story-nav-node', 'is-component', expanded && 'is-expanded']}
+            style={navDepthStyle(depth)}
+          >
             <button
               type="button"
               class="lego-story-nav-item"
-              style={navDepthStyle(depth)}
               onClick={() => {
                 if (!expanded) toggle(node.key)
                 emit('select', { story: node.story!, section: 'docs' })
@@ -249,19 +253,17 @@ export default defineComponent({
       }
 
       return (
-        <li class={['lego-story-nav-node', 'is-directory', expanded && 'is-expanded']}>
-          <button
-            type="button"
-            class="lego-story-nav-group"
-            style={navDepthStyle(depth)}
-            onClick={() => toggle(node.key)}
-          >
+        <li
+          class={['lego-story-nav-node', 'is-directory', expanded && 'is-expanded']}
+          style={navDepthStyle(depth)}
+        >
+          <button type="button" class="lego-story-nav-group" onClick={() => toggle(node.key)}>
             {renderCaret(expanded)}
             {renderIcon('folder', expanded)}
             <span class="lego-story-nav-label">{node.label}</span>
           </button>
           {expanded && node.children.length ? (
-            <ul class="lego-story-nav-list lego-story-nav-children" style={navChildrenStyle(depth)}>
+            <ul class="lego-story-nav-list lego-story-nav-children">
               {node.children.map((child) => renderNode(child, depth + 1))}
             </ul>
           ) : null}

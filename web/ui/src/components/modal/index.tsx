@@ -6,11 +6,12 @@ import {
   UiDialogFooter,
   UiDialogHeader,
   UiDialogTitle
-} from '../../shadcn/dialog'
-import { cn } from '../../shadcn/utils'
-import { Button, type ButtonType } from '../button'
+} from './dialog'
+import { cn } from '../../utils/cn'
+import { resolveLazyRenderable, type LazyRenderable } from '../../vue'
+import { Button, type ButtonVariant } from '../button'
 
-export type ModalContent = VNodeChild | (() => VNodeChild)
+export type ModalContent = LazyRenderable
 export type ModalOkResult = boolean | void | Promise<boolean | void>
 
 export interface ModalController {
@@ -24,8 +25,8 @@ export interface ModalOpenOptions {
   content?: ModalContent
   okText?: string
   cancelText?: string
-  okButtonType?: ButtonType
-  cancelButtonType?: ButtonType
+  okButtonVariant?: ButtonVariant
+  cancelButtonVariant?: ButtonVariant
   confirmLoading?: boolean
   width?: string | number
   footer?: boolean | (() => VNodeChild)
@@ -40,8 +41,7 @@ export interface ModalConfirmOptions extends Omit<ModalOpenOptions, 'footer'> {
 }
 
 function renderContent(content: string | ModalContent | undefined): VNodeChild {
-  if (typeof content === 'function') return content()
-  return content
+  return resolveLazyRenderable(content)
 }
 
 function normalizeWidth(width: string | number | undefined): string | undefined {
@@ -70,13 +70,13 @@ export const Modal = defineComponent({
       type: String,
       default: '取消'
     },
-    okButtonType: {
-      type: String as PropType<ButtonType>,
+    okButtonVariant: {
+      type: String as PropType<ButtonVariant>,
       default: 'primary'
     },
-    cancelButtonType: {
-      type: String as PropType<ButtonType>,
-      default: 'default'
+    cancelButtonVariant: {
+      type: String as PropType<ButtonVariant>,
+      default: 'outline'
     },
     confirmLoading: Boolean,
     width: [String, Number] as PropType<string | number>,
@@ -129,12 +129,12 @@ export const Modal = defineComponent({
 
       return (
         <UiDialogFooter>
-          <Button type={props.cancelButtonType} onClick={handleCancel}>
+          <Button variant={props.cancelButtonVariant} onClick={handleCancel}>
             {props.cancelText}
           </Button>
           <Button
-            type={props.okButtonType}
-            loading={props.confirmLoading || internalLoading.value}
+            variant={props.okButtonVariant}
+            isPending={props.confirmLoading || internalLoading.value}
             onClick={handleOk}
           >
             {props.okText}
@@ -265,7 +265,7 @@ export function confirm(options: ModalConfirmOptions): Promise<boolean> {
   return new Promise((resolve) => {
     let settled = false
     const controller = openModal({
-      okButtonType: 'danger',
+      okButtonVariant: 'danger',
       ...options,
       onOk: async () => {
         const result = await options.onOk?.()

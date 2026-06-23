@@ -1,0 +1,115 @@
+.lego-source-viewer {
+  margin: 0;
+  border-top: 1px solid var(--lego-story-border-soft);
+  background: var(--lego-story-code-bg);
+}
+
+.lego-panel-heading {
+  min-height: 40px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--lego-story-border-soft);
+  color: var(--lego-story-mute);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.lego-outline-panel {
+  min-height: 100%;
+  background: var(--lego-story-surface);
+}
+
+.lego-outline-list {
+  display: grid;
+  gap: 2px;
+  padding: 12px;
+}
+
+.lego-outline-item {
+  display: block;
+  width: 100%;
+  min-height: 30px;
+  border-left: 2px solid transparent;
+  border-radius: 0 7px 7px 0;
+  padding: 0 10px;
+  background: transparent;
+  color: var(--lego-story-muted);
+  text-align: left;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0;
+  transition:
+    background-color 0.16s ease,
+    border-color 0.16s ease,
+    color 0.16s ease;
+}
+
+.lego-outline-item:hover,
+.lego-outline-item.is-active {
+  border-left-color: var(--lego-story-primary);
+  background: var(--lego-story-primary-soft);
+  color: var(--lego-story-primary);
+}
+
+.lego-source-code {
+  max-height: 320px;
+  margin: 0;
+  overflow: auto;
+  padding: 16px;
+  background: transparent;
+  color: var(--lego-story-code-text);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.lego-source-code code {
+  font-family: var(--vp-font-family-mono);
+}
+
+.lego-json-editor {
+  display: grid;
+  height: 100%;
+  min-height: 0;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  background: var(--lego-story-surface);
+}
+
+.lego-json-editor-host {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.lego-json-editor-host .cm-editor {
+  height: 100%;
+  background: var(--lego-story-surface);
+  color: var(--lego-story-text);
+  font-size: 13px;
+}
+
+.lego-json-editor-host .cm-scroller {
+  font-family: var(--vp-font-family-mono);
+}
+
+.lego-json-editor-host .cm-gutters {
+  border-right: 1px solid var(--lego-story-border-soft);
+  background: var(--lego-story-surface-soft);
+  color: var(--lego-story-mute);
+}
+
+.lego-json-editor-host .cm-activeLine,
+.lego-json-editor-host .cm-activeLineGutter {
+  background: var(--lego-story-primary-soft);
+}
+
+.lego-json-editor-status {
+  min-height: 42px;
+  padding: 11px 14px;
+  border-top: 1px solid var(--lego-story-border-soft);
+  color: var(--color-success);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.lego-json-editor-status.is-error {
+  color: var(--color-danger);
+}

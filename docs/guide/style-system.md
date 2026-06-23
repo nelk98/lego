@@ -58,7 +58,7 @@ SCSS 中 `$color-blue-500` 是完整颜色，适合直接用于常规样式；�
 | `configs/style.ts` | web / mobile 共用的 Sass 注入路径和 UnoCSS 配置路径。 |
 | `shared/src/style/web.scss` | Web 全局入口，包含 palette、theme、preflight。 |
 | `shared/src/style/mobile.scss` | Mobile/Taro 全局入口，包含 palette、theme、移动端基础 reset。 |
-| `web/ui/src/styles/shadcn-theme.css` | 把 shadcn 语义变量映射到 shared token。 |
+| `web/ui/src/styles/semantic-theme.css` | 把 registry 语义变量映射到 shared token。 |
 
 ## 使用规则
 

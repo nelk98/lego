@@ -1,6 +1,6 @@
 import { X } from '@lucide/vue'
 import { defineComponent, useAttrs, type PropType, type StyleValue } from 'vue'
-import { cn } from '../../shadcn/utils'
+import { cn } from '../../utils/cn'
 
 export type InputSize = 'sm' | 'md' | 'lg'
 export type InputValue = string | number | undefined

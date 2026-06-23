@@ -131,7 +131,7 @@ const TOKEN_SECTIONS: TokenSection[] = [
     description: 'info / success / warning / danger',
     tokens: STATUS_TOKENS
   },
-  { title: '语义色', description: 'shadcn semantic tokens', tokens: SEMANTIC_TOKENS },
+  { title: '语义色', description: 'registry semantic tokens', tokens: SEMANTIC_TOKENS },
   { title: '中性色', description: 'hex 色阶 + white/black 通道', tokens: NEUTRAL_TOKENS }
 ]
 

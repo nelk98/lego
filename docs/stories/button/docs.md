@@ -1,28 +1,49 @@
 # Button 按钮
 
-按钮用于触发一次明确的操作，适合提交表单、打开弹层、执行页面级主操作或普通文本操作。
-
-## 基础用法
-
-在文档页可以纵向查看所有示例；需要临时调整 props 时，点击左侧某个示例或示例卡片中的调试入口进入单示例演练模式。
+可点击的按钮组件，支持多种变体与状态。API 对齐 [HeroUI Button](https://www.heroui.com/docs/react/components/button)。
 
 ## 设计说明
 
-- `type` 控制视觉层级，常用值为 `primary`、`default`、`danger`、`text`。
-- `size` 控制按钮高度和内边距，支持 `sm`、`md`、`lg`。
-- `loading` 会展示加载指示并自动禁用点击。
-- `disabled` 用于表达当前操作不可用。
-- `block` 让按钮占满父容器宽度，常用于移动端或表单底部。
-- `htmlType` 透传原生 `button`、`submit`、`reset` 类型。
-- `children` 在演练场中作为插槽文本传入，方便通过 JSON 直接调试。
+- `variant` 控制视觉样式：`primary`、`secondary`、`tertiary`、`outline`、`ghost`、`danger`、`danger-soft`。
+- `isPending` 进入加载态；内容通过 scoped slot 自行渲染 Spinner（与 HeroUI 一致，组件不内置 Spinner）。
+- `isDisabled` 表达不可操作；`fullWidth` 用于通栏按钮；`isIconOnly` 用于纯图标按钮。
+- 默认 slot 接收 `ButtonRenderProps`，可读取 `isPending`、`isPressed` 等状态。
+- `render` 可覆盖默认 `<button>` 根节点。
+- `type` 为 Vue 表单扩展，支持 `button`、`submit`、`reset`。
 
 ## API
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| `type` | 视觉层级 | `'primary' \| 'default' \| 'danger' \| 'text'` | `'default'` |
+| `variant` | 视觉变体 | `'primary' \| 'secondary' \| 'tertiary' \| 'outline' \| 'ghost' \| 'danger' \| 'danger-soft'` | `'primary'` |
 | `size` | 按钮尺寸 | `'sm' \| 'md' \| 'lg'` | `'md'` |
-| `disabled` | 是否禁用 | `boolean` | `false` |
-| `loading` | 是否加载中 | `boolean` | `false` |
-| `block` | 是否撑满父容器 | `boolean` | `false` |
-| `htmlType` | 原生按钮类型 | `'button' \| 'submit' \| 'reset'` | `'button'` |
+| `fullWidth` | 是否撑满父容器 | `boolean` | `false` |
+| `isDisabled` | 是否禁用 | `boolean` | `false` |
+| `isPending` | 是否加载中 | `boolean` | `false` |
+| `isIconOnly` | 是否为纯图标按钮 | `boolean` | `false` |
+| `render` | 自定义根节点渲染函数 | `ButtonRenderFn` | - |
+| `type` | 原生按钮类型（Vue 扩展） | `'button' \| 'submit' \| 'reset'` | `'button'` |
+
+## 事件
+
+| 事件 | 说明 |
+| --- | --- |
+| `press` | 按钮被按下时触发，对齐 HeroUI `onPress` |
+| `click` | 兼容 Vue 习惯的点击事件 |
+
+## ButtonRenderProps
+
+scoped slot 与 `render` 的第二个参数：
+
+| 属性 | 类型 | 说明 |
+| --- | --- | --- |
+| `isPending` | `boolean` | 是否处于加载状态 |
+| `isPressed` | `boolean` | 是否正在被按压 |
+| `isHovered` | `boolean` | 是否悬停 |
+| `isFocused` | `boolean` | 是否聚焦 |
+| `isFocusVisible` | `boolean` | 是否应显示焦点环 |
+| `isDisabled` | `boolean` | 是否禁用 |
+
+## 样式
+
+组件内部使用 UnoCSS / Tailwind 工具类与 `@lego/shared` token（如 `bg-primary`、`bg-bg-2`、`border-line-2`），不复制 HeroUI 的 BEM 类名。
