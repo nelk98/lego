@@ -1,7 +1,9 @@
 import { Spin } from '@lego/shared'
-import { Button, type ButtonRenderProps, type ButtonVariant } from '@lego/ui'
+import { Button, Icon, type ButtonRenderProps, type ButtonVariant } from '@lego/ui'
 import { defineComponent, ref } from 'vue'
 import { defineStory } from '../../runtime'
+
+const ICON_SIZE = 16
 
 interface ButtonStoryProps {
   variant?: ButtonVariant
@@ -22,80 +24,6 @@ const variants: ButtonVariant[] = [
   'danger',
   'danger-soft'
 ]
-
-function IconGlobe() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" class="size-4">
-      <path
-        fill="currentColor"
-        d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm7.93 9h-3.18a15.7 15.7 0 0 0-1.2-5.02A8.03 8.03 0 0 1 19.93 11ZM12 4c.95 1.6 1.6 3.6 1.86 5.86H10.14C10.4 7.6 11.05 5.6 12 4ZM8.45 5.98A15.7 15.7 0 0 0 7.25 11H4.07a8.03 8.03 0 0 1 4.38-5.02ZM4.07 13h3.18c.22 1.86.7 3.58 1.2 5.02A8.03 8.03 0 0 1 4.07 13Zm7.93 7c-.95-1.6-1.6-3.6-1.86-5.86h3.72C13.6 16.4 12.95 18.4 12 20Zm3.55-1.98c.5-1.44.98-3.16 1.2-5.02h3.18a8.03 8.03 0 0 1-4.38 5.02Z"
-      />
-    </svg>
-  )
-}
-
-function IconPlus() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" class="size-4">
-      <path fill="currentColor" d="M11 4h2v7h7v2h-7v7h-2v-7H4v-2h7V4Z" />
-    </svg>
-  )
-}
-
-function IconMail() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" class="size-4">
-      <path
-        fill="currentColor"
-        d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Zm0 2 8 5 8-5v8H4V8Z"
-      />
-    </svg>
-  )
-}
-
-function IconTrash() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" class="size-4">
-      <path
-        fill="currentColor"
-        d="M9 3h6l1 2h4v2H4V5h4l1-2Zm1 6h2v9h-2V9Zm4 0h2v9h-2V9ZM7 9h2v9H7V9Z"
-      />
-    </svg>
-  )
-}
-
-function IconEllipsis() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" class="size-4">
-      <path
-        fill="currentColor"
-        d="M6 10a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm6 0a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm6 0a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z"
-      />
-    </svg>
-  )
-}
-
-function IconGear() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" class="size-4">
-      <path
-        fill="currentColor"
-        d="m19.14 12.94.03-.24 1.02-.78-1.4-2.42-1.2.3-.22-.16a6.5 6.5 0 0 0-.56-.42l-.16-.22.3-1.2-2.42-1.4-.78 1.02-.24.03a6.4 6.4 0 0 0-.48 0l-.24-.03-.78-1.02-2.42 1.4.3 1.2-.16.22c-.2.15-.39.3-.56.46l-.22.16-1.2-.3-1.4 2.42 1.02.78.03.24a6.4 6.4 0 0 0 0 .48l-.03.24-1.02.78 1.4 2.42 1.2-.3.22.16c.17.16.36.31.56.46l.16.22-.3 1.2 2.42 1.4.78-1.02.24-.03c.16.02.32.03.48.03s.32-.01.48-.03l.24.03.78 1.02 2.42-1.4-.3-1.2.16-.22c.2-.15.39-.3.56-.46l.22-.16 1.2.3 1.4-2.42-1.02-.78-.03-.24a6.4 6.4 0 0 0 0-.48ZM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7Z"
-      />
-    </svg>
-  )
-}
-
-function IconPaperclip() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" class="size-4">
-      <path
-        fill="currentColor"
-        d="M16.5 6.5 9 14a2.12 2.12 0 1 0 3 3l7.5-7.5a3.63 3.63 0 0 0-5.12-5.12L5.5 13.38A5.62 5.62 0 0 0 13.5 21.38l8.25-8.25-1.42-1.42-8.25 8.25a3.62 3.62 0 0 1-5.12-5.12l9.88-9.88a1.63 1.63 0 1 1 2.3 2.3L9 17a.75.75 0 1 1-1.06-1.06l7.56-7.56Z"
-      />
-    </svg>
-  )
-}
 
 function ButtonSpinner() {
   return (
@@ -122,7 +50,7 @@ const LoadingStateDemo = defineComponent({
         {{
           default: ({ isPending }: ButtonRenderProps) => (
             <>
-              {isPending ? <ButtonSpinner /> : <IconPaperclip />}
+              {isPending ? <ButtonSpinner /> : <Icon name="@linear/paperclip" size={ICON_SIZE} />}
               {isPending ? 'Uploading...' : 'Upload File'}
             </>
           )
@@ -181,26 +109,26 @@ export default defineStory<ButtonStoryProps>({
       category: 'Variants',
       description: '图标与文案都通过默认 slot 传入。',
       props: {},
-      source: `<Button><GlobeIcon />Search</Button>
-<Button variant="secondary"><PlusIcon />Add Member</Button>
-<Button variant="tertiary"><MailIcon />Email</Button>
-<Button variant="danger"><TrashIcon />Delete</Button>`,
+      source: `<Button><Icon name="globe" size={16} />Search</Button>
+<Button variant="secondary"><Icon name="add" size={16} />Add Member</Button>
+<Button variant="tertiary"><Icon name="mail" size={16} />Email</Button>
+<Button variant="danger"><Icon name="delete" size={16} />Delete</Button>`,
       render: () => (
         <div class="lego-demo-row">
           <Button>
-            <IconGlobe />
+            <Icon name="globe" size={ICON_SIZE} />
             Search
           </Button>
           <Button variant="secondary">
-            <IconPlus />
+            <Icon name="add" size={ICON_SIZE} />
             Add Member
           </Button>
           <Button variant="tertiary">
-            <IconMail />
+            <Icon name="mail" size={ICON_SIZE} />
             Email
           </Button>
           <Button variant="danger">
-            <IconTrash />
+            <Icon name="delete" size={ICON_SIZE} />
             Delete
           </Button>
         </div>
@@ -211,19 +139,19 @@ export default defineStory<ButtonStoryProps>({
       category: 'Variants',
       description: 'isIconOnly 固定正方形尺寸。',
       props: {},
-      source: `<Button isIconOnly variant="tertiary"><EllipsisIcon /></Button>
-<Button isIconOnly variant="secondary"><GearIcon /></Button>
-<Button isIconOnly variant="danger"><TrashIcon /></Button>`,
+      source: `<Button isIconOnly variant="tertiary"><Icon name="@linear/more" size={16} /></Button>
+<Button isIconOnly variant="secondary"><Icon name="settings" size={16} /></Button>
+<Button isIconOnly variant="danger"><Icon name="delete" size={16} /></Button>`,
       render: () => (
         <div class="lego-demo-row">
           <Button isIconOnly variant="tertiary" aria-label="More">
-            😄
+            <Icon name="@linear/more" size={ICON_SIZE} />
           </Button>
           <Button isIconOnly variant="secondary" aria-label="Settings">
-            <IconGear />
+            <Icon name="settings" size={ICON_SIZE} />
           </Button>
           <Button isIconOnly variant="danger" aria-label="Delete">
-            <IconTrash />
+            <Icon name="delete" size={ICON_SIZE} />
           </Button>
         </div>
       )
@@ -266,7 +194,7 @@ export default defineStory<ButtonStoryProps>({
 <Button isPending={isLoading} onPress={handlePress}>
   {({ isPending }) => (
     <>
-      {isPending ? <Spinner /> : <PaperclipIcon />}
+      {isPending ? <Spinner /> : <Icon name="@linear/paperclip" size={16} />}
       {isPending ? 'Uploading...' : 'Upload File'}
     </>
   )}
@@ -295,12 +223,12 @@ export default defineStory<ButtonStoryProps>({
       description: 'fullWidth 让按钮占满容器宽度。',
       props: {},
       source: `<Button fullWidth>Primary Button</Button>
-<Button fullWidth><PlusIcon />With Icon</Button>`,
+<Button fullWidth><Icon name="add" size={16} />With Icon</Button>`,
       render: () => (
         <div class="lego-demo-column is-narrow" style={{ width: '400px', maxWidth: '100%' }}>
           <Button fullWidth>Primary Button</Button>
           <Button fullWidth>
-            <IconPlus />
+            <Icon name="add" size={ICON_SIZE} />
             With Icon
           </Button>
         </div>
@@ -329,21 +257,20 @@ export default defineStory<ButtonStoryProps>({
       category: 'Layout',
       description: 'tertiary 变体适合第三方登录场景。',
       props: {},
-      source: `<Button class="w-full" variant="tertiary">Sign in with Google</Button>
+      source: `<Button class="w-full" variant="tertiary"><Icon name="@linear/google" size={16} />Sign in with Google</Button>
 <Button class="w-full" variant="tertiary">Sign in with GitHub</Button>
-<Button class="w-full" variant="tertiary">Sign in with Apple</Button>`,
+<Button class="w-full" variant="tertiary"><Icon name="apple" size={16} />Sign in with Apple</Button>`,
       render: () => (
         <div class="lego-demo-column is-narrow" style={{ width: '320px', maxWidth: '100%' }}>
           <Button class="w-full" variant="tertiary">
-            <span aria-hidden="true">G</span>
+            <Icon name="@linear/google" size={ICON_SIZE} />
             Sign in with Google
           </Button>
           <Button class="w-full" variant="tertiary">
-            <span aria-hidden="true">GH</span>
             Sign in with GitHub
           </Button>
           <Button class="w-full" variant="tertiary">
-            <span aria-hidden="true">A</span>
+            <Icon name="apple" size={ICON_SIZE} />
             Sign in with Apple
           </Button>
         </div>

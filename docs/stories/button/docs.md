@@ -8,6 +8,7 @@
 - `isPending` 进入加载态；内容通过 scoped slot 自行渲染 Spinner（与 HeroUI 一致，组件不内置 Spinner）。
 - `isDisabled` 表达不可操作；`fullWidth` 用于通栏按钮；`isIconOnly` 用于纯图标按钮。
 - 默认 slot 接收 `ButtonRenderProps`，可读取 `isPending`、`isPressed` 等状态。
+- 图标通过 [`Icon`](/stories/?story=icon) 组件传入，见「图标 / Icon」文档。
 - `render` 可覆盖默认 `<button>` 根节点。
 - `type` 为 Vue 表单扩展，支持 `button`、`submit`、`reset`。
 

@@ -1,15 +1,16 @@
 import { computed, defineComponent, ref, watch, type PropType } from 'vue'
-import type { StoryRecord } from '../types'
+import type { StoryKind, StoryRecord } from '../types'
 import {
   ChevronIcon,
   ComponentIcon,
   DocsIcon,
   FolderCollapsedIcon,
   FolderExpandedIcon,
+  PageIcon,
   VariantIcon
 } from './StoryNavIcons'
 
-export type StoryNavSection = 'docs' | 'demo'
+export type StoryNavSection = 'docs' | 'demo' | 'page'
 
 export interface StoryNavTarget {
   story: StoryRecord
@@ -17,7 +18,7 @@ export interface StoryNavTarget {
   demoIndex?: number
 }
 
-type StoryTreeNodeKind = 'directory' | 'component'
+type StoryTreeNodeKind = 'directory' | 'component' | 'page'
 
 interface StoryTreeNode {
   key: string
@@ -25,6 +26,10 @@ interface StoryTreeNode {
   kind: StoryTreeNodeKind
   children: StoryTreeNode[]
   story?: StoryRecord
+}
+
+function getStoryKind(story: StoryRecord): StoryKind {
+  return story.story.kind ?? 'component'
 }
 
 function buildStoryTree(stories: StoryRecord[]) {
@@ -36,7 +41,7 @@ function buildStoryTree(stories: StoryRecord[]) {
     let key = ''
 
     parts.forEach((part, index) => {
-      const isComponent = index === parts.length - 1
+      const isLeaf = index === parts.length - 1
       key = key ? `${key}/${part}` : part
       let node = children.find((item) => item.label === part)
 
@@ -44,14 +49,14 @@ function buildStoryTree(stories: StoryRecord[]) {
         node = {
           key,
           label: part,
-          kind: isComponent ? 'component' : 'directory',
+          kind: isLeaf ? (getStoryKind(story) === 'page' ? 'page' : 'component') : 'directory',
           children: []
         }
         children.push(node)
       }
 
-      if (isComponent) {
-        node.kind = 'component'
+      if (isLeaf) {
+        node.kind = getStoryKind(story) === 'page' ? 'page' : 'component'
         node.story = story
       }
 
@@ -79,8 +84,14 @@ function getExpandedKeysForStory(stories: StoryRecord[], storyId: string) {
   return keys
 }
 
-function getSelectedKey(storyId: string, section: StoryNavSection, demoIndex: number) {
+function getSelectedKey(
+  storyId: string,
+  section: StoryNavSection,
+  demoIndex: number,
+  storyKind: StoryKind
+) {
   if (!storyId) return ''
+  if (section === 'page' || storyKind === 'page') return `${storyId}::page`
   if (section === 'demo') return `${storyId}::demo::${demoIndex}`
   return `${storyId}::docs`
 }
@@ -115,8 +126,17 @@ export default defineComponent({
   setup(props, { emit }) {
     const tree = computed(() => buildStoryTree(props.stories))
     const expandedKeys = ref(getExpandedKeysForStory(props.stories, props.selectedId))
+    const selectedStoryKind = computed(() => {
+      const story = props.stories.find((item) => item.id === props.selectedId)
+      return story ? getStoryKind(story) : 'component'
+    })
     const selectedKey = computed(() =>
-      getSelectedKey(props.selectedId, props.selectedSection, props.selectedDemoIndex)
+      getSelectedKey(
+        props.selectedId,
+        props.selectedSection,
+        props.selectedDemoIndex,
+        selectedStoryKind.value
+      )
     )
 
     watch(
@@ -148,7 +168,10 @@ export default defineComponent({
       )
     }
 
-    function renderIcon(kind: 'folder' | 'component' | 'docs' | 'story', expanded = false) {
+    function renderIcon(
+      kind: 'folder' | 'component' | 'docs' | 'story' | 'page',
+      expanded = false
+    ) {
       const className = ['lego-story-nav-icon', `is-${kind}`]
       let icon
 
@@ -156,6 +179,8 @@ export default defineComponent({
         icon = expanded ? <FolderExpandedIcon /> : <FolderCollapsedIcon />
       } else if (kind === 'component') {
         icon = <ComponentIcon />
+      } else if (kind === 'page') {
+        icon = <PageIcon />
       } else if (kind === 'docs') {
         icon = <DocsIcon />
       } else {
@@ -170,29 +195,32 @@ export default defineComponent({
     }
 
     function renderComponentChildren(story: StoryRecord, depth: number) {
-      const docsKey = getSelectedKey(story.id, 'docs', 0)
+      const docsKey = getSelectedKey(story.id, 'docs', 0, 'component')
+      const demos = story.story.demos ?? []
 
       return (
         <ul class="lego-story-nav-list lego-story-nav-children">
-          <li
-            class={[
-              'lego-story-nav-node',
-              'is-docs',
-              selectedKey.value === docsKey && 'is-selected'
-            ]}
-            style={navDepthStyle(depth)}
-          >
-            <button
-              type="button"
-              class="lego-story-nav-item"
-              onClick={() => emit('select', { story, section: 'docs' })}
+          {story.story.docs ? (
+            <li
+              class={[
+                'lego-story-nav-node',
+                'is-docs',
+                selectedKey.value === docsKey && 'is-selected'
+              ]}
+              style={navDepthStyle(depth)}
             >
-              {renderIcon('docs')}
-              <span class="lego-story-nav-label">使用文档</span>
-            </button>
-          </li>
-          {story.story.demos.map((demo, index) => {
-            const key = getSelectedKey(story.id, 'demo', index)
+              <button
+                type="button"
+                class="lego-story-nav-item"
+                onClick={() => emit('select', { story, section: 'docs' })}
+              >
+                {renderIcon('docs')}
+                <span class="lego-story-nav-label">使用文档</span>
+              </button>
+            </li>
+          ) : null}
+          {demos.map((demo, index) => {
+            const key = getSelectedKey(story.id, 'demo', index, 'component')
 
             return (
               <li
@@ -221,7 +249,35 @@ export default defineComponent({
     function renderNode(node: StoryTreeNode, depth = 0) {
       const expanded = isExpanded(node.key)
 
+      if (node.kind === 'page' && node.story) {
+        const pageKey = getSelectedKey(node.story.id, 'page', 0, 'page')
+
+        return (
+          <li
+            class={[
+              'lego-story-nav-node',
+              'is-page',
+              selectedKey.value === pageKey && 'is-selected'
+            ]}
+            style={navDepthStyle(depth)}
+          >
+            <button
+              type="button"
+              class="lego-story-nav-item"
+              onClick={() => emit('select', { story: node.story!, section: 'page' })}
+            >
+              <span class="lego-story-nav-caret-spacer" aria-hidden="true" />
+              {renderIcon('page')}
+              <span class="lego-story-nav-label">{node.label}</span>
+            </button>
+          </li>
+        )
+      }
+
       if (node.kind === 'component' && node.story) {
+        const hasChildren =
+          Boolean(node.story.story.docs) || (node.story.story.demos?.length ?? 0) > 0
+
         return (
           <li
             class={['lego-story-nav-node', 'is-component', expanded && 'is-expanded']}
@@ -231,23 +287,31 @@ export default defineComponent({
               type="button"
               class="lego-story-nav-item"
               onClick={() => {
-                if (!expanded) toggle(node.key)
-                emit('select', { story: node.story!, section: 'docs' })
+                if (hasChildren && !expanded) toggle(node.key)
+                emit('select', {
+                  story: node.story!,
+                  section: node.story!.story.docs ? 'docs' : 'demo',
+                  demoIndex: 0
+                })
               }}
             >
-              <span
-                class="lego-story-nav-caret-wrap"
-                onClick={(event) => {
-                  event.stopPropagation()
-                  toggle(node.key)
-                }}
-              >
-                {renderCaret(expanded)}
-              </span>
+              {hasChildren ? (
+                <span
+                  class="lego-story-nav-caret-wrap"
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    toggle(node.key)
+                  }}
+                >
+                  {renderCaret(expanded)}
+                </span>
+              ) : (
+                <span class="lego-story-nav-caret-spacer" aria-hidden="true" />
+              )}
               {renderIcon('component')}
               <span class="lego-story-nav-label">{node.label}</span>
             </button>
-            {expanded ? renderComponentChildren(node.story, depth + 1) : null}
+            {expanded && hasChildren ? renderComponentChildren(node.story, depth + 1) : null}
           </li>
         )
       }

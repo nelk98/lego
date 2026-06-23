@@ -1,0 +1,48 @@
+---
+description: Web UI 组件实现约定（参考 HeroUI API，使用 UnoCSS + shared token 写样式）
+globs: web/ui/src/**/*.tsx
+alwaysApply: false
+---
+
+# Web UI 组件约定
+
+## 参考 HeroUI 的范围
+
+- **应对齐**：组件命名、props 语义、交互状态（如 `isPending`、`variant`）、文档示例结构（与 [HeroUI 文档](https://www.heroui.com/docs/react/components/) 一一对应）。
+- **不要照搬**：HeroUI 的 BEM 类名（`.button--primary`）、组件专用 SCSS、Tailwind Variants 源码。
+
+## 样式写法
+
+1. 使用 `cn()`（`web/ui/src/utils/cn.ts`）合并 UnoCSS / Tailwind 工具类。
+2. 变体、尺寸用 `Record<Variant, string>` 映射，可抽到 `variants.ts`；UnoCSS 已通过 `uno.config.ts` 的 `content.filesystem`（绝对路径覆盖 `web/ui`）与 `.ts` pipeline 扫描，**不要**为组件维护 `safelist`。
+3. 颜色优先使用已在 `uno.config.ts` 注册的 Lego token：
+   - 主色/状态：`bg-primary`、`bg-primary-50`、`text-primary`、`bg-danger`、`text-white`、`bg-danger-light`、`text-danger`
+   - 表面/文字/边框：`bg-bg-1`、`bg-bg-2`、`text-text-0`、`border-line-2`
+   - registry 语义（Input 等）：`bg-muted`、`text-foreground`、`border-border`、`ring-ring`
+4. **不要**为常规组件新增 `.scss`；复杂布局（如 DeviceFrame）除外。
+
+## 示例
+
+```tsx
+// ✅ API + 示例对齐 HeroUI，样式用 Lego token
+const buttonVariantClass = {
+  primary: 'bg-primary text-primary-foreground hover:bg-primary-hover',
+  secondary: 'bg-primary-50 text-primary hover:bg-primary-100',
+  outline: 'border border-solid border-line-1 bg-transparent hover:bg-bg-2',
+  danger: 'bg-danger text-white hover:bg-danger-hover',
+  'danger-soft': 'bg-danger-light text-danger hover:bg-danger-light-hover'
+}
+
+// ❌ 不要复制 HeroUI BEM
+<button class="button button--primary" />
+```
+
+## 文档与 Story
+
+- 每个 HeroUI 示例对应一条 story demo（用法、变体、带图标、仅图标、加载中、加载状态、尺寸、全宽、禁用、社交按钮、自定义 render 等）。
+- API 表与 HeroUI 保持一致；Vue 特有扩展（如 `type`、`click`）单独注明。
+
+## 交互层
+
+- 简单组件：原生元素 + 工具类 + `data-*` 状态（`data-pending`、`data-pressed`）。
+- 复杂组件：Reka UI primitives + 业务 API。

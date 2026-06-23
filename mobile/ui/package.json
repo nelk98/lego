@@ -17,11 +17,16 @@
     "./styles": {
       "types": "./src/entry/styles.ts",
       "import": "./src/entry/styles.ts"
+    },
+    "./icon": {
+      "types": "./src/icon/index.tsx",
+      "import": "./src/icon/index.tsx"
     }
   },
   "dependencies": {
     "@lego/shared": "workspace:*",
-    "@tarojs/components": "4.1.11"
+    "@tarojs/components": "4.1.11",
+    "@tarojs/taro": "4.1.11"
   },
   "devDependencies": {
     "typescript": "~5.9.3"

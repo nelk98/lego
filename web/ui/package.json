@@ -26,6 +26,11 @@
       "import": "./src/scroll-view/index.tsx",
       "require": "./src/scroll-view/index.tsx"
     },
+    "./icon": {
+      "types": "./src/icon/index.tsx",
+      "import": "./src/icon/index.tsx",
+      "require": "./src/icon/index.tsx"
+    },
     "./vue": {
       "types": "./src/vue/index.ts",
       "import": "./src/vue/index.ts",

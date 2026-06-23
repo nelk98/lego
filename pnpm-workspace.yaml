@@ -6,3 +6,12 @@ packages:
   - 'mobile/ui'
   - 'mobile-lab'
   - 'docs'
+allowBuilds:
+  '@parcel/watcher': true
+  '@swc/core': true
+  '@tarojs/binding': true
+  '@tarojs/cli': true
+  core-js: true
+  core-js-pure: true
+  esbuild: true
+  vue-demi: true

@@ -100,3 +100,15 @@ export const ChevronIcon: FunctionalComponent = () => (
     />
   </svg>
 )
+
+export const PageIcon: FunctionalComponent = () => (
+  <svg {...iconAttrs}>
+    <path
+      d="M4 5.5C4 4.12 5.12 3 6.5 3H14.5L20 8.5V18.5C20 19.88 18.88 21 17.5 21H6.5C5.12 21 4 19.88 4 18.5V5.5Z"
+      {...strokeAttrs}
+    />
+    <path d="M14 3.5V9H19.5" {...strokeAttrs} />
+    <path d="M8 13H16" {...strokeAttrs} />
+    <path d="M8 16.5H13" {...strokeAttrs} />
+  </svg>
+)

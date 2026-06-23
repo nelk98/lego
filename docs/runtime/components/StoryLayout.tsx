@@ -65,6 +65,8 @@ export default defineComponent({
 
     const demos = computed(() => currentStory.value?.story.demos ?? [])
 
+    const isPageStory = computed(() => currentStory.value?.story.kind === 'page')
+
     const currentDemo = computed(() => {
       return demos.value[selectedDemoIndex.value] ?? demos.value[0]
     })
@@ -136,6 +138,9 @@ export default defineComponent({
 
       if (target.section === 'demo') {
         selectedDemoIndex.value = target.demoIndex ?? 0
+        activeOutlineKey.value = ''
+      } else if (target.section === 'page') {
+        selectedDemoIndex.value = 0
         activeOutlineKey.value = ''
       } else {
         selectedDemoIndex.value = 0
@@ -217,10 +222,12 @@ export default defineComponent({
       if (Number.isInteger(demoParam) && demoParam >= 0) {
         selectedDemoIndex.value = demoParam
       }
-      if (viewParam === 'docs' || viewParam === 'demo') {
+      if (viewParam === 'docs' || viewParam === 'demo' || viewParam === 'page') {
         selectedSection.value = viewParam
       } else if (url.searchParams.has('demo') && Number.isInteger(demoParam)) {
         selectedSection.value = 'demo'
+      } else if (story?.story.kind === 'page') {
+        selectedSection.value = 'page'
       }
 
       syncUrl()
@@ -334,7 +341,24 @@ export default defineComponent({
       )
     }
 
+    function renderPageContent() {
+      const page = currentStory.value?.story.page
+      if (!page) {
+        return <p class="lego-story-muted">当前页面暂无内容。</p>
+      }
+      return <section class="lego-story-page-content">{page()}</section>
+    }
+
     function renderInspector() {
+      if (isPageStory.value) {
+        return (
+          <section class="lego-outline-panel">
+            <div class="lego-panel-heading">提示</div>
+            <p class="lego-story-muted lego-story-page-hint">点击图标卡片可复制 name 到剪贴板。</p>
+          </section>
+        )
+      }
+
       if (selectedSection.value === 'docs') {
         return renderOutline()
       }
@@ -355,10 +379,16 @@ export default defineComponent({
       const story = currentStory.value
       const demo = currentDemo.value
       const isDocs = selectedSection.value === 'docs'
+      const isPage = selectedSection.value === 'page' || isPageStory.value
 
       return (
         <div class="lego-story-shell">
-          <div class={['lego-story-body', isDocs ? 'is-docs-view' : 'is-demo-view']}>
+          <div
+            class={[
+              'lego-story-body',
+              isPage ? 'is-page-view' : isDocs ? 'is-docs-view' : 'is-demo-view'
+            ]}
+          >
             <aside class="lego-story-sidebar">
               <ScrollView class="lego-story-scroll lego-story-sidebar-scroll" trigger="hover">
                 <StoryNav
@@ -377,19 +407,27 @@ export default defineComponent({
               trigger="hover"
             >
               <main class="lego-story-content">
-                <header class={['lego-story-header', isDocs ? 'is-docs' : 'is-demo']}>
+                <header
+                  class={['lego-story-header', isPage ? 'is-page' : isDocs ? 'is-docs' : 'is-demo']}
+                >
                   <div>
                     <div class="lego-story-kicker">
-                      {isDocs ? getStoryGroup(story) : story?.title}
+                      {isPage || isDocs ? getStoryGroup(story) : story?.title}
                     </div>
-                    <h1>{isDocs ? getStoryName(story) : (demo?.name ?? getStoryName(story))}</h1>
-                    {!isDocs && demo?.description ? (
+                    <h1>
+                      {isPage || isDocs ? getStoryName(story) : (demo?.name ?? getStoryName(story))}
+                    </h1>
+                    {isPage ? (
+                      <p class="lego-story-subtitle">浏览全部图标，点击复制 name。</p>
+                    ) : !isDocs && demo?.description ? (
                       <p class="lego-story-subtitle">{demo.description}</p>
                     ) : null}
                   </div>
                 </header>
 
-                {isDocs ? (
+                {isPage ? (
+                  renderPageContent()
+                ) : isDocs ? (
                   <>
                     {renderDocsContent()}
                     {renderDocsExamples()}

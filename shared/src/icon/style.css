@@ -1,0 +1,33 @@
+.lego-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
+  overflow: hidden;
+  color: currentColor;
+  font-size: inherit;
+  line-height: 1;
+  vertical-align: -0.125em;
+  flex-shrink: 0;
+}
+
+.lego-icon--font {
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.lego-icon--font::before {
+  content: var(--lego-icon-content);
+  font-family: inherit;
+  font-style: inherit;
+}
+
+.lego-icon--text::before {
+  content: none;
+}
+
+.lego-icon--placeholder {
+  opacity: 0;
+}

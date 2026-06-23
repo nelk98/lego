@@ -3,7 +3,27 @@ import './styles/index.css'
 export * from './components'
 export { default as ScrollView } from './scroll-view'
 export { Spin } from '@lego/shared'
-export { Icon, type IconName, type IconProps } from './icon'
+export {
+  ICON_LIBRARY_MAP,
+  Icon,
+  codeToChar,
+  getLibraryMap,
+  getLibraryMapRef,
+  getLibraryUrl,
+  parseIconName,
+  registerLibraries,
+  setIconConfigRequest,
+  setIconFontFaceLoader,
+  useDynamicIcons,
+  type IconFontConfig,
+  type IconItem,
+  type IconLibraryInfo,
+  type IconLibraryMap,
+  type IconName,
+  type IconProps,
+  type UseDynamicIconsOptions,
+  type UseDynamicIconsReturn
+} from './icon'
 export {
   PRIMARY_COLOR_NAMES,
   PRIMARY_STEPS,

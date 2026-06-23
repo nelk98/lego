@@ -1,3 +1,5 @@
+import type { AppConfig } from '@tarojs/taro'
+
 export default defineAppConfig({
   pages: ['pages/index/index'],
   window: {
@@ -6,4 +8,4 @@ export default defineAppConfig({
     navigationBarTitleText: 'Lego Mobile',
     navigationBarTextStyle: 'black'
   }
-})
+} satisfies AppConfig)

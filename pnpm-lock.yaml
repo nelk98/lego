@@ -274,6 +274,9 @@ importers:
       '@tarojs/components':
         specifier: 4.1.11
         version: 4.1.11(@tarojs/helper@4.1.11(@swc/helpers@0.5.21))(postcss@8.5.14)(rollup@3.30.0)(vue@3.5.30(typescript@5.9.3))(webpack@5.105.4)
+      '@tarojs/taro':
+        specifier: 4.1.11
+        version: 4.1.11(@tarojs/components@4.1.11(@tarojs/helper@4.1.11(@swc/helpers@0.5.21))(postcss@8.5.14)(rollup@3.30.0)(vue@3.5.30(typescript@5.9.3))(webpack@5.105.4))(@tarojs/helper@4.1.11(@swc/helpers@0.5.21))(@tarojs/shared@4.1.11)(postcss@8.5.14)(rollup@3.30.0)(vue@3.5.30(typescript@5.9.3))(webpack@5.105.4)
       vue:
         specifier: ^3.5.0
         version: 3.5.30(typescript@5.9.3)

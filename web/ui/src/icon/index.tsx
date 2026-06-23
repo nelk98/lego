@@ -1,41 +1,97 @@
-import { defineComponent, type PropType } from 'vue'
+import '@lego/shared/icon/style.css'
 
-import type { IconName, IconProps } from '@lego/shared/icon/types'
-
-const iconPaths: Record<IconName, string> = {
-  search:
-    'M10.5 3a7.5 7.5 0 1 1 4.95 13.2l3.35 3.35a1 1 0 0 1-1.42 1.42l-3.35-3.35A7.5 7.5 0 0 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z',
-  close: 'M6 6l12 12M18 6L6 18',
-  check: 'M5 12.5l4.5 4.5L19 7.5'
-}
+import { computed, defineComponent, useAttrs, type HTMLAttributes, type PropType } from 'vue'
+import {
+  mergeIconStyle,
+  quoteFontFamily,
+  toCssSizeValue,
+  useIconGlyph,
+  type IconName,
+  type IconProps,
+  type IconStyleValue
+} from '@lego/shared/icon'
 
 export const Icon = defineComponent({
   name: 'Icon',
+  inheritAttrs: false,
   props: {
     name: { type: String as PropType<IconName>, required: true },
+    library: { type: String, default: '' },
     size: { type: [Number, String], default: 16 },
     color: { type: String, default: 'currentColor' },
-    class: { type: String, default: '' }
+    class: { type: [String, Array, Object] as PropType<unknown>, default: undefined },
+    customClass: { type: [String, Array, Object] as PropType<unknown>, default: undefined },
+    style: { type: [Object, String] as PropType<IconStyleValue>, default: undefined },
+    ariaLabel: { type: String, default: '' },
+    decorative: { type: Boolean, default: true }
   },
   setup(props: IconProps) {
-    return () => (
-      <svg
-        class={props.class}
-        width={props.size}
-        height={props.size}
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke={props.color}
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <path d={iconPaths[props.name]} />
-      </svg>
+    const attrs = useAttrs() as HTMLAttributes & { class?: unknown }
+    const glyph = useIconGlyph(
+      () => props.name,
+      () => props.library
     )
+
+    const rootStyle = computed(() =>
+      mergeIconStyle(
+        {
+          width: toCssSizeValue(props.size),
+          height: toCssSizeValue(props.size),
+          color: props.color,
+          fontSize: toCssSizeValue(props.size),
+          fontFamily: glyph.ready.value ? quoteFontFamily(glyph.fontFamily.value) : undefined
+        },
+        props.style
+      )
+    )
+
+    return () => {
+      const { class: attrClass, ...rootAttrs } = attrs
+      const ariaHidden = props.decorative && !props.ariaLabel ? 'true' : undefined
+
+      return (
+        <span
+          {...rootAttrs}
+          class={[
+            'lego-icon',
+            'lego-icon--font',
+            'lego-icon--text',
+            !glyph.ready.value && 'lego-icon--placeholder',
+            props.class,
+            props.customClass,
+            attrClass
+          ]}
+          style={rootStyle.value}
+          aria-hidden={ariaHidden}
+          aria-label={props.ariaLabel || undefined}
+        >
+          {glyph.ready.value ? glyph.iconChar.value : ''}
+        </span>
+      )
+    }
   }
 })
 
 export default Icon
-export type { IconName, IconProps } from '@lego/shared/icon/types'
+export {
+  ICON_LIBRARY_MAP,
+  codeToChar,
+  getLibraryMap,
+  getLibraryMapRef,
+  getLibraryUrl,
+  parseIconName,
+  registerLibraries,
+  setIconConfigRequest,
+  setIconFontFaceLoader,
+  useDynamicIcons
+} from '@lego/shared/icon'
+export type {
+  IconFontConfig,
+  IconItem,
+  IconLibraryInfo,
+  IconLibraryMap,
+  IconName,
+  IconProps,
+  UseDynamicIconsOptions,
+  UseDynamicIconsReturn
+} from '@lego/shared/icon'

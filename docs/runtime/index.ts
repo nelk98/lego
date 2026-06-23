@@ -1,2 +1,9 @@
 export { defineStory } from './defineStory'
-export type { StoryDefine, StoryDemo, StoryModuleRecord, StoryPlatform, StoryRecord } from './types'
+export type {
+  StoryDefine,
+  StoryDemo,
+  StoryKind,
+  StoryModuleRecord,
+  StoryPlatform,
+  StoryRecord
+} from './types'

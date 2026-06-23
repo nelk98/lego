@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "sideEffects": [
+    "./src/icon/style.css",
     "./src/style/**/*.scss",
     "./src/ui/**/*.scss"
   ],
@@ -26,6 +27,12 @@
       "import": "./src/style/palette.meta.ts",
       "require": "./src/style/palette.meta.ts"
     },
+    "./icon": {
+      "types": "./src/icon/index.ts",
+      "import": "./src/icon/index.ts",
+      "require": "./src/icon/index.ts"
+    },
+    "./icon/style.css": "./src/icon/style.css",
     "./palette": "./src/style/palette.scss",
     "./web": "./src/style/web.scss",
     "./mobile": "./src/style/mobile.scss",
